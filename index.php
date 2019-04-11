@@ -7,6 +7,7 @@ try{
 		if ($_GET['action'] == 'home'){
 			homepage();
 		}
+	}
 	else{
 		homepage();
 	}
