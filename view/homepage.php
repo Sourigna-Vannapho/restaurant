@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <div class="container-fluid background">
 	<div class="image">
-		<img src="../public/img/bg.jpg" class="img-fluid">
+		<img src="public/img/bg.jpg" class="img-fluid">
 		<div class="blackOverlay"></div>
 	</div>
 	<div id="title">
