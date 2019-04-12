@@ -9,7 +9,7 @@
         <link href="../public/css/style.css" rel="stylesheet" />
     </head>
     <body>
-	    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+	    <nav class="navbar navbar-expand-sm">
     			<a class="navbar-brand" href="#">Van' à pho</a>
 		    	<ul class="navbar-nav mr-auto">
 		    		<li><a class="nav-link" href="#">Accueil</a></li>
