@@ -14,7 +14,7 @@
 		    	<ul class="navbar-nav mr-auto">
 		    		<li><a class="nav-link" href="#">Accueil</a></li>
 		    		<li><a class="nav-link" href="#">Réserver</a></li>
-		    		<li><a class="nav-link" href="#">Menu</a></li>
+		    		<li><a class="nav-link" href="index.php?action=menu">Menu</a></li>
 		    		<li><a class="nav-link" href="#">Livre d'or</a></li>
 		    	</ul>
 		    	<ul class="navbar-nav">
