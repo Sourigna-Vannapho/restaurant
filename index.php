@@ -11,6 +11,9 @@ try{
 			case "menu":
 				menu();
 				break;
+			case "booking":
+				booking();
+				break;
 		}
 	}
 	else{

@@ -10,10 +10,10 @@
     </head>
     <body>
 	    <nav class="navbar navbar-expand-sm">
-    			<a class="navbar-brand" href="#">Van' à pho</a>
+    			<a class="navbar-brand" href="index.php?action=home">Van' à pho</a>
 		    	<ul class="navbar-nav mr-auto">
-		    		<li><a class="nav-link" href="#">Accueil</a></li>
-		    		<li><a class="nav-link" href="#">Réserver</a></li>
+		    		<li><a class="nav-link" href="index.php?action=home">Accueil</a></li>
+		    		<li><a class="nav-link" href="index.php?action=booking">Réservation</a></li>
 		    		<li><a class="nav-link" href="index.php?action=menu">Menu</a></li>
 		    		<li><a class="nav-link" href="#">Livre d'or</a></li>
 		    	</ul>
