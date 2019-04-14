@@ -11,3 +11,7 @@ function menu(){
 function booking(){
 	require('view/booking.php');
 }
+
+function register(){
+	require('view/register.php');
+}

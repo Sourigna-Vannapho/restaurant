@@ -1,5 +1,6 @@
 body{
 	background-color:rgba(0,0,0,1);
+	color:white;
 }
 nav{
 	background-color:rgba(0,0,0,0.2);
@@ -38,7 +39,6 @@ nav a{
 	width:100%;
 	position:absolute;
 	top:30%;
-	color:white;
 	font-size:2em;
 }
 h1{
@@ -50,7 +50,6 @@ h1{
 #homepageDescription{
 	margin-top:1em;
 	margin-bottom:1em;
-	color:white;
 }
 #homepageDescription table{
 	color:white;
@@ -60,7 +59,6 @@ h1{
 	text-align:center;
 	top:80%;
 	width:100%;
-	color:white;
 }
 
 .table-striped tbody tr:nth-of-type(2n+1){
@@ -69,5 +67,4 @@ h1{
 
 #bookingForm{
 	margin-top:2em;
-	color:white;
 }

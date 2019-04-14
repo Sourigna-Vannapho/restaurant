@@ -14,6 +14,9 @@ try{
 			case "booking":
 				booking();
 				break;
+			case "register":
+				register();
+				break;
 		}
 	}
 	else{

@@ -18,10 +18,11 @@
 		    		<li><a class="nav-link" href="#">Livre d'or</a></li>
 		    	</ul>
 		    	<ul class="navbar-nav">
-		    		<li><a class="nav-link" href="#">Inscription</a></li>
+		    		<li><a class="nav-link" href="index.php?action=register">Inscription</a></li>
 		    		<li><a class="nav-link" href="#">Connexion</a></li>
 		    	</ul>
 	    </nav>
+	    
 	    <section>
 	    	<?= $content ?>
 	    </section>
