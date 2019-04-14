@@ -8,9 +8,12 @@
 </div>
 <div class="container" id="registerForm">
 	<h1>Inscription</h1>
-	<p>Veuillez remplir les champs ci-dessous</p>
-	<p>Pour toute information complémentaire veuillez nous contacter au numéro suivant : 00 00 00 00 00</p>
 	<form>
+		<div class="form-group">
+			<label>Adresse mail</label>
+			<input type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Exemple : adresse@domaine.com">
+			<small class="form-text text-muted">Votre identifiant de connexion sera votre adresse mail</small>
+		</div>
 		<div class="form-group">
 			<label>Nom</label>
 			<input type="text" class="form-control">
@@ -22,10 +25,6 @@
 		<div class="form-group">
 			<label>Numéro de téléphone</label>
 			<input type="tel" name="phone" pattern="[0-9]{10}" class="form-control" placeholder="Exemple : 0123456789">
-		</div>
-		<div class="form-group">
-			<label>Adresse mail</label>
-			<input type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Exemple : adresse@domaine.com">
 		</div>
 		<div class="form-group">
 			<label>Mot de passe</label>

@@ -68,3 +68,14 @@ h1{
 #bookingForm{
 	margin-top:2em;
 }
+
+#registerForm{
+	margin-top:2em;
+}
+
+.modal-content{
+	background-color:#1e2126;
+}
+.modal-header span{
+	color:white;
+}
