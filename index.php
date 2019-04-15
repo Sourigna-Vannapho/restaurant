@@ -17,6 +17,9 @@ try{
 			case "register":
 				register();
 				break;
+			case "guestbook":
+				guestbook();
+				break;
 		}
 	}
 	else{

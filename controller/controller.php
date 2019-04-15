@@ -15,3 +15,7 @@ function booking(){
 function register(){
 	require('view/register.php');
 }
+
+function guestbook(){
+	require('view/guestbook.php');
+}

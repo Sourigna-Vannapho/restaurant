@@ -79,3 +79,18 @@ h1{
 .modal-header span{
 	color:white;
 }
+#menuAll{
+	margin-top:5em;
+}
+
+#menuAll .col-sm-auto:hover{
+	margin-right:1em;
+}
+
+.menu-item{
+	background:blue;
+}
+#dailyDish{
+	padding-top:5em;
+	text-align:center;
+}

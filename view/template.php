@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $title ?></title>
         
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
         <link href="public/css/style.css" rel="stylesheet" />
     </head>
@@ -12,14 +13,14 @@
 	    <nav class="navbar navbar-expand-sm">
     			<a class="navbar-brand" href="index.php?action=home">Van' à pho</a>
 		    	<ul class="navbar-nav mr-auto">
-		    		<li><a class="nav-link" href="index.php?action=home">Accueil</a></li>
+		    		<li><a class="nav-link" href="index.php?action=home"><i class="fas fa-home"></i> Accueil</a></li>
 		    		<li><a class="nav-link" href="index.php?action=booking">Réservation</a></li>
 		    		<li><a class="nav-link" href="index.php?action=menu">Menu</a></li>
-		    		<li><a class="nav-link" href="#">Livre d'or</a></li>
+		    		<li><a class="nav-link" href="index.php?action=guestbook">Livre d'or</a></li>
 		    	</ul>
 		    	<ul class="navbar-nav">
 		    		<li><a class="nav-link" href="index.php?action=register">Inscription</a></li>
-		    		<li><a class="nav-link" data-toggle="modal" data-target="#connexionWindow" href="#">Connexion</a></li>
+		    		<li><a class="nav-link" data-toggle="modal" data-target="#connexionWindow" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
 		    	</ul>
 	    </nav>
 	    <div class="modal fade" id="connexionWindow" tabindex="-1" role="dialog">
