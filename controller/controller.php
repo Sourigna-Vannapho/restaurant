@@ -1,6 +1,7 @@
 <?php
 require "vendor/autoload.php";
 use model\Sourigna\BlogManager;
+use model\Sourigna\LoginManager;
 // use model\Sourigna\Manager;
 // $database = new Manager();
 
@@ -21,6 +22,13 @@ function booking(){
 
 function register(){
 	require('view/register.php');
+}
+
+function registerConfirm(){
+	$loginManager = new LoginManager();
+	$registerStatus = $loginManager->callRegister();
+	require('view/post/register_post.php');
+
 }
 
 function guestbook(){

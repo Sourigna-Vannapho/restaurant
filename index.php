@@ -20,6 +20,9 @@ try{
 			case "guestbook":
 				guestbook();
 				break;
+			case "register_confirm":
+				registerConfirm();
+				break;
 		}
 	}
 	else{

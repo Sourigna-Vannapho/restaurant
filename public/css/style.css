@@ -37,6 +37,26 @@ nav a{
 h1{
 	font-size:3em;
 }
+.warning{
+	color:red;
+	animation:vibrateWarning 200ms;
+	animation-iteration-count:2;
+}
+@keyframes vibrateWarning {
+	0%{
+		transform: translateX(0px);
+	}
+	33%{
+		transform: translateX(1px);
+	}
+	66%{
+		transform:translateX(-2px);
+	}
+	100%{
+		transform: translateY(0px);
+	}
+
+}
 /*Homepage*/
 
 #title{
