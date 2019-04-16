@@ -28,9 +28,13 @@ function registerConfirm(){
 	$loginManager = new LoginManager();
 	$registerStatus = $loginManager->callRegister();
 	require('view/post/register_post.php');
-
 }
 
+function loginConfirm(){
+	$loginManager = new LoginManager();
+	$loginStatus = $loginManager->callLogin();
+	require('view/post/login_post.php');
+}
 function guestbook(){
 	require('view/guestbook.php');
 }

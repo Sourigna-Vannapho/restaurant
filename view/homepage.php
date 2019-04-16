@@ -123,10 +123,5 @@
 	</div>
 </div>
 
-<script src="public/scripts/map.js"></script>
-<script src="public/scripts/ajax.js"></script>
-<script src="public/scripts/script.js"></script>
-<script src="public/scripts/main.js"></script>
-
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>

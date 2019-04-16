@@ -23,6 +23,9 @@ try{
 			case "register_confirm":
 				registerConfirm();
 				break;
+			case "login_confirm":
+				loginConfirm();
+				break;
 		}
 	}
 	else{

@@ -32,4 +32,8 @@ class LoginManager extends Manager{
 		}
 	}
 
+	function callLogin(){
+		
+	}
+
 }
