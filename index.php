@@ -1,6 +1,11 @@
 <?php
+if(!isset($_SESSION)) 
+	{ 
+        session_start(); 
+    }
 require ("vendor/autoload.php");
 require ("controller/controller.php");
+
 
 try{
 	if (isset($_GET['action'])) {
@@ -25,6 +30,9 @@ try{
 				break;
 			case "login_confirm":
 				loginConfirm();
+				break;
+			case "logout":
+				logoutConfirm();
 				break;
 		}
 	}

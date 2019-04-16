@@ -33,7 +33,28 @@ class LoginManager extends Manager{
 	}
 
 	function callLogin(){
-		
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('SELECT username,first_name,last_name,password,authority,phone FROM users WHERE username = :username');
+		$req->execute(array(
+			'username'=>$_POST['mail']));
+		$loginResult = $req->fetch();
+		$passwordCheck = password_verify($_POST['password'],$loginResult['password']);
+		if(!$loginResult){
+			return true;
+		}
+		else{
+			if($passwordCheck){
+				session_start();
+				$_SESSION['mail'] = $loginResult['username'];
+				$_SESSION['first_name'] = $loginResult['first_name'];
+				$_SESSION['last_name'] = $loginResult['last_name'];
+				$_SESSION['phone'] = $loginResult['phone'];
+				$_SESSION['authority'] = $loginResult['authority'];
+			}
+			else{
+				return true;
+			}
+		}
 	}
 
 }

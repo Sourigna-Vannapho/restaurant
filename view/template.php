@@ -19,8 +19,20 @@
 		    		<li><a class="nav-link" href="index.php?action=guestbook">Livre d'or</a></li>
 		    	</ul>
 		    	<ul class="navbar-nav">
+		    		<?php 
+		    		if (isset($_SESSION['authority'])):
+		    			echo ('Bonjour'. ' ' .$_SESSION['first_name']. ' ' .$_SESSION['last_name']);
+		    		?>
+		    		<li><a class="nav-link" href="index.php?action=logout"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>
+		    		<?php
+		    		else:
+		    		?>
 		    		<li><a class="nav-link" href="index.php?action=register">Inscription</a></li>
 		    		<li><a class="nav-link" data-toggle="modal" data-target="#connexionWindow" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+		    		<?php
+		    		endif;
+		    		?>
+		    		
 		    	</ul>
 	    </nav>
 	    <div class="modal fade" id="registerWindow" tabindex="-1" role="dialog">
@@ -62,11 +74,9 @@
 								<label>Mot de passe</label>
 								<input type="password" name="password" class="form-control" pattern=".{6,}"placeholder="6 caractères minimum">
 							</div>
-        				</form>
-      				</div>
-      				<div class="modal-footer">
-				        <button type="button" class="btn btn-primary">Connexion</button>
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        			        <button type="submit" class="btn btn-primary">Connexion</button>
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+      					</form>
       				</div>
     			</div>
   			</div>

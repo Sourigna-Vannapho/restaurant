@@ -35,6 +35,10 @@ function loginConfirm(){
 	$loginStatus = $loginManager->callLogin();
 	require('view/post/login_post.php');
 }
+
+function logoutConfirm(){
+	require('view/post/logout_post.php');
+}
 function guestbook(){
 	require('view/guestbook.php');
 }
