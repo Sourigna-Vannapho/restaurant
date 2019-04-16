@@ -1,5 +1,12 @@
 <?php $title = 'Van\' à pho'; ?>
 <?php ob_start(); ?>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+  crossorigin=""></script>
+
 <div class="container-fluid background">
 	<div class="image">
 		<img src="public/img/bg_home.jpg" class="img-fluid">
@@ -10,7 +17,8 @@
 		<p>Restaurant traditionnel asiatique</p>
 	</div>
 	<div id="checkNews">
-		<a href="#blog">Voir les dernières nouvelles</a>
+		<a href="#blog">Voir les dernières nouvelles<br/> <i class="fas fa-chevron-down"></i></a>
+
 	</div>
 </div>
 <div class="container-fluid" id="homepageDescription">
@@ -99,10 +107,26 @@
 
 		</div>
 		<div class="col">
-			<h2>Où nous trouver</h2>
+			<h2>Contact</h2>
+			<div id="mapid">
+				<div class="mapOverlay"></div>			
+				<address>
+				<h3>VAN' A PHO</h3>
+				280 Rue Benjamin Delessert<br/>
+				77127 Lieusaint<br/>
+				01 23 45 67 89<br/>
+				Mail :<br/>
+				</address>
+			</div>
 
 		</div>
 	</div>
 </div>
+
+<script src="public/scripts/map.js"></script>
+<script src="public/scripts/ajax.js"></script>
+<script src="public/scripts/script.js"></script>
+<script src="public/scripts/main.js"></script>
+
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
