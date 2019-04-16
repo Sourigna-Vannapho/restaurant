@@ -1,6 +1,13 @@
 <?php
+require "vendor/autoload.php";
+use model\Sourigna\BlogManager;
+// use model\Sourigna\Manager;
+// $database = new Manager();
+
 
 function homepage(){
+	$blogManager = new BlogManager();
+	$blogEntry = $blogManager->callBlog();
 	require('view/homepage.php');
 }
 

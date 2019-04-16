@@ -18,10 +18,36 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<h2>Dernières Nouvelles</h2>
-				<div class="row">
-					<div class="col-sm-12">
-				<!-- Insérer appel vers la base de données pour le blog -->
-				Test
+				<div id="blogSlider" class="row carousel slide" data-ride="carousel">
+					<div class="col-sm-10 carousel-inner">
+						<?php 
+						$i=0;
+						while ($data = $blogEntry->fetch()){ ?>
+						<div class="carousel-item <?php if($i==0){$i=1;
+							echo 'active'; } ?>">
+							<h3>
+								<?= ($data['title']) ?> 
+							</h3>
+							<p>
+								<?= ($data['content']) ?>
+							</p>
+							<p>
+								Posté le <?= ($data['date_creation']) ?>
+							</p>
+						</div>
+						<?php
+						}
+						$blogEntry->closeCursor();
+						?>
+					</div>
+					<div id="sliderIndicator">
+						<ol class="carousel-indicators">
+							<li data-target="#blogSlider" data-slide-to="0" class="active"></li>
+						    <li data-target="#blogSlider" data-slide-to="1"></li>
+						    <li data-target="#blogSlider" data-slide-to="2"></li>
+						    <li data-target="#blogSlider" data-slide-to="3"></li>
+						    <li data-target="#blogSlider" data-slide-to="4"></li>
+						</ol>
 					</div>
 				</div>
 			</div>
