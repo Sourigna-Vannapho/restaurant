@@ -42,7 +42,7 @@
 			<input type="password" class="form-control" pattern=".{6,}">
 		</div>
 		<br/>
-		<button type="submit" class="btn btn-primary">Réserver</button>
+		<button type="submit" class="btn btn-primary">Inscription</button>
 	</form>
 </div>
 <?php $content = ob_get_clean(); ?>

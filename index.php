@@ -37,6 +37,9 @@ try{
 			case "logout":
 				logoutConfirm();
 				break;
+			case "booking_confirm":
+				bookingConfirm();
+				break;
 		}
 	}
 	else{

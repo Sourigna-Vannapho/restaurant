@@ -3,6 +3,7 @@ require "vendor/autoload.php";
 use model\Sourigna\BlogManager;
 use model\Sourigna\LoginManager;
 use model\Sourigna\GuestbookManager;
+use model\Sourigna\BookingManager;
 // use model\Sourigna\Manager;
 // $database = new Manager();
 
@@ -41,10 +42,17 @@ function logoutConfirm(){
 	require('view/post/logout_post.php');
 }
 function guestbook(){
+	$guestbookManager = new GuestbookManager();
+	$guestbookEntry = $guestbookManager->callGuestbook();
 	require('view/guestbook.php');
 }
 function entryGuestbook(){
 	$guestbookManager = new GuestbookManager();
-	$test = $guestbookManager->writeGuestbook();
+	$guestbookStatus = $guestbookManager->writeGuestbook();
 	require('view/post/guestbook_post.php');
+}
+function bookingConfirm(){
+	$bookingManager = new BookingManager();
+	$bookingStatus = $bookingManager->callBooking();
+	require('view/post/booking_post.php');
 }

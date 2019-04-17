@@ -16,12 +16,12 @@
 		    		<li><a class="nav-link" href="index.php?action=home"><i class="fas fa-home"></i> Accueil</a></li>
 		    		<li><a class="nav-link" href="index.php?action=booking">Réservation</a></li>
 		    		<li><a class="nav-link" href="index.php?action=menu">Menu</a></li>
-		    		<li><a class="nav-link" href="index.php?action=guestbook">Livre d'or</a></li>
+		    		<li><a class="nav-link" href="index.php?action=guestbook&page=1">Livre d'or</a></li>
 		    	</ul>
 		    	<ul class="navbar-nav">
 		    		<?php 
 		    		if (isset($_SESSION['authority'])):
-		    			echo ('Bonjour'. ' ' .$_SESSION['first_name']. ' ' .$_SESSION['last_name']);
+		    			echo ('Bonjour' . ' ' . $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] . ' (' . $_SESSION['mail'] . ')');
 		    		?>
 		    		<li><a class="nav-link" href="index.php?action=logout"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>
 		    		<?php
@@ -35,19 +35,37 @@
 		    		
 		    	</ul>
 	    </nav>
-	    <div class="modal fade" id="registerWindow" tabindex="-1" role="dialog">
+	    <div class="modal fade" id="information" tabindex="-1" role="dialog">
   			<div class="modal-dialog" role="document">
    				<div class="modal-content">
     				<div class="modal-header">
-     					<h2 class="modal-title">Inscription complète !</h2>
+     					<h2 class="modal-title">Information</h2>
         				<button type="button" class="close" data-dismiss="modal">
           				<span>&times;</span>
         				</button>
       				</div>
       				<div class="modal-body">
+      					<?php 
+      					if (isset($_GET['information'])) :
+      						switch($_GET['information']) :
+      							case "register" : ?>
+      					<h3>Inscription complète !</h3>
         				<p>
         					Un mail à été envoyé dans votre boîte mail, cliquez sur le lien à l'intérieur pour finaliser votre inscription et pouvoir ensuite réserver une table chez nous !
         				</p>
+        				<?php 
+        							break;
+        						case "booking" :
+        				?>
+        				<h3>Réservation complète !</h3>
+        				<p>
+        					Votre réservation à bien été prise en compte !
+        				</p>
+        				<?php
+        							break;
+        					endswitch;
+        				endif;
+        				?>
       				</div>
       				<div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -92,9 +110,9 @@
 	<script src="public/scripts/script.js"></script>
 	<script src="public/scripts/main.js"></script>
 	<?php 
-	if (isset($_GET['register_success'])):
+	if (isset($_GET['information'])):
 	?>
-	<script>var test = $("#registerWindow").modal('show')</script>
+	<script>var test = $("#information").modal('show')</script>
 	<?php 
 	endif; 
 	?>

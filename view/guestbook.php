@@ -16,6 +16,22 @@
 		<br/>
 		<button type="submit" class="btn btn-primary">Valider</button>
 	</form>
+	<?php
+	while ($data = $guestbookEntry->fetch()){?>
+	<p> <?= ($data['comment']) ?> 
+	</p>
+	<p> Posté par 
+		<?php if ($data['user_id']==0):
+			echo ('invité');
+	else:
+		echo ($data['first_name'] . ' ' . $data['last_name']);
+	endif;
+		echo (' le ' . $data['creation_date']); ?> 
+	</p>
+	<?php
+	}
+	$guestbookEntry->closeCursor();
+	?>
 </div>
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>
