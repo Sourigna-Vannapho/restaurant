@@ -25,6 +25,9 @@ try{
 			case "guestbook":
 				guestbook();
 				break;
+			case "entry_guestbook":
+				entryGuestbook();
+				break;
 			case "register_confirm":
 				registerConfirm();
 				break;

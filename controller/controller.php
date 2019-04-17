@@ -2,6 +2,7 @@
 require "vendor/autoload.php";
 use model\Sourigna\BlogManager;
 use model\Sourigna\LoginManager;
+use model\Sourigna\GuestbookManager;
 // use model\Sourigna\Manager;
 // $database = new Manager();
 
@@ -41,4 +42,9 @@ function logoutConfirm(){
 }
 function guestbook(){
 	require('view/guestbook.php');
+}
+function entryGuestbook(){
+	$guestbookManager = new GuestbookManager();
+	$test = $guestbookManager->writeGuestbook();
+	require('view/post/guestbook_post.php');
 }
