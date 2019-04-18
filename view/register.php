@@ -11,7 +11,7 @@
 	<form method="POST" action="index.php?action=register_confirm">
 		<div class="form-group">
 			<label>Adresse mail</label>
-			<input type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Exemple : adresse@domaine.com">
+			<input type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Exemple : adresse@domaine.com" required>
 			<small class="form-text text-muted">Votre identifiant de connexion sera votre adresse mail</small>
 			<?php 
 			if (isset($_GET['existing_user'])):
@@ -23,23 +23,23 @@
 		</div>
 		<div class="form-group">
 			<label>Nom</label>
-			<input type="text" class="form-control" name="lastName">
+			<input type="text" class="form-control" name="lastName" required>
 		</div>
 		<div class="form-group">
 			<label>Prénom</label>
-			<input type="text" class="form-control" name="firstName">
+			<input type="text" class="form-control" name="firstName" required>
 		</div>
 		<div class="form-group">
 			<label>Numéro de téléphone</label>
-			<input type="tel" name="phone" pattern="[0-9]{10}" class="form-control" placeholder="Exemple : 0123456789">
+			<input type="tel" name="phone" pattern="[0-9]{10}" class="form-control" placeholder="Exemple : 0123456789" required>
 		</div>
 		<div class="form-group">
 			<label>Mot de passe</label>
-			<input type="password" class="form-control" pattern=".{6,}"placeholder="6 caractères minimum" name="pass">
+			<input type="password" class="form-control" pattern=".{6,}"placeholder="6 caractères minimum" name="pass" required>
 		</div>
 		<div class="form-group">
 			<label>Confirmation du mot de passe</label>
-			<input type="password" class="form-control" pattern=".{6,}">
+			<input type="password" class="form-control" pattern=".{6,}" required>
 		</div>
 		<br/>
 		<button type="submit" class="btn btn-primary">Inscription</button>

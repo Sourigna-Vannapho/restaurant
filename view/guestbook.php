@@ -12,7 +12,7 @@
 		<p>Ceci est un espace où vous pouvez partager vos impressions sur votre visite chez nous !</p>
 	</div>
 	<form method="POST" action="index.php?action=entry_guestbook">
-		<textarea class="form-control col-sm-4 offset-sm-4" name="comment" rows="3"></textarea>
+		<textarea class="form-control col-sm-4 offset-sm-4" name="comment" rows="3" required></textarea>
 		<br/>
 		<button type="submit" class="btn btn-primary">Valider</button>
 	</form>

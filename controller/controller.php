@@ -1,9 +1,10 @@
 <?php
-require "vendor/autoload.php";
+require ("vendor/autoload.php");
 use model\Sourigna\BlogManager;
 use model\Sourigna\LoginManager;
 use model\Sourigna\GuestbookManager;
 use model\Sourigna\BookingManager;
+
 // use model\Sourigna\Manager;
 // $database = new Manager();
 
