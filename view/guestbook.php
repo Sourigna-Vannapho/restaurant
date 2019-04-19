@@ -16,22 +16,58 @@
 		<br/>
 		<button type="submit" class="btn btn-primary">Valider</button>
 	</form>
-	<?php
-	while ($data = $guestbookEntry->fetch()){?>
-	<p> <?= ($data['comment']) ?> 
-	</p>
-	<p> Posté par 
-		<?php if ($data['user_id']==0):
-			echo ('invité');
-	else:
-		echo ($data['first_name'] . ' ' . $data['last_name']);
-	endif;
-		echo (' le ' . $data['creation_date']); ?> 
-	</p>
-	<?php
-	}
-	$guestbookEntry->closeCursor();
-	?>
+	<div class="row">
+		<div class="col-lg-5 col-sm-5 offset-sm-1">
+		<?php 
+		$c=1;
+		while ($data = $guestbookEntry->fetch()){
+			?>
+			
+			<p> <?= ($data['comment']) ?> 
+			</p>
+			<p> Posté par 
+				<?php if ($data['user_id']==0):
+					echo ('invité');
+			else:
+				echo ($data['first_name'] . ' ' . $data['last_name']);
+			endif;
+				echo (' le ' . $data['creation_date']); ?> 
+			</p>
+		<?php if ($c==4){echo ('</div>'); }
+			  if ($c==4){echo ('<div class="col-md-4 col-sm-5">');}?>
+		<?php
+		$c++;
+		}
+		$guestbookEntry->closeCursor();
+		?>
+		</div>
+	</div>
+	<nav class="col-sm-2 offset-sm-5">
+  		<ul class="pagination">
+		    <li class="page-item 
+		    <?php 
+		    if($_GET['page']==1): 
+		    	echo ('disabled');
+		    endif;
+		    ?> ">
+		    <a class="page-link" href="index.php?action=guestbook&page=<?= ($_GET['page']-1)?>">Previous</a></li>
+		    <?php
+		    $i=1;
+		    while ($i<=$guestbookPageNb){ ?>
+		    <li class=" page-item <?php if($i == $_GET['page']){echo ('active');}?> "><a class="page-link" href="index.php?action=guestbook&page=<?= $i ?>"><?= $i ?></a></li>
+		    <?php
+		    $i++;
+			}
+		    ?>
+		    <li class="page-item 
+		    <?php 
+		    if($_GET['page']==$guestbookPageNb):
+		    echo ('disabled');
+		    endif;
+		    ?>">
+		    <a class="page-link" href="index.php?action=guestbook&page=<?= ($_GET['page']+1)?>">Next</a></li>
+		</ul>
+	</nav>
 </div>
 <?php $content = ob_get_clean(); ?>
 <?php require('template.php'); ?>

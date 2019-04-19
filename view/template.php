@@ -15,7 +15,7 @@
 		    	<ul class="navbar-nav mr-auto">
 		    		<li><a class="nav-link" href="index.php?action=home"><i class="fas fa-home"></i> Accueil</a></li>
 		    		<li><a class="nav-link" href="index.php?action=booking">Réservation</a></li>
-		    		<li><a class="nav-link" href="index.php?action=menu&mail">Menu</a></li>
+		    		<li><a class="nav-link" href="index.php?action=menu">Menu</a></li>
 		    		<li><a class="nav-link" href="index.php?action=guestbook&page=1">Livre d'or</a></li>
 		    	</ul>
 		    	<ul class="navbar-nav">
@@ -101,7 +101,6 @@
 		</div>
 
 	    <section>
-	    	<?= bin2hex(random_bytes(16)) ?>
 	    	<?= $content ?>
 	    </section>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

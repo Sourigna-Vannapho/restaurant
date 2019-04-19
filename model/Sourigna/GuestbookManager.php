@@ -3,19 +3,34 @@
 namespace model\Sourigna;
 
 class GuestbookManager extends Manager{
-	function callGuestbook(){
+	function callGuestbook($commentPerPage){
+		if (isset($_GET['page'])) {
+		    $currentPage = $_GET['page'];
+		} else {
+		    $currentPage = 1;
+		}
 		$bdd = $this->databaseConnect();
-		$comments = $bdd->query('SELECT 
+		$offset = ($currentPage - 1) * $commentPerPage;
+		$comments = $bdd->query("SELECT 
 			u.first_name AS first_name,
 			u.last_name AS last_name,
 			g.content AS comment,
 			g.users_id AS user_id,
-			DATE_FORMAT(g.date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date
+			DATE_FORMAT(g.date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date
 			FROM guestbook g
 			LEFT JOIN users u 
 			ON g.users_id = u.id
-			ORDER BY g.id DESC');
+			ORDER BY g.id DESC
+			LIMIT $offset, $commentPerPage");
 		return $comments;
+	}
+
+	function callPaginationTotal($commentPerPage){
+		$bdd = $this->databaseConnect();
+		$commentNbReq = $bdd->query('SELECT COUNT(*) AS commentNb FROM guestbook');
+		$commentNbFetch = $commentNbReq->fetch();
+		$commentNb = CEIL($commentNbFetch[0]/$commentPerPage);
+		return $commentNb;
 	}
 
 	function writeGuestbook(){

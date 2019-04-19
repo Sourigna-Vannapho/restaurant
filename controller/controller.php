@@ -43,8 +43,10 @@ function logoutConfirm(){
 	require('view/post/logout_post.php');
 }
 function guestbook(){
+	$commentPerPage = 8;
 	$guestbookManager = new GuestbookManager();
-	$guestbookEntry = $guestbookManager->callGuestbook();
+	$guestbookEntry = $guestbookManager->callGuestbook($commentPerPage);
+	$guestbookPageNb = $guestbookManager->callPaginationTotal($commentPerPage);
 	require('view/guestbook.php');
 }
 function entryGuestbook(){
