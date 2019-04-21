@@ -15,7 +15,7 @@
 		    	<ul class="navbar-nav mr-auto">
 		    		<li><a class="nav-link" href="index.php?action=home"><i class="fas fa-home"></i> Accueil</a></li>
 		    		<li><a class="nav-link" href="index.php?action=booking">Réservation</a></li>
-		    		<li><a class="nav-link" href="index.php?action=menu">Menu</a></li>
+		    		<li><a class="nav-link" href="index.php?action=menu&category=1&page=1">Menu</a></li>
 		    		<li><a class="nav-link" href="index.php?action=guestbook&page=1">Livre d'or</a></li>
 		    	</ul>
 		    	<ul class="navbar-nav">
@@ -113,7 +113,7 @@
 	<?php 
 	if (isset($_GET['information'])):
 	?>
-	<script>var test = $("#information").modal('show')</script>
+	<script>var modalShow = $("#information").modal('show')</script>
 	<?php 
 	endif; 
 	?>

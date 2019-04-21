@@ -16,34 +16,36 @@
 		<br/>
 		<button type="submit" class="btn btn-primary">Valider</button>
 	</form>
-	<div class="row">
-		<div class="col-lg-5 col-sm-5 offset-sm-1">
-		<?php 
-		$c=1;
-		while ($data = $guestbookEntry->fetch()){
+	<div id="guestbookEntry">
+		<div class="row">
+			<div class="col-lg-5 col-sm-5 offset-sm-1">
+			<?php 
+			$c=1;
+			while ($data = $guestbookEntry->fetch()){
+				?>
+				
+				<p> <?= ($data['comment']) ?> 
+				</p>
+				<p> Posté par 
+					<?php if ($data['user_id']==0):
+						echo ('Visiteur');
+				else:
+					echo ($data['first_name'] . ' ' . $data['last_name']);
+				endif;
+					echo (' le ' . $data['creation_date']); ?> 
+				</p>
+			<?php if ($c==4){echo ('</div>'); }
+				  if ($c==4){echo ('<div class="col-md-4 col-sm-5">');}?>
+			<?php
+			$c++;
+			}
+			$guestbookEntry->closeCursor();
 			?>
-			
-			<p> <?= ($data['comment']) ?> 
-			</p>
-			<p> Posté par 
-				<?php if ($data['user_id']==0):
-					echo ('invité');
-			else:
-				echo ($data['first_name'] . ' ' . $data['last_name']);
-			endif;
-				echo (' le ' . $data['creation_date']); ?> 
-			</p>
-		<?php if ($c==4){echo ('</div>'); }
-			  if ($c==4){echo ('<div class="col-md-4 col-sm-5">');}?>
-		<?php
-		$c++;
-		}
-		$guestbookEntry->closeCursor();
-		?>
+			</div>
 		</div>
 	</div>
-	<nav class="col-sm-2 offset-sm-5">
-  		<ul class="pagination">
+	<nav>
+  		<ul class="pagination justify-content-center">
 		    <li class="page-item 
 		    <?php 
 		    if($_GET['page']==1): 

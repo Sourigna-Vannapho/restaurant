@@ -4,10 +4,7 @@ use model\Sourigna\BlogManager;
 use model\Sourigna\LoginManager;
 use model\Sourigna\GuestbookManager;
 use model\Sourigna\BookingManager;
-
-// use model\Sourigna\Manager;
-// $database = new Manager();
-
+use model\Sourigna\MenuManager;
 
 function homepage(){
 	$blogManager = new BlogManager();
@@ -16,6 +13,10 @@ function homepage(){
 }
 
 function menu(){
+	$dishPerPage = 8;
+	$menuManager = new MenuManager();
+	$menuStatus = $menuManager->callMenu($dishPerPage);
+	$menuPageNb = $menuManager->callPaginationTotalMenu($dishPerPage);
 	require('view/menu.php');
 }
 

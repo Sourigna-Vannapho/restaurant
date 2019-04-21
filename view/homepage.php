@@ -7,7 +7,7 @@
   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
   crossorigin=""></script>
 
-<div class="container-fluid background">
+<div class="container-fluid background" id="homepageBackground">
 	<div class="image">
 		<img src="public/img/bg_home.jpg" class="img-fluid">
 		<div class="blackOverlay"></div>

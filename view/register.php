@@ -8,7 +8,7 @@
 </div>
 <div class="container" id="registerForm">
 	<h1>Inscription</h1>
-	<form method="POST" action="index.php?action=register_confirm">
+	<form method="POST" action="index.php?action=register_confirm" onsubmit="passwordValidation()">
 		<div class="form-group">
 			<label>Adresse mail</label>
 			<input type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Exemple : adresse@domaine.com" required>
@@ -39,7 +39,7 @@
 		</div>
 		<div class="form-group">
 			<label>Confirmation du mot de passe</label>
-			<input type="password" class="form-control" pattern=".{6,}" required>
+			<input type="password" class="form-control" pattern=".{6,}" name="passConfirm" required>
 		</div>
 		<br/>
 		<button type="submit" class="btn btn-primary">Inscription</button>
