@@ -28,6 +28,23 @@ class BookingManager extends Manager{
 		}else{
 			return true;
 		}
-		
+	}
+
+	function adminBooking(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->query('SELECT 
+			r.client_amount AS clientNb, 
+			r.table_amount AS tableNb, 
+			r.reservation_day AS reservationDay, 
+			r.reservation_timeslot AS reservationTime, 
+			u.username AS username, 
+			u.first_name AS firstName, 
+			u.last_name AS lastName, 
+			u.phone AS phone
+			FROM reservation r
+			LEFT JOIN users u ON u.id=r.users_id
+			WHERE r.reservation_day  BETWEEN CURDATE() AND CURDATE() + 2
+			ORDER BY r.reservation_day ASC');
+		return $req;
 	}
 }

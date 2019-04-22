@@ -14,9 +14,6 @@ try{
 			case "menu":
 				menu();
 				break;
-			case "booking":
-				booking();
-				break;
 			case "register":
 				register();
 				break;
@@ -35,9 +32,24 @@ try{
 			case "logout":
 				logoutConfirm();
 				break;
-			case "booking_confirm":
-				bookingConfirm();
-				break;
+			
+		}
+		if (isset($_SESSION['authority'])){
+			switch($_GET['action']){
+				case "booking":
+					booking();
+					break;
+				case "booking_confirm":
+					bookingConfirm();
+					break;
+			}
+			if ($_SESSION['authority']==2){
+				switch($_GET['action']){
+					case "admin_booking":
+					adminBooking();
+					break;
+				}
+			}
 		}
 	}
 	else{

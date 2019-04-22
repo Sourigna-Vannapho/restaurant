@@ -314,3 +314,22 @@ section{
 	word-wrap: break-word;
 }
 
+/* admin panel */
+.table{
+	color:white;
+}
+.todayDate{
+	background-color:#8FBC8F;
+}
+.tomorrowDate{
+	background-color:#3CB371;
+}
+.afterTomorrowDate{
+	background-color:#2E8B57;
+}
+.firstService{
+	background-color:#FF8C00;
+}
+.secondServuce{
+	background-color:#191970;
+}

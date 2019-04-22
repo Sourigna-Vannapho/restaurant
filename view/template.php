@@ -17,6 +17,15 @@
 		    		<li><a class="nav-link" href="index.php?action=booking">Réservation</a></li>
 		    		<li><a class="nav-link" href="index.php?action=menu&category=1&page=1">Menu</a></li>
 		    		<li><a class="nav-link" href="index.php?action=guestbook&page=1">Livre d'or</a></li>
+            <?php 
+            if (isset($_SESSION['authority'])){
+              if($_SESSION['authority']==2){
+            ?>
+            <li><a class="nav-link" href="index.php?action=admin_booking">Panneau administrateur</a></li>
+            <?php
+              }
+            }
+            ?>
 		    	</ul>
 		    	<ul class="navbar-nav">
 		    		<?php 

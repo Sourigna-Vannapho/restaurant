@@ -60,3 +60,8 @@ function bookingConfirm(){
 	$bookingStatus = $bookingManager->callBooking();
 	require('view/post/booking_post.php');
 }
+function adminBooking(){
+	$bookingManager = new BookingManager();
+	$bookingStatus = $bookingManager->adminBooking();
+	require('view/admin_panel.php');
+}
