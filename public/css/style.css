@@ -341,3 +341,7 @@ section{
 #blogAdmin{
 	text-align: center;
 }
+
+#blogAdmin .card{
+	color:black;
+}

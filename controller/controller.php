@@ -69,11 +69,16 @@ function adminBooking(){
 function adminBlog(){
 	$blogManager = new BlogManager();
 	$blogRead = $blogManager->callBlog();
+	if (isset($_GET['id']))
+		{$singleBlogEntry = $blogManager->singleBlog();};
 	require('view/admin_blog.php');
 }
 
 function entryBlog(){
 	$blogManager = new BlogManager();
-	$blogEntry = $blogManager->writeBlog();
+	if (isset($_GET['id'])){
+		$editedEntry = $blogManager->editBlog();
+	}else{
+		$blogEntry = $blogManager->writeBlog();}
 	require('view/post/blog_post.php');
 }

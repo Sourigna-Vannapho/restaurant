@@ -6,11 +6,21 @@ class BlogManager extends Manager{
 
 function callBlog(){
 	$bdd = $this->databaseConnect();
-	$req = $bdd->query('SELECT title,content,DATE_FORMAT(date,\'%d/%m/%Y\') AS date_creation
+	$req = $bdd->query('SELECT id,title,content,DATE_FORMAT(date,\'%d/%m/%Y\') AS date_creation
 		FROM blog 
 		ORDER BY id DESC
 		LIMIT 5');
 	return $req;
+}
+
+function singleBlog(){
+	$bdd = $this->databaseConnect();
+	$req = $bdd->prepare('SELECT id,title,content 
+		FROM blog
+		WHERE id=:id');
+	$req->execute(array('id'=>$_GET['id']));
+	$singleEntry = $req->fetch();
+	return $singleEntry;
 }
 
 function writeBlog(){
@@ -21,4 +31,14 @@ function writeBlog(){
 		'content'=>$_POST['blogContent']));
 }
 
+function editBlog(){
+	$bdd = $this->databaseConnect();
+	$req = $bdd->prepare('UPDATE blog 
+		SET title = :title, content = :content
+		WHERE id = :id');
+	$req->execute(array(
+		'title'=>$_POST['blogTitle'],
+		'content'=>$_POST['blogContent'],
+		'id'=>$_GET['id']));
+}
 }
