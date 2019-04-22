@@ -1,24 +1,7 @@
 <?php $title = 'Van\' à pho'; ?>
 <?php ob_start(); ?>
-	<nav class="navbar navbar-expand-sm">
-		Panneau Administrateur
-	  	<a class="nav-link" href="#">Réservations</a>
-		<a class="nav-link" href="#">Blog</a>
-	 	<a class="nav-link" href="#">Gérer les accès</a>
-	  	<a class="nav-link" href="#">Modifier la carte</a>
-	</nav>
-	<h1>Réservations</h1>
+<h1>Réservations</h1>
 <div class="container">
-<!-- //<?php 
-//$today = date('Y-m-d');
-//echo $today;
-//while ($data = $bookingStatus->fetch()){
-//	if($data['reservationDay']==$today){
-//		echo $data['phone'];
-//	}else {echo ('boo');}
-//}
-//$bookingStatus->closeCursor();
-//?> -->
 <table class="table table-striped">
   <thead>
     <tr>
@@ -28,6 +11,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Nombre de personnes</th>
       <th scope="col">Numéro de téléphone</th>
+      <th scope="col">Annuler</th>
     </tr>
   </thead>
   <tbody>

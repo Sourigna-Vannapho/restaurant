@@ -8,7 +8,7 @@ use model\Sourigna\MenuManager;
 
 function homepage(){
 	$blogManager = new BlogManager();
-	$blogEntry = $blogManager->callBlog();
+	$blogRead = $blogManager->callBlog();
 	require('view/homepage.php');
 }
 
@@ -63,5 +63,17 @@ function bookingConfirm(){
 function adminBooking(){
 	$bookingManager = new BookingManager();
 	$bookingStatus = $bookingManager->adminBooking();
-	require('view/admin_panel.php');
+	require('view/admin_booking.php');
+}
+
+function adminBlog(){
+	$blogManager = new BlogManager();
+	$blogRead = $blogManager->callBlog();
+	require('view/admin_blog.php');
+}
+
+function entryBlog(){
+	$blogManager = new BlogManager();
+	$blogEntry = $blogManager->writeBlog();
+	require('view/post/blog_post.php');
 }

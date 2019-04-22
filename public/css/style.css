@@ -10,6 +10,9 @@ nav{
 	background-color:rgba(0,0,0,0.2);
 	z-index:5;
 }
+.userNav{
+
+}
 nav a{
 	text-decoration:none;
 	color:white;
@@ -314,7 +317,7 @@ section{
 	word-wrap: break-word;
 }
 
-/* admin panel */
+/* admin booking */
 .table{
 	color:white;
 }
@@ -332,4 +335,9 @@ section{
 }
 .secondServuce{
 	background-color:#191970;
+}
+
+/* admin blog*/
+#blogAdmin{
+	text-align: center;
 }

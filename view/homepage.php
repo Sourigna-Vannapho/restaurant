@@ -30,7 +30,7 @@
 					<div class="col-sm-10 carousel-inner">
 						<?php 
 						$i=0;
-						while ($data = $blogEntry->fetch()){ ?>
+						while ($data = $blogRead->fetch()){ ?>
 						<div class="carousel-item <?php if($i==0){$i=1;
 							echo 'active'; } ?>">
 							<h3>
@@ -45,7 +45,7 @@
 						</div>
 						<?php
 						}
-						$blogEntry->closeCursor();
+						$blogRead->closeCursor();
 						?>
 					</div>
 					<div id="sliderIndicator">

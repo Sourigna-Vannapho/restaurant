@@ -12,4 +12,13 @@ function callBlog(){
 		LIMIT 5');
 	return $req;
 }
+
+function writeBlog(){
+	$bdd = $this->databaseConnect();
+	$req = $bdd->prepare('INSERT INTO blog(title,content,date) VALUES(:title,:content,NOW())');
+	$req->execute(array(
+		'title'=>$_POST['blogTitle'],
+		'content'=>$_POST['blogContent']));
+}
+
 }

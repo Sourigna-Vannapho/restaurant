@@ -10,18 +10,34 @@
         <link href="public/css/style.css" rel="stylesheet" />
     </head>
     <body>
-	    <nav class="navbar navbar-expand-sm">
+	    <nav class="navbar navbar-expand-sm userNav">
     			<a class="navbar-brand" href="index.php?action=home">Van' à pho</a>
 		    	<ul class="navbar-nav mr-auto">
 		    		<li><a class="nav-link" href="index.php?action=home"><i class="fas fa-home"></i> Accueil</a></li>
 		    		<li><a class="nav-link" href="index.php?action=booking">Réservation</a></li>
-		    		<li><a class="nav-link" href="index.php?action=menu&category=1&page=1">Menu</a></li>
+            <div class="dropdown show">
+		    		<a class="nav-link dropdown-toggle" href="#" id="menuDropdown" data-toggle="dropdown" href="#" >Menu</a>
+              <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                <a class="dropdown-item" href="index.php?action=menu&category=1&page=1">Entrée</a>
+                <a class="dropdown-item" href="index.php?action=menu&category=2&page=1">Plat</a>
+                <a class="dropdown-item" href="index.php?action=menu&category=3&page=1">Dessert</a>
+                <a class="dropdown-item" href="index.php?action=menu&category=4&page=1">Boisson</a>
+              </div>
+            </div>
 		    		<li><a class="nav-link" href="index.php?action=guestbook&page=1">Livre d'or</a></li>
             <?php 
             if (isset($_SESSION['authority'])){
               if($_SESSION['authority']==2){
             ?>
-            <li><a class="nav-link" href="index.php?action=admin_booking">Panneau administrateur</a></li>
+            <div class="dropdown show">
+            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" data-toggle="dropdown">Panneau administrateur</a>
+              <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
+                <a class="dropdown-item" href="index.php?action=admin_blog">Blog</a>
+                <a class="dropdown-item" href="#">Gérer les accès</a>
+                <a class="dropdown-item" href="#">Modifier la carte</a>
+              </div>
+            </div>
             <?php
               }
             }

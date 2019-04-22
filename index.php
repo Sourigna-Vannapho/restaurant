@@ -49,6 +49,16 @@ try{
 					adminBooking();
 					break;
 				}
+				switch($_GET['action']){
+					case "admin_blog":
+					adminBlog();
+					break;
+				}
+				switch($_GET['action']){
+					case "entry_blog":
+					entryBlog();
+					break;
+				}
 			}
 		}
 	}
