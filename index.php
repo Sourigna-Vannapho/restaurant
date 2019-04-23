@@ -46,18 +46,23 @@ try{
 			if ($_SESSION['authority']==2){
 				switch($_GET['action']){
 					case "admin_booking":
-					adminBooking();
-					break;
-				}
-				switch($_GET['action']){
+						adminBooking();
+						break;
+					case "delete_booking":
+						bookingDelete();
+						break;
 					case "admin_blog":
-					adminBlog();
-					break;
-				}
-				switch($_GET['action']){
+						adminBlog();
+						break;
 					case "entry_blog":
-					entryBlog();
-					break;
+						entryBlog();
+						break;
+					case "delete_blog":
+						deleteBlog();
+						break;
+					case "admin_users":
+						adminUsers();
+						break;
 				}
 			}
 		}

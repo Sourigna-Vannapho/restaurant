@@ -27,42 +27,42 @@ class LoginManager extends Manager{
 					'phone' => $_POST['phone'],
 					'authentication' => $authenticationGenerate
 				));
-				try{
-					$mail->setFrom('restaurant.vanapho@gmail.com','Restaurant Van a Pho');
-					$mail->addAddress($trimmedMail,trim($_POST['firstName']) . trim($_POST['lastName']));
-					$mail->isHTML(TRUE);
-					$mail->Subject = 'Van a pho : Confirmation de votre inscription';
-				  	$mail->Body = '<html>Bonjour,<br/> <br/>
-				  	Ce mail est envoyé suite à votre inscription sur le site de notre restaurant Van a Pho, <br/>
-				  	Veuillez cliquer sur le lien ci-dessous afin de finaliser votre inscription : <br/>
-				  	<a href=\'http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication=</html>' . $authenticationGenerate . '<html>\'> http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication= </html>'. $authenticationGenerate . '<html></a><br/>
-				  	Suite à cette vérification vous serez capable de faire des réservations.<br/>
+				// try{
+				// 	$mail->setFrom('restaurant.vanapho@gmail.com','Restaurant Van a Pho');
+				// 	$mail->addAddress($trimmedMail,trim($_POST['firstName']) . trim($_POST['lastName']));
+				// 	$mail->isHTML(TRUE);
+				// 	$mail->Subject = 'Van a pho : Confirmation de votre inscription';
+				//   	$mail->Body = '<html>Bonjour,<br/> <br/>
+				//   	Ce mail est envoyé suite à votre inscription sur le site de notre restaurant Van a Pho, <br/>
+				//   	Veuillez cliquer sur le lien ci-dessous afin de finaliser votre inscription : <br/>
+				//   	<a href=\'http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication=</html>' . $authenticationGenerate . '<html>\'> http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication= </html>'. $authenticationGenerate . '<html></a><br/>
+				//   	Suite à cette vérification vous serez capable de faire des réservations.<br/>
 
-				  	A bientot chez nous !'
-				  	;
-					/* Use SMTP. */
-					$mail->isSMTP();
-					/* Google (Gmail) SMTP server. */
-					$mail->Host = 'smtp.gmail.com';
-					/* SMTP port. */
-					$mail->Port = 587;
-					/* Set authentication. */
-					$mail->SMTPAuth = true;
-					$mail->SMTPSecure = 'tls';
-					/* Username (email address). */
-					$mail->Username = 'restaurant.vanapho@gmail.com';
-					/* Google account password. */
-					$mail->Password = 'Isajab77';
-					/* Enable SMTP debug output. */
-				  	$mail->send();}
-				  	catch (Exception $e)
-					{
-					   echo $e->errorMessage();
-					}
-					catch (\Exception $e)
-					{
-					   echo $e->getMessage();
-					}
+				//   	A bientot chez nous !'
+				//   	;
+				// 	/* Use SMTP. */
+				// 	$mail->isSMTP();
+				// 	/* Google (Gmail) SMTP server. */
+				// 	$mail->Host = 'smtp.gmail.com';
+				// 	/* SMTP port. */
+				// 	$mail->Port = 587;
+				// 	/* Set authentication. */
+				// 	$mail->SMTPAuth = true;
+				// 	$mail->SMTPSecure = 'tls';
+				// 	/* Username (email address). */
+				// 	$mail->Username = 'restaurant.vanapho@gmail.com';
+				// 	/* Google account password. */
+				// 	$mail->Password = 'Isajab77';
+				// 	/* Enable SMTP debug output. */
+				//   	$mail->send();}
+				//   	catch (Exception $e)
+				// 	{
+				// 	   echo $e->errorMessage();
+				// 	}
+				// 	catch (\Exception $e)
+				// 	{
+				// 	   echo $e->getMessage();
+				// 	}
 			}
 			else{
 			}

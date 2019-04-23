@@ -66,6 +66,12 @@ function adminBooking(){
 	require('view/admin_booking.php');
 }
 
+function bookingDelete(){
+	$bookingManager = new BookingManager();
+	$bookingStatus = $bookingManager->deleteBooking();
+	require('view/post/booking_delete_post.php');
+}
+
 function adminBlog(){
 	$blogManager = new BlogManager();
 	$blogRead = $blogManager->callBlog();
@@ -81,4 +87,14 @@ function entryBlog(){
 	}else{
 		$blogEntry = $blogManager->writeBlog();}
 	require('view/post/blog_post.php');
+}
+
+function deleteBlog(){
+	$blogManager = new BlogManager();
+	$deleteEntry = $blogManager->deleteBlog();
+	require('view/post/blog_delete_post.php');
+}
+
+function adminUsers(){
+	
 }

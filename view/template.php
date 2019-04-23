@@ -34,7 +34,7 @@
               <div class="dropdown-menu" aria-labelledby="adminDropdown">
                 <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
                 <a class="dropdown-item" href="index.php?action=admin_blog">Blog</a>
-                <a class="dropdown-item" href="#">Gérer les accès</a>
+                <a class="dropdown-item" href="index.php?action=admin_users">Gérer les accès</a>
                 <a class="dropdown-item" href="#">Modifier la carte</a>
               </div>
             </div>
@@ -142,6 +142,13 @@
 	<?php 
 	endif; 
 	?>
+  <script>function passwordValidation(){
+    if (document.getElementById("registerPass").value != document.getElementById("registerPassConfirm").value){
+      alert("Les mots de passe doivent être identiques !");
+      return false;
+    }else{return true;}
+  }
+  </script>
 
     </body>
 </html>

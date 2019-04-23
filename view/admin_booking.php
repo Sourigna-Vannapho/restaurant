@@ -11,7 +11,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Nombre de personnes</th>
       <th scope="col">Numéro de téléphone</th>
-      <th scope="col">Annuler</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -43,6 +43,7 @@
   		<td><?= $reservationEntry['lastName'] . ' ' .$reservationEntry['firstName'] ?></td>
   		<td><?= $reservationEntry['clientNb'] ?></td>
   		<td><?= $reservationEntry['phone'] ?></td>
+      <td><a href="index.php?action=delete_booking&amp;id=<?= $reservationEntry['reservationId']?>">Annuler</a></td>
   	</tr>	
   	<?php
   	} 

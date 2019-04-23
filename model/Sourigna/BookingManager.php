@@ -36,7 +36,8 @@ class BookingManager extends Manager{
 			r.client_amount AS clientNb, 
 			r.table_amount AS tableNb, 
 			r.reservation_day AS reservationDay, 
-			r.reservation_timeslot AS reservationTime, 
+			r.reservation_timeslot AS reservationTime,
+			r.id AS reservationId, 
 			u.username AS username, 
 			u.first_name AS firstName, 
 			u.last_name AS lastName, 
@@ -46,5 +47,11 @@ class BookingManager extends Manager{
 			WHERE r.reservation_day  BETWEEN CURDATE() AND CURDATE() + 2
 			ORDER BY r.reservation_day ASC');
 		return $req;
+	}
+
+	function deleteBooking(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('DELETE FROM reservation WHERE id = :id');
+		$req->execute(array('id'=>$_GET['id']));
 	}
 }

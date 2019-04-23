@@ -41,4 +41,11 @@ function editBlog(){
 		'content'=>$_POST['blogContent'],
 		'id'=>$_GET['id']));
 }
+
+function deleteBlog(){
+	$bdd = $this->databaseConnect();
+	$req = $bdd->prepare('DELETE FROM blog WHERE id = :id');
+	$req->execute(array('id'=>$_GET['id']));
+}
+
 }
