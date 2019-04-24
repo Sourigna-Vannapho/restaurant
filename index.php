@@ -63,6 +63,9 @@ try{
 					case "admin_users":
 						adminUsers();
 						break;
+					case "authority_modify":
+						authorityChange();
+						break;
 				}
 			}
 		}

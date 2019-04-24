@@ -1,7 +1,7 @@
 <?php
 require ("vendor/autoload.php");
 use model\Sourigna\BlogManager;
-use model\Sourigna\LoginManager;
+use model\Sourigna\UserManager;
 use model\Sourigna\GuestbookManager;
 use model\Sourigna\BookingManager;
 use model\Sourigna\MenuManager;
@@ -29,14 +29,14 @@ function register(){
 }
 
 function registerConfirm(){
-	$loginManager = new LoginManager();
-	$registerStatus = $loginManager->callRegister();
+	$userManager = new UserManager();
+	$registerStatus = $userManager->callRegister();
 	require('view/post/register_post.php');
 }
 
 function loginConfirm(){
-	$loginManager = new LoginManager();
-	$loginStatus = $loginManager->callLogin();
+	$userManager = new UserManager();
+	$loginStatus = $userManager->callLogin();
 	require('view/post/login_post.php');
 }
 
@@ -96,5 +96,13 @@ function deleteBlog(){
 }
 
 function adminUsers(){
-	
+	$userManager = new UserManager();
+	$userStatus = $userManager->callUsers();
+	require('view/admin_users.php');
+}
+
+function authorityChange(){
+	$userManager = new UserManager();
+	$authorityStatus = $userManager->modifyAuthority();
+	require('view/post/user_authority_post.php');
 }

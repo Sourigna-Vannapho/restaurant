@@ -4,7 +4,7 @@ namespace model\Sourigna;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-class LoginManager extends Manager{
+class UserManager extends Manager{
 	function callRegister(){
 		$mail = new PHPMailer;
 		$trimmedMail = trim($_POST['mail']);
@@ -97,6 +97,22 @@ class LoginManager extends Manager{
 				return true;
 			}
 		}
+	}
+
+	function callUsers(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->query('SELECT id, username ,first_name, last_name, authority, phone FROM users ORDER BY id DESC');
+		return $req;
+	}
+
+	function modifyAuthority(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('UPDATE users 
+			SET authority = :authority
+			WHERE id = :id');
+		$req->execute(array(
+			'authority'=>$_POST['userAuthority'],
+			'id'=>$_GET['id']));
 	}
 
 }
