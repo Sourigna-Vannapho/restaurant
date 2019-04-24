@@ -35,7 +35,7 @@
                 <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
                 <a class="dropdown-item" href="index.php?action=admin_blog">Blog</a>
                 <a class="dropdown-item" href="index.php?action=admin_users">Gérer les accès</a>
-                <a class="dropdown-item" href="#">Modifier la carte</a>
+                <a class="dropdown-item" href="index.php?action=menu_edit">Modifier la carte</a>
               </div>
             </div>
             <?php

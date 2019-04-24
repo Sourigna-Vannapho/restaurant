@@ -66,6 +66,9 @@ try{
 					case "authority_modify":
 						authorityChange();
 						break;
+					case "menu_edit":
+						adminMenu();
+						break;
 				}
 			}
 		}

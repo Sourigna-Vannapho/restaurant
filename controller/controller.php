@@ -106,3 +106,11 @@ function authorityChange(){
 	$authorityStatus = $userManager->modifyAuthority();
 	require('view/post/user_authority_post.php');
 }
+
+function adminMenu(){
+	$menuManager = new MenuManager();
+	$menuDisplay = $menuManager->adminMenu();
+	if (isset($_GET['id']))
+		{$singleMenuEntry = $menuManager->singleMenu();}
+	require('view/admin_menu.php');
+}

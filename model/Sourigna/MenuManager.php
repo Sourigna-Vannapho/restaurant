@@ -29,4 +29,20 @@ class MenuManager extends Manager{
 		$dishNb = CEIL($dishNbReqFetch[0]/$dishPerPage);
 		return $dishNb;
 	}
+
+	function adminMenu(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->query('SELECT id,name,description,price,category,available,img_link
+			FROM dishes ORDER BY category ASC');
+		return $req;
+	}
+
+	function singleMenu(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('SELECT id,name,description,price,category,available,img_link
+			FROM dishes WHERE id=:id');
+		$req->execute(array('id'=>$_GET['id']));
+		$menuEntry = $req->fetch();
+		return $menuEntry;
+	}
 }

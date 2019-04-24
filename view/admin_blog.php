@@ -3,40 +3,40 @@
 <div id="blogAdmin" class="container">
 	<h1>Blog</h1>
 	<br/>
-	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBlog" role="button" aria-expanded="false" aria-controls="collapseBlog">
     Afficher éditeur
-  </a>
-  <br/>
-  <br/>
-  <div class="collapse <?php if(isset($_GET['id'])){echo('show');} ?>" id="collapseExample">
-  <div class="card card-body">
-  	<?php 
-  	if (isset($_GET['id'])){
-  	?>
-  	<div class="alert alert-warning" role="alert">
-  		Vous êtes actuellement en train de modifier l'entrée intitulée <?= $singleBlogEntry['title'] ?>
-	</div>
-	<?php 
-	}
-	?>
-	<form method="POST" action="index.php?action=entry_blog&id=<?php if (isset($_GET['id'])){ echo $singleBlogEntry['id'];}?>">
-		<label>Titre</label>
-		<input type="text" class="form-control col" name="blogTitle" value="<?php if (isset($_GET['id'])){ echo $singleBlogEntry['title'];}?>" required></input>
-		<br/>
-		<label>Contenu</label>
-		<textarea class="form-control col" name="blogContent" rows="3" required><?php if (isset($_GET['id'])){ echo $singleBlogEntry['content'];}?> </textarea>
-		<br/>
-		<button type="submit" class="btn btn-primary"><?php if (isset($_GET['id'])){ echo ('Modifier');}else{ echo ('Ajouter');} ?></button>
-		<?php
-		if (isset($_GET['id'])){
-		?>
-		<a href="index.php?action=admin_blog"><button class="btn btn-primary">Annuler modifications</button></a>
-		<?php
+  	</a>
+  	<br/>
+  	<br/>
+  	<div class="collapse <?php if(isset($_GET['id'])){echo('show');} ?>" id="collapseBlog">
+	  	<div class="card card-body">
+	  	<?php 
+	  	if (isset($_GET['id'])){
+	  	?>
+		  	<div class="alert alert-warning" role="alert">
+		  		Vous êtes actuellement en train de modifier l'entrée intitulée <?= $singleBlogEntry['title'] ?>
+			</div>
+		<?php 
 		}
 		?>
-	</form>
-</div>
-</div>
+			<form method="POST" action="index.php?action=entry_blog<?php if (isset($_GET['id'])){ echo '&id=' . $singleBlogEntry['id'];}?>">
+				<label>Titre</label>
+				<input type="text" class="form-control col" name="blogTitle" value="<?php if (isset($_GET['id'])){ echo $singleBlogEntry['title'];}?>" required></input>
+				<br/>
+				<label>Contenu</label>
+				<textarea class="form-control col" name="blogContent" rows="3" required><?php if (isset($_GET['id'])){ echo $singleBlogEntry['content'];}?> </textarea>
+				<br/>
+				<button type="submit" class="btn btn-primary"><?php if (isset($_GET['id'])){ echo ('Modifier');}else{ echo ('Ajouter');} ?></button>
+				<?php
+				if (isset($_GET['id'])){
+				?>
+				<a href="index.php?action=admin_blog"><button class="btn btn-primary">Annuler modifications</button></a>
+				<?php
+				}
+				?>
+			</form>
+		</div>
+	</div>
 	<br/>
 	<br/>
 	<div>
