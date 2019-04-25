@@ -17,9 +17,9 @@
   <tbody>
   	<?php 
   	date_default_timezone_set('Europe/Paris');
-  	$today = date('Y-m-d');
-  	$tomorrow = date('Y-m-d',strtotime("+1 day"));
-  	$afterTomorrow = date('Y-m-d',strtotime("+2 day"));
+  	$today = date('d-m-Y');
+  	$tomorrow = date('d-m-Y',strtotime("+1 day"));
+  	$afterTomorrow = date('d-m-Y',strtotime("+2 day"));
 
   	while ($reservationEntry=$bookingStatus->fetch()){ 
  	?>
@@ -39,7 +39,7 @@
   		else if ($reservationEntry['reservationTime']==2)
   		{echo ('secondService');}
   		?>"><?= $reservationEntry['reservationTime'] ?></td>
-  		<td></td>
+  		<td><?= $reservationEntry['arrivalTime']?></td>
   		<td><?= $reservationEntry['lastName'] . ' ' .$reservationEntry['firstName'] ?></td>
   		<td><?= $reservationEntry['clientNb'] ?></td>
   		<td><?= $reservationEntry['phone'] ?></td>

@@ -66,8 +66,11 @@ try{
 					case "authority_modify":
 						authorityChange();
 						break;
-					case "menu_edit":
+					case "admin_menu":
 						adminMenu();
+						break;
+					case "entry_menu":
+						entryMenu();
 						break;
 				}
 			}

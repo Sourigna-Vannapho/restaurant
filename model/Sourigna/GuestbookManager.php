@@ -16,7 +16,7 @@ class GuestbookManager extends Manager{
 			u.last_name AS last_name,
 			g.content AS comment,
 			g.users_id AS user_id,
-			DATE_FORMAT(g.date, '%d/%m/%Y à %Hh%imin%ss') AS creation_date
+			DATE_FORMAT(g.date, '%d/%m/%Y à %Hh%i') AS creation_date
 			FROM guestbook g
 			LEFT JOIN users u 
 			ON g.users_id = u.id

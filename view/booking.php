@@ -27,15 +27,15 @@
 			<input type="date" class="form-control" name="day" required>
 		</div>
 		<div class="form-group">
-			<label>Heure de la réservation</label>
+			<label>Service</label>
 			<select class="form-control" name="timeslot" required>
-				<option value="1">12:00</option>
-				<option value="2">12:30</option>
-				<option value="3">13:00</option>
-				<option value="4">19:30</option>
-				<option value="5">20:00</option>
-				<option value="6">20:30</option>
+				<option value="1">Midi</option>
+				<option value="2">Soir</option>
 			</select>
+		</div>
+		<div class="form-group">
+			<label>Heure d'arrivée</label>
+			<input type="time" name="time" class="form-control" required>
 		</div>
 		<div class="form-group">
 			<label>Nombre de personnes</label>

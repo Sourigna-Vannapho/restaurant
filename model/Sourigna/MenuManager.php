@@ -45,4 +45,38 @@ class MenuManager extends Manager{
 		$menuEntry = $req->fetch();
 		return $menuEntry;
 	}
+
+	function writeMenu(){
+		$uploadCheck = $this->uploadPicture();
+		if ($uploadCheck == true){
+			$bdd = $this->databaseConnect();
+			$firstMenu = $bdd->prepare('INSERT INTO dishes(name,description,price,category,available,img_link) 
+				VALUES (:name,:description,:price,:category,:available,:img_link)');
+			$firstMenu->execute(array(
+				'name'=>$_POST['menuName'],
+				'description'=>$_POST['menuDescription'],
+				'price'=>$_POST['menuPrice'],
+				'category'=>$_POST['menuCategory'],
+				'available'=>$_POST['menuAvailable'],
+				'img_link'=>'placeholder'));
+			$idReq = $bdd->query('SELECT MAX(id) FROM dishes');
+			$fetchId = $idReq->fetch();
+			$latestId = $fetchId[0];
+			$imgName = $latestId . "." .strtolower(pathinfo("uploads/" . basename($_FILES["menuUpload"]["name"]),PATHINFO_EXTENSION));
+			$secondMenu = $bdd->prepare('UPDATE dishes SET img_link = :img_link WHERE id = :id');
+			$secondMenu->execute(array(
+				'img_link'=>"public/img/" . $imgName,
+				'id'=>$latestId));
+			rename("uploads/" . basename( $_FILES["menuUpload"]["name"]),"public/img/". $latestId .".jpg");
+			return true;
+
+		}else{
+			return false;
+		}
+
+	}
+
+	function editMenu(){
+
+	}
 }

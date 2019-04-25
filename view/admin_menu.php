@@ -47,17 +47,19 @@
 						</select>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary"><?php if (isset($_GET['id'])){ echo ('Modifier');}else{ echo ('Ajouter');} ?></button>
+				<input type="file" name="menuUpload" id="menuUpload">
+				<button type="submit" name="submit" class="btn btn-primary"><?php if (isset($_GET['id'])){ echo ('Modifier');}else{ echo ('Ajouter');} ?></button>
 				<?php
 				if (isset($_GET['id'])){
 				?>
-				<a href="index.php?action=menu_edit"><button class="btn btn-primary">Annuler modifications</button></a>
+				<a href="index.php?action=admin_menu"><div class="btn btn-primary">Annuler modification</div></a>
 				<?php
 				}
 				?>
 			</form>
 		</div>
 	</div>
+
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -96,9 +98,9 @@
 				<td><?= $data['name']?></td>
 				<td><?= $data['description']?></td>
 				<td><?= $data['price']?> €</td>
-				<td><?= $data['available']?></td>
+				<td><?php if($data['available']==1){echo('Oui');}else{echo('Non');}?></td>
 				<td><img src="<?= $data['img_link']?>"></td>
-				<td><a href="index.php?action=menu_edit&id=<?=$data['id']?>">Modifier</a></td>
+				<td><a href="index.php?action=admin_menu&id=<?=$data['id']?>">Modifier</a></td>
 
 			</tr>
 

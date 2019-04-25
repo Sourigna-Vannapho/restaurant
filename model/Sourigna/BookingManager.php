@@ -17,14 +17,15 @@ class BookingManager extends Manager{
 		$availableTable = $tableReq->fetch();
 		$tableNb = $availableTable[0];
 		if($tableAmount+$tableNb <= $maxTableAmount){
-			$req = $bdd->prepare('INSERT INTO reservation(client_amount,table_amount,reservation_day,reservation_timeslot,users_id)
-			VALUES(:client_amount,:table_amount,:reservation_day,:reservation_timeslot,:users_id)');
+			$req = $bdd->prepare('INSERT INTO reservation(client_amount,table_amount,reservation_day,reservation_timeslot,users_id,reservation_time)
+			VALUES(:client_amount,:table_amount,:reservation_day,:reservation_timeslot,:users_id,:reservation_time)');
 			$req->execute(array(
 			'client_amount'=>$_POST['nbPpl'],
 			'table_amount'=>$tableAmount,
 			'reservation_day'=>$_POST['day'],
 			'reservation_timeslot'=>$_POST['timeslot'],
-			'users_id'=>$_SESSION['id']));
+			'users_id'=>$_SESSION['id'],
+			'reservation_time'=>$_POST['time']));
 		}else{
 			return true;
 		}
@@ -35,9 +36,10 @@ class BookingManager extends Manager{
 		$req = $bdd->query('SELECT 
 			r.client_amount AS clientNb, 
 			r.table_amount AS tableNb, 
-			r.reservation_day AS reservationDay, 
+			DATE_FORMAT(r.reservation_day, "%d-%m-%Y") AS reservationDay, 
 			r.reservation_timeslot AS reservationTime,
 			r.id AS reservationId, 
+			TIME_FORMAT(r.reservation_time, "%H h %i") AS arrivalTime,
 			u.username AS username, 
 			u.first_name AS firstName, 
 			u.last_name AS lastName, 
@@ -45,7 +47,7 @@ class BookingManager extends Manager{
 			FROM reservation r
 			LEFT JOIN users u ON u.id=r.users_id
 			WHERE r.reservation_day  BETWEEN CURDATE() AND CURDATE() + 2
-			ORDER BY r.reservation_day ASC');
+			ORDER BY r.reservation_day ASC,r.reservation_time DESC');
 		return $req;
 	}
 

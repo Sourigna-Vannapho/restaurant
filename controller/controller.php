@@ -114,3 +114,13 @@ function adminMenu(){
 		{$singleMenuEntry = $menuManager->singleMenu();}
 	require('view/admin_menu.php');
 }
+
+function entryMenu(){
+	$menuManager = new MenuManager();
+	if (isset($_GET['id'])){
+		$editMenu = $menuManager->editMenu();
+	}else{
+		$newMenu = $menuManager->writeMenu();
+	}
+	require('view/post/menu_post.php');
+}
