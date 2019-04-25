@@ -100,7 +100,10 @@
 				<td><?= $data['price']?> €</td>
 				<td><?php if($data['available']==1){echo('Oui');}else{echo('Non');}?></td>
 				<td><img src="<?= $data['img_link']?>"></td>
-				<td><a href="index.php?action=admin_menu&id=<?=$data['id']?>">Modifier</a></td>
+				<td>
+					<a href="index.php?action=admin_menu&id=<?=$data['id']?>">Modifier</a>
+					<a href="index.php?action=delete_menu&id=<?=$data['id']?>">	Supprimer</a>
+				</td>
 
 			</tr>
 

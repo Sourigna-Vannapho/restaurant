@@ -62,12 +62,12 @@ class MenuManager extends Manager{
 			$idReq = $bdd->query('SELECT MAX(id) FROM dishes');
 			$fetchId = $idReq->fetch();
 			$latestId = $fetchId[0];
-			$imgName = $latestId . "." .strtolower(pathinfo("uploads/" . basename($_FILES["menuUpload"]["name"]),PATHINFO_EXTENSION));
+			$imgLink = "public/img/" . $latestId . "." .strtolower(pathinfo("uploads/" . basename($_FILES["menuUpload"]["name"]),PATHINFO_EXTENSION));
 			$secondMenu = $bdd->prepare('UPDATE dishes SET img_link = :img_link WHERE id = :id');
 			$secondMenu->execute(array(
-				'img_link'=>"public/img/" . $imgName,
+				'img_link'=>$imgLink,
 				'id'=>$latestId));
-			rename("uploads/" . basename( $_FILES["menuUpload"]["name"]),"public/img/". $latestId .".jpg");
+			rename("uploads/" . basename( $_FILES["menuUpload"]["name"]),$imgLink);
 			return true;
 
 		}else{
@@ -77,6 +77,25 @@ class MenuManager extends Manager{
 	}
 
 	function editMenu(){
-
+		if (isset($_FILES['menuUpload'])){
+			$uploadCheck = $this->uploadPicture();
+			rename("uploads/" . basename( $_FILES["menuUpload"]["name"]),"public/img/". $_GET['id'] .".jpg");
+		}
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('UPDATE dishes 
+			SET name = :name,
+				description = :description,
+				price = :price,
+				category = :category,
+				available = :available
+			WHERE id = :id');
+		$req->execute(array(
+			'name'=>$_POST['menuName'],
+			'description'=>$_POST['menuDescription'],
+			'price'=>$_POST['menuPrice'],
+			'category'=>$_POST['menuCategory'],
+			'available'=>$_POST['menuAvailable'],
+			'id'=>$_GET['id']));
+		return true;
 	}
 }
