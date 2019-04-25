@@ -72,6 +72,9 @@ try{
 					case "entry_menu":
 						entryMenu();
 						break;
+					case "delete_menu":
+						deleteMenu();
+						break;
 				}
 			}
 		}

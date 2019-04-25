@@ -98,4 +98,17 @@ class MenuManager extends Manager{
 			'id'=>$_GET['id']));
 		return true;
 	}
+
+	function deleteDish(){
+		$bdd = $this->databaseConnect();
+		$dishId = $_GET['id'];
+		$imgReq = $bdd->prepare('SELECT img_link FROM dishes WHERE id = :id');
+		$imgExec = $imgReq->execute(array('id'=>$dishId));
+		$imgFetch = $imgReq->fetch();
+		$imgLink = $imgFetch[0];
+		unlink($imgLink);
+		$req = $bdd->prepare('DELETE FROM dishes WHERE id = :id');
+		$req->execute(array('id'=>$dishId));
+
+	}
 }

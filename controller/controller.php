@@ -124,3 +124,9 @@ function entryMenu(){
 	}
 	require('view/post/menu_post.php');
 }
+
+function deleteMenu(){
+	$menuManager = new MenuManager();
+	$deleteEntry = $menuManager->deleteDish();
+	require('view/post/menu_delete_post.php');
+}
