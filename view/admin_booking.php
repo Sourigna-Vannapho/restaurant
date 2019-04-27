@@ -38,7 +38,7 @@
   		{echo ('firstService');}
   		else if ($reservationEntry['reservationTime']==2)
   		{echo ('secondService');}
-  		?>"><?= $reservationEntry['reservationTime'] ?></td>
+  		?>"><?php if ($reservationEntry['reservationTime']==1){echo('Midi');}else{echo('Soir');} ?></td>
   		<td><?= $reservationEntry['arrivalTime']?></td>
   		<td><?= $reservationEntry['lastName'] . ' ' .$reservationEntry['firstName'] ?></td>
   		<td><?= $reservationEntry['clientNb'] ?></td>

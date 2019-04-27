@@ -47,8 +47,6 @@ class MenuManager extends Manager{
 	}
 
 	function writeMenu(){
-		$uploadCheck = $this->uploadPicture();
-		if ($uploadCheck == true){
 			$bdd = $this->databaseConnect();
 			$firstMenu = $bdd->prepare('INSERT INTO dishes(name,description,price,category,available,img_link) 
 				VALUES (:name,:description,:price,:category,:available,:img_link)');
@@ -59,28 +57,28 @@ class MenuManager extends Manager{
 				'category'=>$_POST['menuCategory'],
 				'available'=>$_POST['menuAvailable'],
 				'img_link'=>'placeholder'));
-			$idReq = $bdd->query('SELECT MAX(id) FROM dishes');
-			$fetchId = $idReq->fetch();
-			$latestId = $fetchId[0];
-			$imgLink = "public/img/" . $latestId . "." .strtolower(pathinfo("uploads/" . basename($_FILES["menuUpload"]["name"]),PATHINFO_EXTENSION));
-			$secondMenu = $bdd->prepare('UPDATE dishes SET img_link = :img_link WHERE id = :id');
-			$secondMenu->execute(array(
+	}
+
+	function getNewId(){
+		$bdd = $this->databaseConnect();
+		$idReq = $bdd->query('SELECT MAX(id) FROM dishes');
+		$fetchId = $idReq->fetch();
+		$latestId = $fetchId[0];
+		return $latestId;
+	}
+
+	function updateLinkDish($newestId){
+		$bdd = $this->databaseConnect();
+		$imgLink = "public/img/" . $newestId . "." .strtolower(pathinfo("public/uploads/" . basename($_FILES["menuUpload"]["name"]),PATHINFO_EXTENSION));
+		$secondMenu = $bdd->prepare('UPDATE dishes SET img_link = :img_link WHERE id = :id');
+		$secondMenu->execute(array(
 				'img_link'=>$imgLink,
-				'id'=>$latestId));
-			rename("uploads/" . basename( $_FILES["menuUpload"]["name"]),$imgLink);
-			return true;
-
-		}else{
-			return false;
-		}
-
+				'id'=>$newestId));
+		rename("public/uploads/" . basename( $_FILES["menuUpload"]["name"]),$imgLink);
+		return true;
 	}
 
 	function editMenu(){
-		if (isset($_FILES['menuUpload'])){
-			$uploadCheck = $this->uploadPicture();
-			rename("uploads/" . basename( $_FILES["menuUpload"]["name"]),"public/img/". $_GET['id'] .".jpg");
-		}
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('UPDATE dishes 
 			SET name = :name,
@@ -99,16 +97,18 @@ class MenuManager extends Manager{
 		return true;
 	}
 
-	function deleteDish(){
+	function deletePicture(){
 		$bdd = $this->databaseConnect();
-		$dishId = $_GET['id'];
 		$imgReq = $bdd->prepare('SELECT img_link FROM dishes WHERE id = :id');
-		$imgExec = $imgReq->execute(array('id'=>$dishId));
+		$imgExec = $imgReq->execute(array('id'=>$_GET['id']));
 		$imgFetch = $imgReq->fetch();
 		$imgLink = $imgFetch[0];
 		unlink($imgLink);
-		$req = $bdd->prepare('DELETE FROM dishes WHERE id = :id');
-		$req->execute(array('id'=>$dishId));
+	}
 
+	function deleteDish(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('DELETE FROM dishes WHERE id = :id');
+		$req->execute(array('id'=>$_GET['id']));
 	}
 }

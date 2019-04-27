@@ -1,5 +1,6 @@
 <?php
 require ("vendor/autoload.php");
+require ("public/php/upload.php");
 use model\Sourigna\BlogManager;
 use model\Sourigna\UserManager;
 use model\Sourigna\GuestbookManager;
@@ -114,19 +115,27 @@ function adminMenu(){
 		{$singleMenuEntry = $menuManager->singleMenu();}
 	require('view/admin_menu.php');
 }
+function pictureUpload(){
+	$pictureUpload = uploadPicture();
+}
 
-function entryMenu(){
+function newMenu(){
 	$menuManager = new MenuManager();
-	if (isset($_GET['id'])){
-		$editMenu = $menuManager->editMenu();
-	}else{
-		$newMenu = $menuManager->writeMenu();
-	}
+	$newMenu = $menuManager->writeMenu();
+	$newestId = $menuManager->getNewId();
+	$updateLink = $menuManager->updateLinkDish($newestId);
+	require('view/post/menu_post.php');
+}
+
+function editMenu(){
+	$menuManager = new MenuManager();
+	$editMenu = $menuManager->editMenu();
 	require('view/post/menu_post.php');
 }
 
 function deleteMenu(){
 	$menuManager = new MenuManager();
+	$deletePicture = $menuManager->deletePicture();
 	$deleteEntry = $menuManager->deleteDish();
 	require('view/post/menu_delete_post.php');
 }

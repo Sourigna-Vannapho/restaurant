@@ -47,12 +47,12 @@
 						</select>
 					</div>
 				</div>
-				<input type="file" name="menuUpload" id="menuUpload">
+				<input type="file" name="menuUpload" id="menuUpload" <?php if (!isset($_GET['id'])){echo('required');} ?> >
 				<button type="submit" name="submit" class="btn btn-primary"><?php if (isset($_GET['id'])){ echo ('Modifier');}else{ echo ('Ajouter');} ?></button>
 				<?php
 				if (isset($_GET['id'])){
 				?>
-				<a href="index.php?action=admin_menu"><div class="btn btn-primary">Annuler modification</div></a>
+				<a href="index.php?action=admin_menu"><button class="btn btn-primary">Annuler modification</button></a>
 				<?php
 				}
 				?>
@@ -97,7 +97,7 @@
 					}?></td>
 				<td><?= $data['name']?></td>
 				<td><?= $data['description']?></td>
-				<td><?= $data['price']?> €</td>
+				<td><?= $data['price']?>€</td>
 				<td><?php if($data['available']==1){echo('Oui');}else{echo('Non');}?></td>
 				<td><img src="<?= $data['img_link']?>"></td>
 				<td>

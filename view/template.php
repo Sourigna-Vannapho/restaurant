@@ -27,7 +27,7 @@
 		    		<li><a class="nav-link" href="index.php?action=guestbook&page=1">Livre d'or</a></li>
             <?php 
             if (isset($_SESSION['authority'])){
-              if($_SESSION['authority']==2){
+              if($_SESSION['authority']>=2){
             ?>
             <div class="dropdown show">
             <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" data-toggle="dropdown">Panneau administrateur</a>
@@ -143,6 +143,8 @@
 	endif; 
 	?>
   <script>function passwordValidation(){
+    console.log("test" + $("#registerPass").value);
+    console.log("test2" + $("#registerPassConfirm").value);
     if (document.getElementById("registerPass").value != document.getElementById("registerPassConfirm").value){
       alert("Les mots de passe doivent être identiques !");
       return false;

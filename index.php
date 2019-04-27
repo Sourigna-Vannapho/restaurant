@@ -43,7 +43,7 @@ try{
 					bookingConfirm();
 					break;
 			}
-			if ($_SESSION['authority']==2){
+			if ($_SESSION['authority']>=2){
 				switch($_GET['action']){
 					case "admin_booking":
 						adminBooking();
@@ -60,6 +60,10 @@ try{
 					case "delete_blog":
 						deleteBlog();
 						break;
+				}
+			}
+			if ($_SESSION['authority']>=3){
+				switch($_GET['action']){
 					case "admin_users":
 						adminUsers();
 						break;
@@ -70,8 +74,18 @@ try{
 						adminMenu();
 						break;
 					case "entry_menu":
-						entryMenu();
-						break;
+					//Check if a new picture has been uploaded
+						if (isset($_FILES['menuUpload']) && $_FILES['menuUpload']['size'] > 0){
+							pictureUpload();
+						}
+						//Check if it's an edit or a new entry
+						if (isset($_GET['id'])){
+							editMenu();
+							break;
+						}else{
+							newMenu();
+							break;
+						}
 					case "delete_menu":
 						deleteMenu();
 						break;
