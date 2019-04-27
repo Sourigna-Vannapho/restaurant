@@ -54,4 +54,6 @@
 </table>
 </div>
 <?php $content = ob_get_clean(); ?>
+<?php ob_start(); ?>
+<?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

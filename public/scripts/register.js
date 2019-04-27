@@ -3,6 +3,4 @@ function passwordValidation(){
       alert("Les mots de passe doivent être identiques !");
       return false;
     }else{return true;}
-  }
-
-
+}

@@ -124,4 +124,8 @@
 </div>
 
 <?php $content = ob_get_clean(); ?>
+<?php ob_start(); ?>
+<script src="public/scripts/map.js"></script>
+<script src="public/scripts/homepage.js"></script>
+<?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

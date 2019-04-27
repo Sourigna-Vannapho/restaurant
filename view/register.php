@@ -46,4 +46,7 @@
 	</form>
 </div>
 <?php $content = ob_get_clean(); ?>
+<?php ob_start(); ?>
+<script src="public/scripts/register.js"></script>
+<?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>
