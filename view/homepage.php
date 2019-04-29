@@ -31,8 +31,8 @@
 						<?php 
 						$i=0;
 						while ($data = $blogRead->fetch()){ ?>
-						<div class="carousel-item <?php if($i==0){$i=1;
-							echo 'active'; } ?>">
+						<div class="carousel-item <?php if($i==0):$i=1;
+							echo 'active'; endif; ?>">
 							<h3>
 								<?= ($data['title']) ?> 
 							</h3>

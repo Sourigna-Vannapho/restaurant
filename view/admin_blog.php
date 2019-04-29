@@ -8,31 +8,31 @@
   	</a>
   	<br/>
   	<br/>
-  	<div class="collapse <?php if(isset($_GET['id'])){echo('show');} ?>" id="collapseBlog">
+  	<div class="collapse <?php if(isset($_GET['id'])): echo('show'); endif; ?>" id="collapseBlog">
 	  	<div class="card card-body">
 	  	<?php 
-	  	if (isset($_GET['id'])){
+	  	if (isset($_GET['id'])):
 	  	?>
 		  	<div class="alert alert-warning" role="alert">
 		  		Vous êtes actuellement en train de modifier l'entrée intitulée <?= $singleBlogEntry['title'] ?>
 			</div>
 		<?php 
-		}
+		endif;
 		?>
 			<form method="POST" action="index.php?action=entry_blog<?php if (isset($_GET['id'])){ echo '&id=' . $singleBlogEntry['id'];}?>">
 				<label>Titre</label>
-				<input type="text" class="form-control col" name="blogTitle" value="<?php if (isset($_GET['id'])){ echo $singleBlogEntry['title'];}?>" required></input>
+				<input type="text" class="form-control col" name="blogTitle" value="<?php if (isset($_GET['id'])): echo $singleBlogEntry['title']; endif;?>" required></input>
 				<br/>
 				<label>Contenu</label>
-				<textarea class="form-control col" name="blogContent" rows="3" required><?php if (isset($_GET['id'])){ echo $singleBlogEntry['content'];}?> </textarea>
+				<textarea class="form-control col" name="blogContent" rows="3" required><?php if (isset($_GET['id'])): echo $singleBlogEntry['content']; endif;?> </textarea>
 				<br/>
-				<button type="submit" class="btn btn-primary"><?php if (isset($_GET['id'])){ echo ('Modifier');}else{ echo ('Ajouter');} ?></button>
+				<button type="submit" class="btn btn-primary"><?php if (isset($_GET['id'])): echo ('Modifier'); else: echo ('Ajouter'); endif; ?></button>
 				<?php
-				if (isset($_GET['id'])){
+				if (isset($_GET['id'])):
 				?>
 				<a href="index.php?action=admin_blog"><button class="btn btn-primary">Annuler modifications</button></a>
 				<?php
-				}
+				endif;
 				?>
 			</form>
 		</div>

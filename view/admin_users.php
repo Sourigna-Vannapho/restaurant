@@ -28,18 +28,18 @@ while ($data = $userStatus->fetch()){
 			<td>
 				<select name="userAuthority" form="userForm<?= $userId ?>">
 					<option value="1" 
-					<?php if ($userAuthority==1)
-					{echo 'selected';} 
+					<?php if ($userAuthority==1):
+						echo 'selected'; endif;
 					?>
 					>Client</option>
 					<option value="2"
-					<?php if ($userAuthority==2)
-					{echo 'selected';} 
+					<?php if ($userAuthority==2):
+						echo 'selected'; endif;
 					?>
 					>Employé</option>
 					<option value="3"
-					<?php if ($userAuthority==3)
-					{echo 'selected';} 
+					<?php if ($userAuthority==3): 
+						echo 'selected'; endif;
 					?>
 					>Administrateur</option>
 				</select>

@@ -10,11 +10,12 @@
 	<div class="row">
 		<div class="col-sm-1 menu-item
 		<?php 
-		if(isset($_GET['category'])){
-			if($_GET['category']==1)
-			{echo ('activeMenu');}
-			else{echo('nonActiveMenu');}
-		}
+		if(isset($_GET['category'])):
+			if($_GET['category']==1):
+			echo ('activeMenu');
+			else:echo('nonActiveMenu');
+			endif;
+		endif;
 		?>" id="entreeMenu">
 			<a href="index.php?action=menu&category=1&page=1">
 				<h2>Entrées</h2>
@@ -26,11 +27,12 @@
 		</div>
 		<div class="col-sm-1 menu-item
 		<?php 
-		if(isset($_GET['category'])){
-			if($_GET['category']==2)
-			{echo ('activeMenu');}
-			else{echo('nonActiveMenu');}
-		}
+		if(isset($_GET['category'])):
+			if($_GET['category']==2):
+			echo ('activeMenu');
+			else:echo('nonActiveMenu');
+			endif;
+		endif;
 		?>" id="platMenu">
 			<a href="index.php?action=menu&category=2&page=1">
 				<h2>Plats</h2>
@@ -43,11 +45,11 @@
 		</div>
 		<div class="col-sm-1 menu-item
 		<?php 
-		if(isset($_GET['category'])){
-			if($_GET['category']==3)
-			{echo ('activeMenu');}
-			else{echo('nonActiveMenu');}
-		}
+		if(isset($_GET['category'])):
+			if($_GET['category']==3):
+			echo ('activeMenu');
+			else: echo('nonActiveMenu');endif;
+		endif;
 		?>" id="dessertMenu">
 			<a href="index.php?action=menu&category=3&page=1">
 				<div class="gradientMenu">
@@ -59,11 +61,12 @@
 		</div>
 		<div class="col-sm-1 menu-item
 		<?php 
-		if(isset($_GET['category'])){
-			if($_GET['category']==4)
-			{echo ('activeMenu');}
-			else{echo('nonActiveMenu');}
-		}
+		if(isset($_GET['category'])):
+			if($_GET['category']==4):
+			echo ('activeMenu');
+			else:echo('nonActiveMenu');
+			endif;
+		endif;
 		?>" id="boissonMenu">
 			<a href="index.php?action=menu&category=4&page=1">
 				<div class="gradientMenu">
@@ -113,7 +116,7 @@
 					<?php
 				    $p=1;
 				    while ($p<=$menuPageNb){ ?>
-				    <li class=" page-item <?php if($p == $_GET['page']){echo ('active');}?> "><a class="page-link" href="index.php?action=menu&category=<?= $_GET['category']?>&page=<?= $p ?>"><?= $p ?></a></li>
+				    <li class=" page-item <?php if($p == $_GET['page']): echo ('active'); endif;?> "><a class="page-link" href="index.php?action=menu&category=<?= $_GET['category']?>&page=<?= $p ?>"><?= $p ?></a></li>
 				    <?php
 				    $p++;
 					}

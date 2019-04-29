@@ -34,8 +34,8 @@
 				endif;
 					echo (' le ' . $data['creation_date']); ?> 
 				</p>
-			<?php if ($c==4){echo ('</div>'); }
-				  if ($c==4){echo ('<div class="col-md-4 col-sm-5">');}?>
+			<?php if ($c==4):echo ('</div>'); endif;
+				  if ($c==4):echo ('<div class="col-md-4 col-sm-5">');endif;?>
 			<?php
 			$c++;
 			}
@@ -56,7 +56,7 @@
 		    <?php
 		    $i=1;
 		    while ($i<=$guestbookPageNb){ ?>
-		    <li class=" page-item <?php if($i == $_GET['page']){echo ('active');}?> "><a class="page-link" href="index.php?action=guestbook&page=<?= $i ?>"><?= $i ?></a></li>
+		    <li class=" page-item <?php if($i == $_GET['page']): echo ('active');endif;?> "><a class="page-link" href="index.php?action=guestbook&page=<?= $i ?>"><?= $i ?></a></li>
 		    <?php
 		    $i++;
 			}

@@ -26,19 +26,17 @@
   	<tr>
   		<td scope="row" class="
   		<?php 
-  		if ($reservationEntry['reservationDay']==$today)
-  		{echo ('todayDate');}
-  		else if($reservationEntry['reservationDay']==$tomorrow)
-  		{echo ('tomorrowDate');}
-  		else if($reservationEntry['reservationDay']==$afterTomorrow)
-  		{echo ('afterTomorrowDate');}?>"><?= $reservationEntry['reservationDay'] ?></td>
+  		if ($reservationEntry['reservationDay']==$today): echo ('todayDate');
+  		elseif($reservationEntry['reservationDay']==$tomorrow): echo ('tomorrowDate');
+  		elseif($reservationEntry['reservationDay']==$afterTomorrow): echo ('afterTomorrowDate');
+      endif;?>"><?= $reservationEntry['reservationDay'] ?></td>
   		<td class="
   		<?php 
-  		if ($reservationEntry['reservationTime']==1)
-  		{echo ('firstService');}
-  		else if ($reservationEntry['reservationTime']==2)
-  		{echo ('secondService');}
-  		?>"><?php if ($reservationEntry['reservationTime']==1){echo('Midi');}else{echo('Soir');} ?></td>
+  		if ($reservationEntry['reservationTime']==1): echo ('firstService');
+  		elseif ($reservationEntry['reservationTime']==2): echo ('secondService'); 
+      endif;
+  		?>"><?php if ($reservationEntry['reservationTime']==1):echo('Midi'); else: echo('Soir'); endif; ?>
+      </td>
   		<td><?= $reservationEntry['arrivalTime']?></td>
   		<td><?= $reservationEntry['lastName'] . ' ' .$reservationEntry['firstName'] ?></td>
   		<td><?= $reservationEntry['clientNb'] ?></td>
