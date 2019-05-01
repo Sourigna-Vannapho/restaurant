@@ -9,15 +9,15 @@
       <link href="public/css/style.css" rel="stylesheet" />
   </head>
   <body>
-      <nav class="navbar navbar-expand-sm userNav">
-    		<a class="navbar-brand" href="index.php?action=home">Van' à pho</a>
+      <nav class="navbar navbar-expand-sm">
+    		<a class="navbar-brand" href="index.php?action=home"><i class="fas fa-home"></i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     		 	<ul class="navbar-nav mr-auto">
     		 		<li>
-              <a class="nav-link" href="index.php?action=home"><i class="fas fa-home"></i> Accueil</a>
+              <a class="nav-link" href="index.php?action=home"> Accueil</a>
             </li>
     		 		<li>
               <a class="nav-link
@@ -63,7 +63,7 @@
               endif;
               ?>
     		  </ul>
-    		  <ul class="navbar-nav">
+    		  <ul class="navbar-nav justify-content-end">
     		  	<?php 
     		  	if (isset($_SESSION['authority'])):
     		  		echo ('Bonjour' . ' ' . $_SESSION['first_name'] . ' ' . $_SESSION['last_name']);

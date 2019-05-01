@@ -62,7 +62,7 @@
 		</div>
 	</div>
 	<div class="row" id="openingHoursMap">
-		<div class="col">
+		<div class="col-lg-6">
 			<h2>Horaires d'ouverture</h2>
 			<table class="table table-striped">
 				<tbody>
@@ -106,7 +106,7 @@
 			</table>
 
 		</div>
-		<div class="col">
+		<div class="col-lg-6">
 			<h2>Contact</h2>
 			<div id="mapid">
 				<div class="mapOverlay"></div>			
@@ -115,7 +115,7 @@
 				280 Rue Benjamin Delessert<br/>
 				77127 Lieusaint<br/>
 				01 23 45 67 89<br/>
-				Mail :<br/>
+				Mail : restaurant.vanapho@gmail.com<br/>
 				</address>
 			</div>
 
