@@ -98,7 +98,7 @@
 								$i++;?>
 							</div>
 							<div class="row">
-								<a href="#">Détails</a>
+								<a href="#" tabindex="0" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<?= $data['criteria1']?>" >Détails</a>
 							</div>
 						</div>
 					</div>

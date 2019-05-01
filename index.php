@@ -32,7 +32,9 @@ try{
 			case "logout":
 				logoutConfirm();
 				break;
-			
+			case "register_promote":
+				userPromote();
+				break;
 		}
 		if (isset($_SESSION['authority'])){
 			switch($_GET['action']){
@@ -86,6 +88,12 @@ try{
 							newMenu();
 							break;
 						}
+					case "edit_criteria":
+						editCriteria();
+						break;
+					case "new_criteria":
+						newCriteria();
+						break;
 					case "delete_menu":
 						deleteMenu();
 						break;

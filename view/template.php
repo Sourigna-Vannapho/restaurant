@@ -9,55 +9,77 @@
       <link href="public/css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm userNav">
-  		<a class="navbar-brand" href="index.php?action=home">Van' à pho</a>
-		 	<ul class="navbar-nav mr-auto">
-		 		<li><a class="nav-link" href="index.php?action=home"><i class="fas fa-home"></i> Accueil</a></li>
-		 		<li><a class="nav-link" href="index.php?action=booking">Réservation</a></li>
-          <div class="dropdown show">
-		        <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" data-toggle="dropdown" href="#" >Menu</a>
-            <div class="dropdown-menu" aria-labelledby="menuDropdown">
-              <a class="dropdown-item" href="index.php?action=menu&category=1&page=1">Entrée</a>
-              <a class="dropdown-item" href="index.php?action=menu&category=2&page=1">Plat</a>
-              <a class="dropdown-item" href="index.php?action=menu&category=3&page=1">Dessert</a>
-              <a class="dropdown-item" href="index.php?action=menu&category=4&page=1">Boisson</a>
-            </div>
-          </div>
-		    		<li><a class="nav-link" href="index.php?action=guestbook&page=1">Livre d'or</a></li>
-            <?php 
-            if (isset($_SESSION['authority'])){
-              if($_SESSION['authority']>=2){
-            ?>
-            <div class="dropdown show">
-              <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" data-toggle="dropdown">Panneau administrateur</a>
-              <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
-                <a class="dropdown-item" href="index.php?action=admin_blog">Blog</a>
-                <a class="dropdown-item" href="index.php?action=admin_users">Gérer les accès</a>
-                <a class="dropdown-item" href="index.php?action=admin_menu">Modifier la carte</a>
+      <nav class="navbar navbar-expand-sm userNav">
+    		<a class="navbar-brand" href="index.php?action=home">Van' à pho</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    		 	<ul class="navbar-nav mr-auto">
+    		 		<li>
+              <a class="nav-link" href="index.php?action=home"><i class="fas fa-home"></i> Accueil</a>
+            </li>
+    		 		<li>
+              <a class="nav-link
+              <?php 
+              if (isset($_SESSION['authority'])): 
+                  if($_SESSION['authority']>=1): 
+                    echo ('active'); 
+                  endif; 
+              else: echo ('disabled ');
+              endif;?>" href="index.php?action=booking">Réservation</a>
+            </li>
+            <li>
+              <div class="dropdown show">
+    		        <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" data-toggle="dropdown" href="#" >Menu</a>
+                <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                  <a class="dropdown-item" href="index.php?action=menu&category=1&page=1">Entrée</a>
+                  <a class="dropdown-item" href="index.php?action=menu&category=2&page=1">Plat</a>
+                  <a class="dropdown-item" href="index.php?action=menu&category=3&page=1">Dessert</a>
+                  <a class="dropdown-item" href="index.php?action=menu&category=4&page=1">Boisson</a>
+                </div>
               </div>
-            </div>
-            <?php
-              }
-            }
-            ?>
-		  </ul>
-		   	<ul class="navbar-nav">
-		   		<?php 
-		   		if (isset($_SESSION['authority'])):
-		   			echo ('Bonjour' . ' ' . $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] . ' (' . $_SESSION['mail'] . ')');
-		   		?>
-		    	<li><a class="nav-link" href="index.php?action=logout"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>
-		    	<?php
-		    	else:
-		    	?>
-		    	<li><a class="nav-link" href="index.php?action=register">Inscription</a></li>
-		    	<li><a class="nav-link" data-toggle="modal" data-target="#connexionWindow" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
-		    	<?php
-		    	endif;
-		    	?>
-		    </ul>
-	  </nav>
+            </li>
+    		    <li>
+              <a class="nav-link" href="index.php?action=guestbook&page=1">Livre d'or</a>
+            </li>
+              <?php 
+              if (isset($_SESSION['authority'])):
+                if($_SESSION['authority']>=2):
+              ?>
+            <li>
+              <div class="dropdown show">
+                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" data-toggle="dropdown">Panneau administrateur</a>
+                <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                  <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
+                  <a class="dropdown-item" href="index.php?action=admin_blog">Blog</a>
+                  <a class="dropdown-item" href="index.php?action=admin_users">Gérer les accès</a>
+                  <a class="dropdown-item" href="index.php?action=admin_menu">Modifier la carte</a>
+                </div>
+              </div>
+            </li>
+              <?php
+                endif;
+              endif;
+              ?>
+    		  </ul>
+    		  <ul class="navbar-nav">
+    		  	<?php 
+    		  	if (isset($_SESSION['authority'])):
+    		  		echo ('Bonjour' . ' ' . $_SESSION['first_name'] . ' ' . $_SESSION['last_name']);
+    		  	?>
+    		   	<li><a class="nav-link" href="index.php?action=logout"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>
+    		   	<?php
+    		   	else:
+    		   	?>
+    		   	<li><a class="nav-link" href="index.php?action=register">Inscription</a></li>
+    		   	<li><a class="nav-link" data-toggle="modal" data-target="#connexionWindow" href="#"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+    		   	<?php
+    		   	endif;
+    		   	?>
+    		  </ul>
+        </div>
+  	  </nav>
     <section>
 	   	<?= $content ?>
 	  </section>

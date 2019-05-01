@@ -47,7 +47,7 @@ class BookingManager extends Manager{
 			FROM reservation r
 			LEFT JOIN users u ON u.id=r.users_id
 			WHERE r.reservation_day  BETWEEN CURDATE() AND CURDATE() + 2
-			ORDER BY r.reservation_day ASC,r.reservation_time DESC');
+			ORDER BY r.reservation_day ASC,r.reservation_time ASC');
 		return $req;
 	}
 

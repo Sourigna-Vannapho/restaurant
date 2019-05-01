@@ -2,6 +2,9 @@
 <?php ob_start(); ?>
 <h1>Menu</h1>
 <div class="container">
+	<div class="alert alert-success" role="alert">
+  		Plat ajouté avec succès !
+	</div>
 	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBlog" role="button" aria-expanded="false" aria-controls="collapseBlog">
     Afficher éditeur
 	</a>
@@ -102,9 +105,34 @@
 				<td><img src="<?= $data['img_link']?>"></td>
 				<td>
 					<a href="index.php?action=admin_menu&id=<?=$data['id']?>">Modifier</a>
-					<a href="index.php?action=delete_menu&id=<?=$data['id']?>">	Supprimer</a>
+					<a id="<?=$data['id']?>" href="#" onclick="deleteMenuConfirm(<?=$data['id']?>)">	Supprimer</a>
 				</td>
-
+			</tr>
+			<tr>
+				<td colspan="10" scope="row">
+					<div class="row">
+					Tags :
+					<?php $c=1;
+					 ?>
+						<form method="POST" action=" 
+						<?php 
+						if(isset($data['criteria1'])){ 
+						?>
+						index.php?action=edit_criteria&id=<?=$data['id']?>
+						<?php }
+						else{ ?>
+							index.php?action=new_criteria&id=<?=$data['id']?>
+							<?php } ?>">
+						<?php 
+					while ($c!=6){?>
+							<input name="criteria<?=$c?>" type="text" value="<?=$data['criteria'.$c]?>" >
+							<?php
+						echo " ";
+						$c++;}?>
+							<button class="btn btn-primary" type="submit">Modifier</button> <?php ?>
+						</form>
+					</div>
+				</td>
 			</tr>
 
 	<?php	
@@ -116,5 +144,6 @@
 </div>
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
+<script src="public/scripts/deletePrompt.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

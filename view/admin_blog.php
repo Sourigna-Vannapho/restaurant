@@ -52,7 +52,7 @@
 				</p>
 				<p>
 					Posté le <?= ($data['date_creation']) ?> - <a href='index.php?action=admin_blog&amp;id=<?= $data['id']?>'><i class="fas fa-edit"></i>Modifier</a>
-					<a id='<?= $data['id']?>' href='index.php?action=delete_blog&amp;id=<?= $data['id']?>'><i class="fas fa-trash-alt"></i>Supprimer</a>
+					<a id='<?= $data['id']?>' href="#" onclick="deleteBlogConfirm(<?= $data['id']?>)" ><i class="fas fa-trash-alt"></i>Supprimer</a>
 				</p>
 			</div>
 		<?php
@@ -63,5 +63,6 @@
 </div>
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
+<script src="public/scripts/deletePrompt.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

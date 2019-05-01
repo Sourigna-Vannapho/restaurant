@@ -35,6 +35,13 @@ function registerConfirm(){
 	require('view/post/register_post.php');
 }
 
+function userPromote(){
+	$userManager = new UserManager();
+	$stringRetrieve = $userManager->callAuthentication();
+	$promoteStatus = $userManager->callPromote($stringRetrieve);
+	require('view/post/promote_post.php');
+}
+
 function loginConfirm(){
 	$userManager = new UserManager();
 	$loginStatus = $userManager->callLogin();
@@ -131,6 +138,18 @@ function editMenu(){
 	$menuManager = new MenuManager();
 	$editMenu = $menuManager->editMenu();
 	require('view/post/menu_post.php');
+}
+
+function newCriteria(){
+	$menuManager = new MenuManager();
+	$criteriaStatus = $menuManager->insertCriteria();
+	require('view/post/criteria_post.php');
+}
+
+function editCriteria(){
+	$menuManager = new MenuManager();
+	$criteriaStatus = $menuManager->updateCriteria();
+	require('view/post/criteria_post.php');
 }
 
 function deleteMenu(){

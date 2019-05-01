@@ -35,7 +35,7 @@ class UserManager extends Manager{
 				//   	$mail->Body = '<html>Bonjour,<br/> <br/>
 				//   	Ce mail est envoyé suite à votre inscription sur le site de notre restaurant Van a Pho, <br/>
 				//   	Veuillez cliquer sur le lien ci-dessous afin de finaliser votre inscription : <br/>
-				//   	<a href=\'http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication=</html>' . $authenticationGenerate . '<html>\'> http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication= </html>'. $authenticationGenerate . '<html></a><br/>
+				//   	<a href=\'http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication=</html>' . $authenticationGenerate . '&mail='. $trimmedMail'<html>\'> http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication= </html>'. $authenticationGenerate . '<html></a><br/>
 				//   	Suite à cette vérification vous serez capable de faire des réservations.<br/>
 
 				//   	A bientot chez nous !'
@@ -54,15 +54,16 @@ class UserManager extends Manager{
 				// 	/* Google account password. */
 				// 	$mail->Password = 'Isajab77';
 				// 	/* Enable SMTP debug output. */
-				//   	$mail->send();}
-				//   	catch (Exception $e)
-				// 	{
-				// 	   echo $e->errorMessage();
-				// 	}
-				// 	catch (\Exception $e)
-				// 	{
-				// 	   echo $e->getMessage();
-				// 	}
+				//   	$mail->send();
+				// }
+				// catch (Exception $e)
+				// {
+				// 	echo $e->errorMessage();
+				// }
+				// catch (\Exception $e)
+				// {
+				// 	echo $e->getMessage();
+				// }
 			}
 			else{
 			}
@@ -70,6 +71,29 @@ class UserManager extends Manager{
 		}
 		else{
 			return true;
+		}
+	}
+
+	function callAuthentication(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('SELECT authentication_string FROM users WHERE username=:username');
+		$req->execute(array('username'=>$_GET['mail']));
+		$fetchString = $req->fetch();
+		$stringRetrieved = $fetchString[0];
+		return $stringRetrieved;
+	}
+
+	function callPromote($user_string){
+		if ($user_string == $_GET['authentication']){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('UPDATE users 
+			SET authority = 1
+			WHERE authentication_string = :string');
+		$req->execute(array(
+			'string'=>$user_string));
+		}
+		else {
+			return false;
 		}
 	}
 
