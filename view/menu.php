@@ -8,7 +8,7 @@
 </div>
 <div class="container-fluid" id="menuAll">
 	<div class="row">
-		<div class="col-sm-1 menu-item
+		<div class="col-lg-1 col-sm-3 menu-item
 		<?php 
 		if(isset($_GET['category'])):
 			if($_GET['category']==1):
@@ -25,7 +25,7 @@
 				</div>
 			</a>
 		</div>
-		<div class="col-sm-1 menu-item
+		<div class="col-lg-1 col-sm-3 menu-item
 		<?php 
 		if(isset($_GET['category'])):
 			if($_GET['category']==2):
@@ -43,7 +43,7 @@
 					
 			</a>
 		</div>
-		<div class="col-sm-1 menu-item
+		<div class="col-lg-1 col-sm-3 menu-item
 		<?php 
 		if(isset($_GET['category'])):
 			if($_GET['category']==3):
@@ -59,7 +59,7 @@
 			</div>
 			</a>
 		</div>
-		<div class="col-sm-1 menu-item
+		<div class="col-lg-1 col-sm-3 menu-item
 		<?php 
 		if(isset($_GET['category'])):
 			if($_GET['category']==4):
@@ -76,7 +76,7 @@
 			</div>
 			</a>
 		</div>
-		<div class="col-sm-8 container-fluid" id="menuShow">
+		<div class="col-lg-8 container-fluid" id="menuShow">
 		<?php 
 		$i=0; ?>
 			<div class="row">
@@ -98,7 +98,13 @@
 								$i++;?>
 							</div>
 							<div class="row">
-								<a href="#" tabindex="0" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<?= $data['criteria1']?>" >Détails</a>
+								<a href="#" tabindex="0" data-container="body" data-toggle="popover" data-placement="bottom" 
+								data-content="
+								<?php $c=1;
+								while ($c!=6){
+									echo($data['criteria'.$c] . " ");
+									$c++;
+								}?>" >Détails</a>
 							</div>
 						</div>
 					</div>

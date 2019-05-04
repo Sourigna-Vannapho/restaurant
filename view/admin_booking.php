@@ -98,12 +98,12 @@
     </thead>
     <tbody>
       <td scope="row">Tables Disponibles</td>
-      <td><?= $tableTodayLunch ?></td>
-      <td><?= $tableTodayDinner ?></td>
-      <td><?= $tableTmwLunch ?></td>
-      <td><?= $tableTmwDinner ?></td>
-      <td><?= $tableATmwLunch ?></td>
-      <td><?= $tableATmwDinner ?></td>
+      <td><?= 20 - $tableTodayLunch ?></td>
+      <td><?= 20 - $tableTodayDinner ?></td>
+      <td><?= 20 - $tableTmwLunch ?></td>
+      <td><?= 20 - $tableTmwDinner ?></td>
+      <td><?= 20 - $tableATmwLunch ?></td>
+      <td><?= 20 -$tableATmwDinner ?></td>
     </tbody>
   </table>
 </div>

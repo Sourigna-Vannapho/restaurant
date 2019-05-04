@@ -2,9 +2,16 @@
 <?php ob_start(); ?>
 <h1>Menu</h1>
 <div class="container">
+	<?php 
+	if(isset($_GET['info'])){ 
+		if ($_GET['info']=='success'){?>
 	<div class="alert alert-success" role="alert">
   		Plat ajouté avec succès !
 	</div>
+	<?php
+		}
+	}
+	?>
 	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBlog" role="button" aria-expanded="false" aria-controls="collapseBlog">
     Afficher éditeur
 	</a>

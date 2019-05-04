@@ -31,7 +31,7 @@
             </li>
             <li>
               <div class="dropdown show">
-    		        <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" data-toggle="dropdown" href="#" >Menu</a>
+    		        <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" data-toggle="dropdown" >Menu</a>
                 <div class="dropdown-menu" aria-labelledby="menuDropdown">
                   <a class="dropdown-item" href="index.php?action=menu&category=1&page=1">Entrée</a>
                   <a class="dropdown-item" href="index.php?action=menu&category=2&page=1">Plat</a>
