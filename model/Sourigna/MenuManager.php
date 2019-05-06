@@ -12,10 +12,8 @@ class MenuManager extends Manager{
 		}
 		$bdd = $this->databaseConnect();
 		$offset = ($currentPage - 1) * $dishPerPage;
-		$req = $bdd->prepare("SELECT d.name, d.description, d.price, d.img_link, c.*
+		$req = $bdd->prepare("SELECT d.name, d.description, d.price, d.img_link
 			FROM dishes d
-			LEFT JOIN dish_criteria c
-            ON d.id = c.dish_id
 			WHERE category=:category AND available=1
 			ORDER BY id DESC
 			LIMIT $offset, $dishPerPage");
@@ -32,13 +30,20 @@ class MenuManager extends Manager{
 		return $dishNb;
 	}
 
-	function callTags(){
+	function callCriteria(){
 		$bdd = $this->databaseConnect();
-		$req = $bdd->query('SELECT * FROM disc_criteria 
-			INNER JOIN dishes
-			ON dish_criteria.dish_id=dishes.id');
+		$req = $bdd->query('SELECT dc.*, c.libelle AS criteria
+			FROM dish_criteria dc
+			INNER JOIN criteria c ON dc.criteria_id = c.id
+			LEFT JOIN dishes d ON dc.dish_id = d.id
+			WHERE dc.dish_id = d.id');
 		return $req;
 
+		// 		$bdd = $this->databaseConnect();
+		// $req = $bdd->query('SELECT * FROM disc_criteria 
+		// 	INNER JOIN dishes
+		// 	ON dish_criteria.dish_id=dishes.id');
+		// return $req;
 	}
 
 	function adminMenu(){
@@ -112,34 +117,11 @@ class MenuManager extends Manager{
 	}
 
 	function insertCriteria(){
-		$bdd = $this->databaseConnect();
-		$req = $bdd->prepare('INSERT INTO dish_criteria(dish_id,criteria1,criteria2,criteria3,criteria4,criteria5) 
-			VALUES (:dish_id,:criteria1,:criteria2,:criteria3,:criteria4,:criteria5)');
-		$req->execute(array(
-			'dish_id'=>$_GET['id'],
-			'criteria1' => $_POST['criteria1'],
-			'criteria2' => $_POST['criteria2'],
-			'criteria3' => $_POST['criteria3'],
-			'criteria4' => $_POST['criteria4'],
-			'criteria5' => $_POST['criteria5']));
+
 	}
 
 	function updateCriteria(){
-		$bdd = $this->databaseConnect();
-		$req = $bdd->prepare('UPDATE dish_criteria
-			SET criteria1 = :criteria1,
-				criteria2 = :criteria2,
-				criteria3 = :criteria3,
-				criteria4 = :criteria4,
-				criteria5 = :criteria5
-			WHERE dish_id = :dish_id');
-		$req->execute(array(
-			'criteria1' => $_POST['criteria1'],
-			'criteria2' => $_POST['criteria2'],
-			'criteria3' => $_POST['criteria3'],
-			'criteria4' => $_POST['criteria4'],
-			'criteria5' => $_POST['criteria5'],
-			'dish_id'=>$_GET['id']));
+
 	}
 
 	function deletePicture(){

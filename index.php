@@ -44,6 +44,15 @@ try{
 				case "booking_confirm":
 					bookingConfirm();
 					break;
+				case "user_profile":
+					userProfile();
+					break;
+				case "phone_modify":
+					userPhone();
+					break;
+				case "user_delete_booking":
+					userBookingDelete();
+					break;
 			}
 			if ($_SESSION['authority']>=2){
 				switch($_GET['action']){

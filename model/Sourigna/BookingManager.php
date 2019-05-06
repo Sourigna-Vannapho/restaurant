@@ -31,6 +31,23 @@ class BookingManager extends Manager{
 		}
 	}
 
+	function userBooking(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('SELECT id,client_amount, reservation_day, reservation_timeslot, TIME_FORMAT(reservation_time, "%H h %i") AS arrivalTime FROM reservation WHERE users_id = :users_id');
+		$req->execute(array(
+			'users_id'=>$_SESSION['id']));
+		return $req;
+	}
+
+	function userBookingDelete(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('DELETE FROM reservation WHERE id = :id AND users_id = :users_id');
+		$req->execute(array(
+			'id'=>$_GET['id'],
+			'users_id'=>$_SESSION['id']));
+		return true;
+	}
+
 	function adminBooking(){
 		$bdd = $this->databaseConnect();
 		$req = $bdd->query('SELECT 

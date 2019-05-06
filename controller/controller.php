@@ -18,6 +18,7 @@ function menu(){
 	$menuManager = new MenuManager();
 	$menuStatus = $menuManager->callMenu($dishPerPage);
 	$menuPageNb = $menuManager->callPaginationTotalMenu($dishPerPage);
+	$criteriaStatus = $menuManager->callCriteria();
 	require('view/menu.php');
 }
 
@@ -68,6 +69,27 @@ function bookingConfirm(){
 	$bookingStatus = $bookingManager->callBooking();
 	require('view/post/booking_post.php');
 }
+
+function userProfile(){
+	$bookingManager = new BookingManager();
+	$userManager = new UserManager();
+	$bookingTest = $bookingManager->userBooking();
+	$userStatus = $userManager->userInfo();
+	require('view/user_profile.php');
+}
+
+function userPhone(){
+	$userManager = new UserManager();
+	$phoneStatus = $userManager->phoneEdit();
+	require('view/post/phone_modify_post.php');
+}
+
+function userBookingDelete(){
+	$bookingManager = new BookingManager();
+	$bookingStatus = $bookingManager->userBookingDelete();
+	require('view/post/user_delete_booking_post.php');
+}
+
 function adminBooking(){
 	$bookingManager = new BookingManager();
 	$bookingStatus = $bookingManager->adminBooking();

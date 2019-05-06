@@ -64,10 +64,11 @@
               ?>
     		  </ul>
     		  <ul class="navbar-nav justify-content-end">
+            <li><a class="nav-link" href="index.php?action=user_profile">
     		  	<?php 
     		  	if (isset($_SESSION['authority'])):
     		  		echo ('Bonjour' . ' ' . $_SESSION['first_name'] . ' ' . $_SESSION['last_name']);
-    		  	?>
+    		  	?></a></li>
     		   	<li><a class="nav-link" href="index.php?action=logout"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>
     		   	<?php
     		   	else:
