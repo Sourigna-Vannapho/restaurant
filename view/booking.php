@@ -24,7 +24,7 @@
 	<form method="POST" action="index.php?action=booking_confirm">
 		<div class="form-group">
 			<label>Jour de la réservation</label>
-			<input type="date" class="form-control" name="day" required>
+			<input type="date" class="form-control" name="day" id="bookingDay" required>
 		</div>
 		<div class="form-group">
 			<label>Service</label>
@@ -42,7 +42,8 @@
 			<input type="number" min="1" max="20" class="form-control" name="nbPpl" required>
 			<small class="form-text text-muted">Pour des réservations supérieures à 10 personnes, veuillez nous contacter par téléphone</small>
 		</div>
-		<button type="submit" class="btn btn-primary">Réserver</button>
+		<button type="submit" class="btn btn-primary" onclick="return validateDate('<?= date('Y-m-d') ?>')">Réserver</button>
+
 	</form>
 	<?php 
 	if (isset($_GET['booking_status'])): 
@@ -55,5 +56,6 @@
 
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
+<script src="public/scripts/booking.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>
