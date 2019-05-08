@@ -59,6 +59,9 @@ try{
 					case "admin_booking":
 						adminBooking();
 						break;
+					case "manual_booking":
+						bookingManual();
+						break;
 					case "delete_booking":
 						bookingDelete();
 						break;

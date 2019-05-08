@@ -73,7 +73,7 @@ function bookingConfirm(){
 function userProfile(){
 	$bookingManager = new BookingManager();
 	$userManager = new UserManager();
-	$bookingTest = $bookingManager->userBooking();
+	$bookingStatus = $bookingManager->userBooking();
 	$userStatus = $userManager->userInfo();
 	require('view/user_profile.php');
 }
@@ -92,8 +92,20 @@ function userBookingDelete(){
 
 function adminBooking(){
 	$bookingManager = new BookingManager();
+	$userManager = new UserManager();
 	$bookingStatus = $bookingManager->adminBooking();
+	$deleteBooking = $bookingManager->emptyBooking();
+	$deletePlaceholder = $userManager->emptyPlaceholder();
 	require('view/admin_booking.php');
+}
+
+function bookingManual(){
+	$userManager = new UserManager();
+	$bookingManager = new BookingManager();
+	$userStatus = $userManager->manualUser();	
+	$lastUserId = $userManager->getLastUserId();
+	$bookingStatus = $bookingManager->manualBooking($lastUserId);
+	require('view/post/manual_booking_post.php');
 }
 
 function bookingDelete(){

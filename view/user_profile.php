@@ -35,9 +35,9 @@
 	      </tr>
     	</thead>
     	<tbody>
-    		<?php while ($reservationEntry=$bookingTest->fetch()){ ?>
+    		<?php while ($reservationEntry=$bookingStatus->fetch()){ ?>
     		<tr>
-	    		<td scope="row"><?= $reservationEntry['reservation_day'] ?></td>
+	    		<td scope="row"><?= $reservationEntry['reservationDay'] ?></td>
 	    		<td class="
 	    		<?php 
 	    		if ($reservationEntry['reservation_timeslot']==1): echo ('firstService');

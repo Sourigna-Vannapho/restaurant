@@ -56,6 +56,6 @@
 
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
-<script src="public/scripts/booking.js"></script>
+<script src="public/scripts/validDate.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

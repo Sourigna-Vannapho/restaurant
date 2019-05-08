@@ -2,7 +2,52 @@
 <?php ob_start(); ?>
 <h1>Réservations</h1>
 <div class="container">
-  
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseBlog" role="button" aria-expanded="false" aria-controls="collapseBlog">
+    Réservation Manuelle
+  </a>
+  <div class="collapse" id="collapseBlog">
+      <div class="card card-body">
+        <form method="POST" action="index.php?action=manual_booking">
+          <div class="form-row">
+            <div class="col">
+              <label>Nom</label>
+              <input type="text" class="form-control" name="lastName" required>
+            </div>
+            <div class="col">
+              <label>Prénom</label>
+              <input type="text" class="form-control" name="firstName" required>
+            </div>
+            <div class="col">
+              <label>Numéro de téléphone</label>
+              <input type="tel" name="phone" pattern="[0-9]{10}" class="form-control" placeholder="Exemple : 0123456789" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Jour de la réservation</label>
+            <input type="date" class="form-control" name="day" id="bookingDay" required>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label>Service</label>
+              <select class="form-control" name="timeslot" required>
+                <option value="1">Midi</option>
+                <option value="2">Soir</option>
+              </select>
+            </div>
+            <div class="col">
+              <label>Heure d'arrivée</label>
+            <input type="time" name="time" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nombre de personnes</label>
+            <input type="number" min="1" max="40" class="form-control" name="nbPpl" required>
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="return validateDate('<?= date('Y-m-d') ?>')">Réserver</button>
+
+        </form>
+    </div>
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -18,9 +63,9 @@
     <tbody>
     	<?php 
     	date_default_timezone_set('Europe/Paris');
-    	$today = date('d-m-Y');
-    	$tomorrow = date('d-m-Y',strtotime("+1 day"));
-    	$afterTomorrow = date('d-m-Y',strtotime("+2 day"));
+    	$today = date('d/m/Y');
+    	$tomorrow = date('d/m/Y',strtotime("+1 day"));
+    	$afterTomorrow = date('d/m/Y',strtotime("+2 day"));
       $tableTodayLunch = 0;
       $tableTodayDinner = 0;
       $tableTmwLunch = 0;
@@ -110,5 +155,6 @@
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
 <script src="public/scripts/deletePrompt.js"></script>
+<script src="public/scripts/validDate.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

@@ -139,10 +139,39 @@ class UserManager extends Manager{
 			'id'=>$_SESSION['id']));
 		return true;
 	}
+	function emptyPlaceholder(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('DELETE u FROM users u 
+			LEFT JOIN reservation r ON u.id=r.users_id 
+			WHERE u.username="placeholder" AND r.users_id IS NULL');
+		$req->execute(array());
+	}
+
+	function manualUser(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('INSERT INTO users(username,first_name,last_name,password,authority,phone,authentication_string) 
+			VALUES(:username,:first_name,:last_name,:password,0,:phone,:authentication_string)');
+		$req->execute(array(
+			'username'=>'placeholder',
+			'first_name'=>$_POST['firstName'],
+			'last_name'=>$_POST['lastName'],
+			'password'=>'placeholder',
+			'phone'=>$_POST['phone'],
+			'authentication_string'=>'placeholder'));
+		return true;
+	}
+
+	function getLastUserId(){
+		$bdd = $this->databaseConnect();
+		$idReq = $bdd->query('SELECT MAX(id) FROM users');
+		$fetchId = $idReq->fetch();
+		$latestId = $fetchId[0];
+		return $latestId;
+	}
 
 	function callUsers(){
 		$bdd = $this->databaseConnect();
-		$req = $bdd->query('SELECT id, username ,first_name, last_name, authority, phone FROM users ORDER BY id DESC');
+		$req = $bdd->query("SELECT id, username ,first_name, last_name, authority, phone FROM users WHERE username != 'placeholder' ORDER BY id DESC");
 		return $req;
 	}
 
