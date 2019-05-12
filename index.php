@@ -35,6 +35,7 @@ try{
 			case "register_promote":
 				userPromote();
 				break;
+
 		}
 		if (isset($_SESSION['authority'])){
 			switch($_GET['action']){

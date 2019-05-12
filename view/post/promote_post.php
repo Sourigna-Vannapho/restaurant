@@ -1,1 +1,2 @@
-<?php echo $stringRetrieve;
+<?php 
+header('Location:index.php?action=home');

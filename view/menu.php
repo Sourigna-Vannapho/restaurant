@@ -52,11 +52,11 @@
 		endif;
 		?>" id="dessertMenu">
 			<a href="index.php?action=menu&category=3&page=1">
-				<div class="gradientMenu">
 				<h2>Desserts</h2>
-				<img src="public/img/dessertMenu.jpg">
-				<div class="menuOverlay"></div>
-			</div>
+				<div class="gradientMenu">
+					<img src="public/img/dessertMenu.jpg">
+					<div class="menuOverlay"></div>
+				</div>
 			</a>
 		</div>
 		<div class="col-lg-1 col-sm-3 menu-item
@@ -69,11 +69,11 @@
 		endif;
 		?>" id="boissonMenu">
 			<a href="index.php?action=menu&category=4&page=1">
-				<div class="gradientMenu">
 				<h2>Boissons</h2>
-				<img src="public/img/boissonMenu.jpg">
-				<div class="menuOverlay"></div>
-			</div>
+				<div class="gradientMenu">
+					<img src="public/img/boissonMenu.jpg">
+					<div class="menuOverlay"></div>
+				</div>
 			</a>
 		</div>
 		<div class="col-lg-8 container-fluid" id="menuShow">
@@ -100,11 +100,8 @@
 							<div class="row">
 								<a href="#" tabindex="0" data-container="body" data-toggle="popover" data-placement="bottom" 
 								data-content="
-								<?php $c=1;
-								while ($c!=6){
-									echo($data['criteria'.$c] . " ");
-									$c++;
-								}?>" >Détails</a>
+								<?= $data['libelleGrp']
+								?>" >Détails</a>
 							</div>
 						</div>
 					</div>

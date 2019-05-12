@@ -77,6 +77,28 @@ h1{
 .card{
 	background-color:black;
 }
+
+.notification{
+	position:fixed;
+	width:50%;
+	text-align:center;
+	left:25%;
+	animation:fadein 500ms;
+	animation-timing-function:ease-in;
+}
+
+@keyframes fadein{
+	0%{
+		transform:translateY(-20px);
+		opacity: 0%;
+	}
+	50%{
+		opacity: 100%;
+	}
+	100%{
+		transform: translateY(0px);
+	}
+}
 /*Homepage*/
 
 #title{
@@ -397,6 +419,18 @@ address{
 		border-radius:none;
 		right:0%;
 		top:0%;
+	}
+	.menu-item img{
+		display:none;
+	}
+	.gradientMenu{
+		display:none;
+	}
+	.menu-item{
+		margin-top:0em;
+	}
+	#menuShow{
+		margin-top:20px;
 	}
 
 }

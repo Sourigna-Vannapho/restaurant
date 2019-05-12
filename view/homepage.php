@@ -34,10 +34,10 @@
 						<div class="carousel-item <?php if($i==0):$i=1;
 							echo 'active'; endif; ?>">
 							<h3>
-								<?= ($data['title']) ?> 
+								<?= htmlspecialchars($data['title']) ?> 
 							</h3>
 							<p>
-								<?= ($data['content']) ?>
+								<?= htmlspecialchars($data['content']) ?>
 							</p>
 							<p>
 								Posté le <?= ($data['date_creation']) ?>

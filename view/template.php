@@ -53,8 +53,13 @@
                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
                   <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
                   <a class="dropdown-item" href="index.php?action=admin_blog">Blog</a>
+                  <?php if($_SESSION['authority']>=3): 
+                  ?>
                   <a class="dropdown-item" href="index.php?action=admin_users">Gérer les accès</a>
                   <a class="dropdown-item" href="index.php?action=admin_menu">Modifier la carte</a>
+                  <?php 
+                  endif;
+                  ?>
                 </div>
               </div>
             </li>

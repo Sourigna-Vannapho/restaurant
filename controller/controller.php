@@ -18,7 +18,7 @@ function menu(){
 	$menuManager = new MenuManager();
 	$menuStatus = $menuManager->callMenu($dishPerPage);
 	$menuPageNb = $menuManager->callPaginationTotalMenu($dishPerPage);
-	$criteriaStatus = $menuManager->callCriteria();
+	// $criteriaStatus = $menuManager->callCriteria();
 	require('view/menu.php');
 }
 

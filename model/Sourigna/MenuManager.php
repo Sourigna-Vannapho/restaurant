@@ -12,10 +12,13 @@ class MenuManager extends Manager{
 		}
 		$bdd = $this->databaseConnect();
 		$offset = ($currentPage - 1) * $dishPerPage;
-		$req = $bdd->prepare("SELECT d.name, d.description, d.price, d.img_link
+		$req = $bdd->prepare("SELECT d.name, d.description, d.price, d.img_link, GROUP_CONCAT(c.libelle) AS libelleGrp
 			FROM dishes d
+			LEFT JOIN dish_criteria dc ON d.id=dc.dish_id
+			LEFT JOIN criteria c ON dc.criteria_id=c.id 
 			WHERE category=:category AND available=1
-			ORDER BY id DESC
+			GROUP BY d.id
+			ORDER BY d.id DESC
 			LIMIT $offset, $dishPerPage");
 		$req->execute(array('category'=>$_GET['category']));
 		return $req;
@@ -30,28 +33,29 @@ class MenuManager extends Manager{
 		return $dishNb;
 	}
 
-	function callCriteria(){
-		$bdd = $this->databaseConnect();
-		$req = $bdd->query('SELECT dc.*, c.libelle AS criteria
-			FROM dish_criteria dc
-			INNER JOIN criteria c ON dc.criteria_id = c.id
-			LEFT JOIN dishes d ON dc.dish_id = d.id
-			WHERE dc.dish_id = d.id');
-		return $req;
+	// function callCriteria(){
+	// 	$bdd = $this->databaseConnect();
+	// 	$req = $bdd->query('SELECT dc.*, c.libelle AS criteria
+	// 		FROM dish_criteria dc
+	// 		INNER JOIN criteria c ON dc.criteria_id = c.id
+	// 		LEFT JOIN dishes d ON dc.dish_id = d.id
+	// 		WHERE dc.dish_id = d.id');
+	// 	return $req;
 
-		// 		$bdd = $this->databaseConnect();
-		// $req = $bdd->query('SELECT * FROM disc_criteria 
-		// 	INNER JOIN dishes
-		// 	ON dish_criteria.dish_id=dishes.id');
-		// return $req;
-	}
+	// 	// 		$bdd = $this->databaseConnect();
+	// 	// $req = $bdd->query('SELECT * FROM disc_criteria 
+	// 	// 	INNER JOIN dishes
+	// 	// 	ON dish_criteria.dish_id=dishes.id');
+	// 	// return $req;
+	// }
 
 	function adminMenu(){
 		$bdd = $this->databaseConnect();
-		$req = $bdd->query('SELECT d.id,d.name,d.description,d.price,d.category,d.available,d.img_link, c.*
+		$req = $bdd->query('SELECT d.id,d.name,d.description,d.price,d.category,d.available,d.img_link, GROUP_CONCAT(c.libelle) AS libelleGrp
 			FROM dishes d 
-			LEFT JOIN dish_criteria c
-            ON d.id = c.dish_id
+			LEFT JOIN dish_criteria dc ON d.id=dc.dish_id
+			LEFT JOIN criteria c ON dc.criteria_id=c.id 
+			GROUP BY d.id
 			ORDER BY category ASC');
 		return $req;
 	}

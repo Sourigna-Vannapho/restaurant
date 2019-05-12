@@ -1,17 +1,18 @@
 <?php $title = 'Van\' à pho'; ?>
 <?php ob_start(); ?>
+<?php 
+if(isset($_GET['info'])){ 
+	if ($_GET['info']=='success'){
+?>
+<div id="adminAlert" class="alert alert-success notification" role="alert">
+  	Opération effectuée avec succès !
+</div>
+<?php
+	}
+}
+?>
 <h1>Menu</h1>
 <div class="container">
-	<?php 
-	if(isset($_GET['info'])){ 
-		if ($_GET['info']=='success'){?>
-	<div class="alert alert-success" role="alert">
-  		Plat ajouté avec succès !
-	</div>
-	<?php
-		}
-	}
-	?>
 	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBlog" role="button" aria-expanded="false" aria-controls="collapseBlog">
     Afficher éditeur
 	</a>
@@ -117,28 +118,14 @@
 			</tr>
 			<tr>
 				<td colspan="10" scope="row">
-					<div class="row">
-					Tags :
-					<?php $c=1;
-					 ?>
-						<form method="POST" action=" 
-						<?php 
-						if(isset($data['criteria1'])){ 
-						?>
-						index.php?action=edit_criteria&id=<?=$data['id']?>
-						<?php }
-						else{ ?>
-							index.php?action=new_criteria&id=<?=$data['id']?>
-							<?php } ?>">
-						<?php 
-					while ($c!=6){?>
-							<input name="criteria<?=$c?>" type="text" value="<?=$data['criteria'.$c]?>" >
-							<?php
-						echo " ";
-						$c++;}?>
-							<button class="btn btn-primary" type="submit">Modifier</button> <?php ?>
-						</form>
-					</div>
+					Critères : 
+					<?php 
+					if ($data['libelleGrp']):
+						echo $data['libelleGrp'];
+					else:
+						echo ('Aucun');
+					endif; 
+					?>
 				</td>
 			</tr>
 
@@ -152,5 +139,6 @@
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
 <script src="public/scripts/deletePrompt.js"></script>
+<script src="public/scripts/notification.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

@@ -1,0 +1,1 @@
+setTimeout(function(){ document.getElementById("adminAlert").style.display = "none"; }, 3000);

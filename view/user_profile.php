@@ -1,5 +1,16 @@
 <?php $title = 'Van\' à pho'; ?>
 <?php ob_start(); ?>
+<?php 
+if(isset($_GET['info'])){ 
+  if ($_GET['info']=='success'){
+?>
+<div id="adminAlert" class="alert alert-success notification" role="alert">
+    Opération effectuée avec succès !
+</div>
+<?php
+  }
+}
+?>
 <h1>Profil</h1>
 <div class="container">
 	<h2>Mes infos</h2>
@@ -62,5 +73,6 @@
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
 <script src="public/scripts/deletePrompt.js"></script>
+<script src="public/scripts/notification.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

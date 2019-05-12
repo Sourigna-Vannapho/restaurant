@@ -1,5 +1,16 @@
 <?php $title = 'Van\' à pho'; ?>
 <?php ob_start(); ?>
+<?php 
+if(isset($_GET['info'])){ 
+  if ($_GET['info']=='success'){
+?>
+<div id="adminAlert" class="alert alert-success notification" role="alert">
+    Opération effectuée avec succès !
+</div>
+<?php
+  }
+}
+?>
 <div id="blogAdmin" class="container">
 	<h1>Blog</h1>
 	<br/>
@@ -14,17 +25,17 @@
 	  	if (isset($_GET['id'])):
 	  	?>
 		  	<div class="alert alert-warning" role="alert">
-		  		Vous êtes actuellement en train de modifier l'entrée intitulée <?= $singleBlogEntry['title'] ?>
+		  		Vous êtes actuellement en train de modifier l'entrée intitulée <?= htmlspecialchars($singleBlogEntry['title']) ?>
 			</div>
 		<?php 
 		endif;
 		?>
 			<form method="POST" action="index.php?action=entry_blog<?php if (isset($_GET['id'])){ echo '&id=' . $singleBlogEntry['id'];}?>">
 				<label>Titre</label>
-				<input type="text" class="form-control col" name="blogTitle" value="<?php if (isset($_GET['id'])): echo $singleBlogEntry['title']; endif;?>" required></input>
+				<input type="text" class="form-control col" name="blogTitle" value="<?php if (isset($_GET['id'])): echo htmlspecialchars($singleBlogEntry['title']); endif;?>" required></input>
 				<br/>
 				<label>Contenu</label>
-				<textarea class="form-control col" name="blogContent" rows="3" required><?php if (isset($_GET['id'])): echo $singleBlogEntry['content']; endif;?> </textarea>
+				<textarea class="form-control col" name="blogContent" rows="3" required><?php if (isset($_GET['id'])): echo htmlspecialchars($singleBlogEntry['content']); endif;?> </textarea>
 				<br/>
 				<button type="submit" class="btn btn-primary"><?php if (isset($_GET['id'])): echo ('Modifier'); else: echo ('Ajouter'); endif; ?></button>
 				<?php
@@ -45,10 +56,10 @@
 		while ($data = $blogRead->fetch()){ ?>
 			<div>
 				<h3>
-					<?= ($data['title']) ?> 
+					<?= htmlspecialchars($data['title']) ?> 
 				</h3>
 				<p>
-					<?= ($data['content']) ?>
+					<?= htmlspecialchars($data['content']) ?>
 				</p>
 				<p>
 					Posté le <?= ($data['date_creation']) ?> - <a href='index.php?action=admin_blog&amp;id=<?= $data['id']?>'><i class="fas fa-edit"></i>Modifier</a>
@@ -64,5 +75,6 @@
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
 <script src="public/scripts/deletePrompt.js"></script>
+<script src="public/scripts/notification.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

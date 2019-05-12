@@ -1,5 +1,16 @@
 <?php $title = 'Van\' à pho'; ?>
 <?php ob_start(); ?>
+<?php 
+if(isset($_GET['info'])){ 
+  if ($_GET['info']=='success'){
+?>
+<div id="adminAlert" class="alert alert-success notification" role="alert">
+    Opération effectuée avec succès !
+</div>
+<?php
+  }
+}
+?>
 <h1>Réservations</h1>
 <div class="container">
   <a class="btn btn-primary" data-toggle="collapse" href="#collapseBlog" role="button" aria-expanded="false" aria-controls="collapseBlog">
@@ -156,5 +167,6 @@
 <?php ob_start(); ?>
 <script src="public/scripts/deletePrompt.js"></script>
 <script src="public/scripts/validDate.js"></script>
+<script src="public/scripts/notification.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

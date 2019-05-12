@@ -1,5 +1,16 @@
 <?php $title = 'Van\' à pho'; ?>
 <?php ob_start(); ?>
+<?php 
+if(isset($_GET['info'])){ 
+  if ($_GET['info']=='success'){
+?>
+<div id="adminAlert" class="alert alert-success notification" role="alert">
+    Opération effectuée avec succès !
+</div>
+<?php
+  }
+}
+?>
 <h1> Utilisateurs </h1>
 <div class="container">
 	<table class="table table-striped">
@@ -57,5 +68,6 @@ $userStatus->closeCursor();
 </div>
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
+<script src="public/scripts/notification.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>
