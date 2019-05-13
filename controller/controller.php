@@ -18,7 +18,6 @@ function menu(){
 	$menuManager = new MenuManager();
 	$menuStatus = $menuManager->callMenu($dishPerPage);
 	$menuPageNb = $menuManager->callPaginationTotalMenu($dishPerPage);
-	// $criteriaStatus = $menuManager->callCriteria();
 	require('view/menu.php');
 }
 
@@ -152,8 +151,13 @@ function authorityChange(){
 function adminMenu(){
 	$menuManager = new MenuManager();
 	$menuDisplay = $menuManager->adminMenu();
+	$menuCriteria = $menuManager->callCriteria();
 	if (isset($_GET['id']))
-		{$singleMenuEntry = $menuManager->singleMenu();}
+		{
+			$singleMenuEntry = $menuManager->singleMenu();
+			$singleCriteriaEntry = $menuManager->singleCriteria();
+			$nonUsedCriteria = $menuManager->nonPresentCriteria();
+		}
 	require('view/admin_menu.php');
 }
 function pictureUpload(){
@@ -177,13 +181,19 @@ function editMenu(){
 function newCriteria(){
 	$menuManager = new MenuManager();
 	$criteriaStatus = $menuManager->insertCriteria();
-	require('view/post/criteria_post.php');
+	require('view/post/criteria_new_post.php');
 }
 
 function editCriteria(){
 	$menuManager = new MenuManager();
 	$criteriaStatus = $menuManager->updateCriteria();
-	require('view/post/criteria_post.php');
+	require('view/post/criteria_edit_post.php');
+}
+
+function removeCriteria(){
+	$menuManager = new MenuManager();
+	$criteriaStatus = $menuManager->deleteCriteria();
+	require('view/post/criteria_edit_post.php');
 }
 
 function deleteMenu(){

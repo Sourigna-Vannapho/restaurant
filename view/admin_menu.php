@@ -13,21 +13,36 @@ if(isset($_GET['info'])){
 ?>
 <h1>Menu</h1>
 <div class="container">
-	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBlog" role="button" aria-expanded="false" aria-controls="collapseBlog">
-    Afficher éditeur
+	<a class="btn btn-primary" data-toggle="collapse" data-target="#collapseMenuEdit" role="button" aria-expanded="false" aria-controls="collapseBlog">
+    Editeur Menu
+	</a>
+	<?php if (isset($_GET['id'])):
+	?>
+	<a class="btn btn-primary" data-toggle="collapse" data-target="#editCriteria" role="button" aria-expanded="false" aria-controls="collapseBlog">
+    Modification critère
+	</a>
+	<?php 
+	endif;
+	?>
+	<a class="btn btn-primary" data-toggle="collapse" data-target="#newCriteria" role="button" aria-expanded="false" aria-controls="collapseBlog">
+    Création critère
 	</a>
 	<br/>
   	<br/>
-  	<div class="collapse <?php if(isset($_GET['id'])): echo('show'); endif;?>" id="collapseBlog">
+  	<div class="collapse <?php 
+  	if(isset($_GET['edit'])):
+  		if($_GET['edit']=='menu'): echo('show'); 
+  		endif; 
+  	endif;?>" id="collapseMenuEdit">
 	  	<div class="card card-body">
 	  	<?php 
-	  	if (isset($_GET['id'])){
+	  	if (isset($_GET['id'])):
 	  	?>
 		  	<div class="alert alert-warning" role="alert">
 		  		Vous êtes actuellement en train de modifier l'entrée intitulée <?= $singleMenuEntry['name'] ?>
 			</div>
 		<?php 
-		}
+		endif;
 		?>
 			<form method="POST" action="index.php?action=entry_menu<?php if (isset($_GET['id'])): echo '&id=' . $singleMenuEntry['id']; endif; ?>" enctype="multipart/form-data">
 				<label>Nom</label>
@@ -58,7 +73,9 @@ if(isset($_GET['info'])){
 						</select>
 					</div>
 				</div>
+				<br/>
 				<input type="file" name="menuUpload" id="menuUpload" <?php if (!isset($_GET['id'])): echo('required');endif; ?> >
+				<br/><br/>
 				<button type="submit" name="submit" class="btn btn-primary"><?php if (isset($_GET['id'])): echo ('Modifier'); else: echo ('Ajouter');endif; ?></button>
 				<?php
 				if (isset($_GET['id'])){
@@ -70,7 +87,85 @@ if(isset($_GET['info'])){
 			</form>
 		</div>
 	</div>
-
+  	<div class="collapse <?php if(isset($_GET['edit'])):
+  		if($_GET['edit']=='criteria'): echo('show'); 
+  		endif; 
+  	endif;?>" id="editCriteria">
+  		<?php 
+	  	if (isset($_GET['id'])):
+	  	?>
+		  	<div class="alert alert-warning" role="alert">
+		  		Vous êtes actuellement en train de modifier les critères de l'entrée intitulée <?= $singleMenuEntry['name'] ?>
+			</div>
+  		<table class="table table-striped">
+  			<thead>
+  				<tr>
+	  				<th>
+	  				Critères actuels
+	  				</th>
+	  				<th>
+	  				</th>
+  				</tr>
+  			</thead>
+  			<?php while ($singleCriteria = $singleCriteriaEntry->fetch()){
+  			?>
+  			<tr>
+  				<td>
+  					<?= $singleCriteria['libelle'] ?>
+  				</td>
+  				<td>
+  					<form method="POST" action="index.php?action=delete_criteria&id=<?= $_GET['id']?>&criteria_id=<?= $singleCriteria['id'] ?>">
+  					<button class="btn btn-primary" type="submit">Supprimer</button>
+  					</form>
+  				</td>
+  			<tr>
+  			<?php 
+  			} 
+  			?>
+  			<tr>
+  				<td>
+  					<select name="addCriteria" form="addCriteriaForm">
+				  		<?php
+				  		while ($criteriaList = $nonUsedCriteria->fetch()){
+				  		?>
+				  		<option value="<?= $criteriaList['id']?>"><?= $criteriaList['libelle'] ?></option>
+				  		<?php
+				  		}
+				  		$nonUsedCriteria->closeCursor();
+				  		?>
+			  		</select>
+  				</td>
+  				<td>
+  					<form method="POST" id="addCriteriaForm" action="index.php?action=edit_criteria&id=<?= $_GET['id']?>">
+  						<button class="btn btn-primary" type="submit" > Ajouter </button>
+  					</form>
+  				</td>
+  			</tr>
+  		</table>
+  		<a href="index.php?action=admin_menu" class="btn btn-primary">Terminer modification</a>
+  		<?php 
+		endif;
+		?>
+  	</div>
+  	<div class="collapse" id="newCriteria">
+  		Critères existants : 
+  		<select>
+	  		<?php
+	  		while ($criteria = $menuCriteria->fetch()){
+	  		?>
+	  		<option><?= $criteria['libelle'] ?></option>
+	  		<?php
+	  		}
+	  		$menuCriteria->closeCursor();
+	  		?>
+  		</select>
+  		<br/><br/>
+  		<form method="POST" action="index.php?action=new_criteria">
+  			<label>Ajouter : </label>
+  			<input type="text" name="criteria" required>
+  			<button class="btn btn-primary" type="submit">Confirmer</button>
+  		</form>
+  	</div>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -112,7 +207,7 @@ if(isset($_GET['info'])){
 				<td><?php if($data['available']==1): echo('Oui');else: echo('Non');endif;?></td>
 				<td><img src="<?= $data['img_link']?>"></td>
 				<td>
-					<a href="index.php?action=admin_menu&id=<?=$data['id']?>">Modifier</a>
+					<a href="index.php?action=admin_menu&id=<?=$data['id']?>&edit=menu">Modifier</a>
 					<a id="<?=$data['id']?>" href="#" onclick="deleteMenuConfirm(<?=$data['id']?>)">	Supprimer</a>
 				</td>
 			</tr>
@@ -126,6 +221,7 @@ if(isset($_GET['info'])){
 						echo ('Aucun');
 					endif; 
 					?>
+					<a href="index.php?action=admin_menu&id=<?=$data['id']?>&edit=criteria"><button class="btn btn-primary"> Modifier</button></a>
 				</td>
 			</tr>
 
@@ -133,6 +229,7 @@ if(isset($_GET['info'])){
 	}
 	$menuDisplay->closeCursor();
 	?>
+
 		</tbody>
 	</table>
 </div>

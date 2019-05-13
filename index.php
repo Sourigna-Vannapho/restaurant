@@ -101,11 +101,14 @@ try{
 							newMenu();
 							break;
 						}
+					case "new_criteria":
+						newCriteria();
+						break;
 					case "edit_criteria":
 						editCriteria();
 						break;
-					case "new_criteria":
-						newCriteria();
+					case "delete_criteria":
+						removeCriteria();
 						break;
 					case "delete_menu":
 						deleteMenu();
