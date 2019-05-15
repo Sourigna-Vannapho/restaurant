@@ -38,7 +38,7 @@ while ($data = $userStatus->fetch()){
 			<td><?= $data['phone'] ?></td>
 			<td>
 				<select name="userAuthority" form="userForm<?= $userId ?>">
-					<option value="1" 
+					<option value="0" 
 					<?php if ($userAuthority==0):
 						echo 'selected'; endif;
 					?>

@@ -7,123 +7,127 @@ require ("controller/controller.php");
 
 try{
 	if (isset($_GET['action'])) {
-		switch($_GET['action']){
-			case "home":
-				homepage();
-				break;
-			case "menu":
-				menu();
-				break;
-			case "register":
-				register();
-				break;
-			case "guestbook":
-				guestbook();
-				break;
-			case "entry_guestbook":
-				entryGuestbook();
-				break;
-			case "register_confirm":
-				registerConfirm();
-				break;
-			case "login_confirm":
-				loginConfirm();
-				break;
-			case "logout":
-				logoutConfirm();
-				break;
-			case "register_promote":
-				userPromote();
-				break;
-
+		if ($_GET['action'] == "home"){
+			homepage();
 		}
-		if (isset($_SESSION['authority'])){
-			switch($_GET['action']){
-				case "booking":
-					booking();
-					break;
-				case "booking_confirm":
-					bookingConfirm();
-					break;
-				case "user_profile":
+		else if ($_GET['action'] == "menu"){
+			menu();
+		}
+		else if ($_GET['action'] == "register"){
+			register();
+		}
+		else if ($_GET['action'] == "guestbook"){
+			guestbook();
+		}
+		else if ($_GET['action'] == "entry_guestbook"){
+			entryGuestbook();
+		}
+		else if ($_GET['action'] == "register_confirm"){
+			registerConfirm();
+		}
+		else if ($_GET['action'] == "login_confirm"){
+			loginConfirm();
+		}
+		else if ($_GET['action'] == "logout"){
+			logoutConfirm();
+		}
+		else if ($_GET['action'] == "register_promote"){
+			userPromote();
+		}
+		else if (isset($_SESSION['authority'])){
+			if ($_SESSION['authority'] >= 0){
+				if ($_GET['action'] == "user_profile"){
 					userProfile();
-					break;
-				case "phone_modify":
+				}
+				else if ($_GET['action'] == "phone_modify"){
 					userPhone();
-					break;
-				case "user_delete_booking":
-					userBookingDelete();
-					break;
-			}
-			if ($_SESSION['authority']>=2){
-				switch($_GET['action']){
-					case "admin_booking":
-						adminBooking();
-						break;
-					case "admin_register":
-						adminRegister();
-						break;
-					case "manual_booking":
-						bookingManual();
-						break;
-					case "delete_booking":
-						bookingDelete();
-						break;
-					case "admin_blog":
-						adminBlog();
-						break;
-					case "entry_blog":
-						entryBlog();
-						break;
-					case "delete_blog":
-						deleteBlog();
-						break;
 				}
-			}
-			if ($_SESSION['authority']>=3){
-				switch($_GET['action']){
-					case "admin_users":
-						adminUsers();
-						break;
-					case "authority_modify":
-						authorityChange();
-						break;
-					case "admin_menu":
-						adminMenu();
-						break;
-					case "entry_menu":
-					//Check if a new picture has been uploaded
-						if (isset($_FILES['menuUpload']) && $_FILES['menuUpload']['size'] > 0){
-							pictureUpload();
+				else if ($_SESSION['authority'] >= 1){
+					if ($_GET['action'] == "booking"){
+						booking();
+					}
+					else if ($_GET['action'] == "booking_confirm"){
+						bookingConfirm();
+					}
+					else if ($_GET['action'] == "user_delete_booking"){
+						userBookingDelete();
+					}
+					else if ($_SESSION['authority'] >= 2){
+						if ($_GET['action'] == "admin_booking"){
+							adminBooking();
 						}
-						//Check if it's an edit or a new entry
-						if (isset($_GET['id'])){
-							editMenu();
-							break;
+						else if ($_GET['action'] == "admin_register"){
+							adminRegister();
+						}
+						else if ($_GET['action'] == "manual_booking"){
+							bookingManual();	
+						}
+						else if ($_GET['action'] == "delete_booking"){
+							bookingDelete();
+						}
+						else if ($_GET['action'] == "admin_blog"){
+							adminBlog();
+						}
+						else if ($_GET['action'] == "entry_blog"){
+							entryBlog();
+						}
+						else if ($_GET['action'] == "delete_blog"){
+							deleteBlog();
+						}
+						else if ($_SESSION['authority'] == 3){
+							if ($_GET['action'] == "admin_users"){
+								adminUsers();
+							}
+							else if ($_GET['action'] == "authority_modify"){
+								authorityChange();
+							}
+							else if ($_GET['action'] == "admin_menu"){
+								adminMenu();
+							}
+							else if ($_GET['action'] == "entry_menu"){
+								if (isset($_FILES['menuUpload']) && $_FILES['menuUpload']['size'] > 0){
+								pictureUpload();
+								}
+								if (isset($_GET['id'])){
+								editMenu();
+								}else{
+								newMenu();
+								}
+							}
+							else if ($_GET['action'] == "new_criteria"){
+								newCriteria();
+							}
+							else if ($_GET['action'] == "edit_criteria"){
+								editCriteria();
+							}
+							else if ($_GET['action'] == "delete_menu_criteria"){
+								removeMenuCriteria();
+							}
+							else if ($_GET['action'] == "delete_criteria"){
+								removeCriteria();
+							}
+							else if ($_GET['action'] == "delete_menu"){
+								deleteMenu();
+							}
+							else{
+								homepage();
+							}
 						}else{
-							newMenu();
-							break;
+								homepage();
 						}
-					case "new_criteria":
-						newCriteria();
-						break;
-					case "edit_criteria":
-						editCriteria();
-						break;
-					case "delete_menu_criteria":
-						removeMenuCriteria();
-						break;
-					case "delete_criteria":
-						removeCriteria();
-						break;
-					case "delete_menu":
-						deleteMenu();
-						break;
-				}
+					}else{
+						homepage();
+					}
+				}else{
+					homepage();
+				}	
+			}else{
+			homepage();
 			}
+		}else{
+			homepage();
 		}
-	}
-	else{
+	}else{
 		homepage();
 	}
 }
