@@ -83,14 +83,16 @@ class UserManager extends Manager{
 		return $stringRetrieved;
 	}
 
+	//A retester
 	function callPromote($user_string){
 		if ($user_string == $_GET['authentication']){
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('UPDATE users 
-			SET authority = 1
+			SET authority = 1, authentication_string = :new_string
 			WHERE authentication_string = :string');
 		$req->execute(array(
-			'string'=>$user_string));
+			'string'=>$user_string,
+			'new_string'=>'Completed'));
 		}
 		else {
 			return false;
@@ -139,39 +141,44 @@ class UserManager extends Manager{
 			'id'=>$_SESSION['id']));
 		return true;
 	}
-	function emptyPlaceholder(){
-		$bdd = $this->databaseConnect();
-		$req = $bdd->prepare('DELETE u FROM users u 
-			LEFT JOIN reservation r ON u.id=r.users_id 
-			WHERE u.username="placeholder" AND r.users_id IS NULL');
-		$req->execute(array());
-	}
 
 	function manualUser(){
-		$bdd = $this->databaseConnect();
-		$req = $bdd->prepare('INSERT INTO users(username,first_name,last_name,password,authority,phone,authentication_string) 
-			VALUES(:username,:first_name,:last_name,:password,0,:phone,:authentication_string)');
-		$req->execute(array(
-			'username'=>'placeholder',
-			'first_name'=>$_POST['firstName'],
-			'last_name'=>$_POST['lastName'],
-			'password'=>'placeholder',
-			'phone'=>$_POST['phone'],
-			'authentication_string'=>'placeholder'));
+		$trimmedMail = trim($_POST['mail']);
+		$trimmedPass = trim($_POST['pass']);
+		if ($trimmedMail !== '' && $trimmedPass !== ''){
+			$bdd = $this->databaseConnect();
+			$mailReq = $bdd->prepare('SELECT username FROM users WHERE username = :mail');
+			$mailReq->execute(array('mail'=>$trimmedMail));
+			$mailAvailable = $mailReq->fetch();
+			if (!$mailAvailable){
+				$passHash = password_hash($trimmedPass,PASSWORD_DEFAULT);
+				$req = $bdd->prepare('INSERT INTO users(username,first_name,last_name,password,authority,phone,authentication_string) 
+					VALUES(:username,:first_name,:last_name,:password,1,:phone,:authentication_string)');
+				$req->execute(array(
+					'username'=>$trimmedMail,
+					'first_name'=>$_POST['firstName'],
+					'last_name'=>$_POST['lastName'],
+					'password'=>$passHash,
+					'phone'=>$_POST['phone'],
+					'authentication_string'=>'Completed'));
 		return true;
+		}
+			else{
+			}
+			return $mailAvailable;
+		}
+		else{
+			return true;
+		}
 	}
-
-	function getLastUserId(){
+	function callUsersBooking(){
 		$bdd = $this->databaseConnect();
-		$idReq = $bdd->query('SELECT MAX(id) FROM users');
-		$fetchId = $idReq->fetch();
-		$latestId = $fetchId[0];
-		return $latestId;
+		$req = $bdd->query("SELECT id, username FROM users WHERE authority > 0 ORDER BY username ASC");
+		return $req;
 	}
-
 	function callUsers(){
 		$bdd = $this->databaseConnect();
-		$req = $bdd->query("SELECT id, username ,first_name, last_name, authority, phone FROM users WHERE username != 'placeholder' ORDER BY id DESC");
+		$req = $bdd->query("SELECT id, username ,first_name, last_name, authority, phone FROM users ORDER BY username ASC");
 		return $req;
 	}
 

@@ -28,7 +28,7 @@ if(isset($_GET['info'])){
 <?php
 while ($data = $userStatus->fetch()){
 	$userAuthority = $data['authority'];
-	$userId = $data['id']
+	$userId = $data['id'];
 ?>
 		<tr>
 			<td><?= $userId ?></td>
@@ -38,6 +38,11 @@ while ($data = $userStatus->fetch()){
 			<td><?= $data['phone'] ?></td>
 			<td>
 				<select name="userAuthority" form="userForm<?= $userId ?>">
+					<option value="1" 
+					<?php if ($userAuthority==0):
+						echo 'selected'; endif;
+					?>
+					>Non identifié</option>
 					<option value="1" 
 					<?php if ($userAuthority==1):
 						echo 'selected'; endif;

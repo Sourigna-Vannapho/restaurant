@@ -114,7 +114,7 @@ if(isset($_GET['info'])){
   					<?= $singleCriteria['libelle'] ?>
   				</td>
   				<td>
-  					<form method="POST" action="index.php?action=delete_criteria&id=<?= $_GET['id']?>&criteria_id=<?= $singleCriteria['id'] ?>">
+  					<form method="POST" action="index.php?action=delete_menu_criteria&id=<?= $_GET['id']?>&criteria_id=<?= $singleCriteria['id'] ?>">
   					<button class="btn btn-primary" type="submit">Supprimer</button>
   					</form>
   				</td>
@@ -149,16 +149,19 @@ if(isset($_GET['info'])){
   	</div>
   	<div class="collapse" id="newCriteria">
   		Critères existants : 
-  		<select>
-	  		<?php
-	  		while ($criteria = $menuCriteria->fetch()){
-	  		?>
-	  		<option><?= $criteria['libelle'] ?></option>
-	  		<?php
-	  		}
-	  		$menuCriteria->closeCursor();
-	  		?>
-  		</select>
+  		<form method="POST" action="index.php?action=delete_criteria">
+	  		<select name="criteriaList">
+		  		<?php
+		  		while ($criteria = $menuCriteria->fetch()){
+		  		?>
+		  		<option value="<?= $criteria['id']?>"><?= $criteria['libelle'] ?></option>
+		  		<?php
+		  		}
+		  		$menuCriteria->closeCursor();
+		  		?>
+	  		</select>
+	  		<button class="btn btn-primary" type="submit">Supprimer</button>
+  		</form>
   		<br/><br/>
   		<form method="POST" action="index.php?action=new_criteria">
   			<label>Ajouter : </label>

@@ -94,16 +94,19 @@ function adminBooking(){
 	$userManager = new UserManager();
 	$bookingStatus = $bookingManager->adminBooking();
 	$deleteBooking = $bookingManager->emptyBooking();
-	$deletePlaceholder = $userManager->emptyPlaceholder();
+	$userStatus = $userManager->callUsersBooking();
 	require('view/admin_booking.php');
 }
 
-function bookingManual(){
+function adminRegister(){
 	$userManager = new UserManager();
+	$userStatus = $userManager->manualUser();
+	require('view/post/manual_register_post.php');
+}
+
+function bookingManual(){
 	$bookingManager = new BookingManager();
-	$userStatus = $userManager->manualUser();	
-	$lastUserId = $userManager->getLastUserId();
-	$bookingStatus = $bookingManager->manualBooking($lastUserId);
+	$bookingStatus = $bookingManager->manualBooking();
 	require('view/post/manual_booking_post.php');
 }
 
@@ -187,6 +190,12 @@ function newCriteria(){
 function editCriteria(){
 	$menuManager = new MenuManager();
 	$criteriaStatus = $menuManager->updateCriteria();
+	require('view/post/criteria_edit_post.php');
+}
+
+function removeMenuCriteria(){
+	$menuManager = new MenuManager();
+	$criteriaStatus = $menuManager->deleteMenuCriteria();
 	require('view/post/criteria_edit_post.php');
 }
 

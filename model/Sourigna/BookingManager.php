@@ -80,7 +80,7 @@ class BookingManager extends Manager{
 		$req->execute(array());
 	}
 
-	function manualBooking($lastUserId){
+	function manualBooking(){
 		$bdd = $this->databaseConnect();
 		$tableAmount = round($_POST['nbPpl']/2,0,PHP_ROUND_HALF_UP);
 		$maxTableAmount = 20;
@@ -99,7 +99,7 @@ class BookingManager extends Manager{
 			'table_amount'=>$tableAmount,
 			'reservation_day'=>$_POST['day'],
 			'reservation_timeslot'=>$_POST['timeslot'],
-			'users_id'=>$lastUserId,
+			'users_id'=>$_POST['userId'],
 			'reservation_time'=>$_POST['time']));
 			return 'true';
 		}else{

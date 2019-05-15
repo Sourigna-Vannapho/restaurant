@@ -46,7 +46,7 @@ class MenuManager extends Manager{
 
 	function callCriteria(){
 		$bdd = $this->databaseConnect();
-		$req = $bdd->query('SELECT libelle FROM criteria ORDER BY id ASC');
+		$req = $bdd->query('SELECT id,libelle FROM criteria ORDER BY id ASC');
 		return $req;
 	}
 
@@ -75,6 +75,37 @@ class MenuManager extends Manager{
 			WHERE id NOT IN(SELECT criteria_id FROM dish_criteria WHERE dish_id=:dish_id)');
 		$req->execute(array('dish_id'=>$_GET['id']));
 		return $req;
+	}
+
+	function insertCriteria(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('INSERT INTO criteria(libelle) VALUES (:libelle)');
+		$req->execute(array("libelle"=>$_POST['criteria']));
+		return true;
+	}
+
+	function updateCriteria(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('INSERT INTO dish_criteria(dish_id,criteria_id) VALUES (:dish_id,:criteria_id)');
+		$req->execute(array("dish_id"=>$_GET['id'],
+							"criteria_id"=>$_POST['addCriteria']));
+		return true;
+	}
+
+	function deleteMenuCriteria(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('DELETE FROM dish_criteria WHERE dish_id = :dish_id AND criteria_id = :criteria_id');
+		$req->execute(array('dish_id'=>$_GET['id'],
+							'criteria_id'=>$_GET['criteria_id']));
+	}
+
+	function deleteCriteria(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('DELETE c, dc 
+			FROM criteria c 
+			LEFT JOIN dish_criteria dc ON dc.criteria_id=c.id
+			WHERE c.id=:criteria_id');
+		$req->execute(array('criteria_id'=>$_POST['criteriaList']));
 	}
 
 	function writeMenu(){
@@ -126,28 +157,6 @@ class MenuManager extends Manager{
 			'available'=>$_POST['menuAvailable'],
 			'id'=>$_GET['id']));
 		return true;
-	}
-
-	function insertCriteria(){
-		$bdd = $this->databaseConnect();
-		$req = $bdd->prepare('INSERT INTO criteria(libelle) VALUES (:libelle)');
-		$req->execute(array("libelle"=>$_POST['criteria']));
-		return true;
-	}
-
-	function updateCriteria(){
-		$bdd = $this->databaseConnect();
-		$req = $bdd->prepare('INSERT INTO dish_criteria(dish_id,criteria_id) VALUES (:dish_id,:criteria_id)');
-		$req->execute(array("dish_id"=>$_GET['id'],
-							"criteria_id"=>$_POST['addCriteria']));
-		return true;
-	}
-
-	function deleteCriteria(){
-		$bdd = $this->databaseConnect();
-		$req = $bdd->prepare('DELETE FROM dish_criteria WHERE dish_id = :dish_id AND criteria_id = :criteria_id');
-		$req->execute(array('dish_id'=>$_GET['id'],
-							'criteria_id'=>$_GET['criteria_id']));
 	}
 
 	function deletePicture(){

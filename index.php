@@ -60,6 +60,9 @@ try{
 					case "admin_booking":
 						adminBooking();
 						break;
+					case "admin_register":
+						adminRegister();
+						break;
 					case "manual_booking":
 						bookingManual();
 						break;
@@ -106,6 +109,9 @@ try{
 						break;
 					case "edit_criteria":
 						editCriteria();
+						break;
+					case "delete_menu_criteria":
+						removeMenuCriteria();
 						break;
 					case "delete_criteria":
 						removeCriteria();
