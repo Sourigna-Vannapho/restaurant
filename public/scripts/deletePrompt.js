@@ -19,3 +19,9 @@ function deleteMenuConfirm(dishId){
 		{document.getElementById(dishId).href="index.php?action=delete_menu&id=" + dishId;
 	}
 };
+
+function deleteGuestbookConfirm(commentId){
+	if(confirm("Désirez vous vraiment supprimer ce commentaire ?"))
+		{document.getElementById(commentId).href="index.php?action=delete_guestbook&id=" + commentId;
+	}
+};

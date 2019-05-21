@@ -74,6 +74,12 @@ try{
 						else if ($_GET['action'] == "delete_blog"){
 							deleteBlog();
 						}
+						else if ($_GET['action'] == "admin_guestbook"){
+							adminGuestbook();
+						}
+						else if ($_GET['action'] == "delete_guestbook"){
+							guestbookDelete();
+						}
 						else if ($_SESSION['authority'] == 3){
 							if ($_GET['action'] == "admin_users"){
 								adminUsers();
@@ -82,7 +88,9 @@ try{
 								authorityChange();
 							}
 							else if ($_GET['action'] == "admin_menu"){
-								adminMenu();
+								if (isset($_GET['id'])){
+								adminMenu($_GET['id']);}
+								else adminMenu('');
 							}
 							else if ($_GET['action'] == "entry_menu"){
 								if (isset($_FILES['menuUpload']) && $_FILES['menuUpload']['size'] > 0){

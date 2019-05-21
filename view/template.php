@@ -51,8 +51,9 @@
               <div class="dropdown show">
                 <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" data-toggle="dropdown">Panneau administrateur</a>
                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                  <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
                   <a class="dropdown-item" href="index.php?action=admin_blog">Blog</a>
+                  <a class="dropdown-item" href="index.php?action=admin_guestbook">Livre d'or</a>
+                  <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
                   <?php if($_SESSION['authority']>=3): 
                   ?>
                   <a class="dropdown-item" href="index.php?action=admin_users">Gérer les accès</a>

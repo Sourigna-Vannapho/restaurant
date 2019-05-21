@@ -47,4 +47,26 @@ class GuestbookManager extends Manager{
 		}
 	}
 
+	function adminGuestbook(){
+		$bdd = $this->databaseConnect();
+		$comments = $bdd->query("SELECT 
+			g.id AS commentId,
+			u.first_name AS first_name,
+			u.last_name AS last_name,
+			g.content AS comment,
+			g.users_id AS user_id,
+			DATE_FORMAT(g.date, '%d/%m/%Y à %Hh%i') AS creation_date
+			FROM guestbook g
+			LEFT JOIN users u 
+			ON g.users_id = u.id
+			ORDER BY g.id DESC");
+		return $comments;
+	}
+
+	function guestbookDelete(){
+		$bdd = $this->databaseConnect();
+		$req = $bdd->prepare('DELETE FROM guestbook WHERE id = :id');
+		$req->execute(array('id'=>$_GET['id']));
+	}
+
 }
