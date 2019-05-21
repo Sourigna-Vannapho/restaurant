@@ -139,6 +139,18 @@ function deleteBlog(){
 	require('view/post/blog_delete_post.php');
 }
 
+function adminGuestbook(){
+	$guestbookManager = new GuestbookManager();
+	$guestbookEntry = $guestbookManager->adminGuestbook();
+	require('view/admin_guestbook.php');
+}
+
+function guestbookDelete(){
+	$guestbookManager = new GuestbookManager();
+	$guestbookStatus = $guestbookManager->guestbookDelete();
+	require('view/post/guestbook_delete_post.php');
+}
+
 function adminUsers(){
 	$userManager = new UserManager();
 	$userStatus = $userManager->callUsers();
@@ -151,18 +163,22 @@ function authorityChange(){
 	require('view/post/user_authority_post.php');
 }
 
-function adminMenu(){
+function adminMenu($id){
 	$menuManager = new MenuManager();
 	$menuDisplay = $menuManager->adminMenu();
 	$menuCriteria = $menuManager->callCriteria();
-	if (isset($_GET['id']))
-		{
-			$singleMenuEntry = $menuManager->singleMenu();
-			$singleCriteriaEntry = $menuManager->singleCriteria();
-			$nonUsedCriteria = $menuManager->nonPresentCriteria();
-		}
+	$singleMenuEntry = $menuManager->singleMenu($id);
+	$singleCriteriaEntry = $menuManager->singleCriteria($id);
+	$nonUsedCriteria = $menuManager->nonPresentCriteria($id);
 	require('view/admin_menu.php');
 }
+
+function adminMenuSingle(){
+	$singleMedeletenuEntry = $menuManager->singleMenu();
+	$singleCriteriaEntry = $menuManager->singleCriteria();
+	$nonUsedCriteria = $menuManager->nonPresentCriteria();
+	}
+	
 function pictureUpload(){
 	$pictureUpload = uploadPicture();
 }
@@ -202,7 +218,7 @@ function removeMenuCriteria(){
 function removeCriteria(){
 	$menuManager = new MenuManager();
 	$criteriaStatus = $menuManager->deleteCriteria();
-	require('view/post/criteria_edit_post.php');
+	require('view/post/criteria_delete_post.php');
 }
 
 function deleteMenu(){

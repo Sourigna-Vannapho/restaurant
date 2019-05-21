@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <div class="container-fluid background">
 	<div class="image">
-		<img src="public/img/bg_register.jpg" class="img-fluid">
+		<img src="public/img/bg_register.jpg" class="img-fluid" alt="Register Background">
 		<div class="blackOverlay"></div>
 	</div>
 </div>
@@ -35,7 +35,7 @@
 		</div>
 		<div class="form-group">
 			<label>Mot de passe</label>
-			<input type="password" class="form-control" pattern=".{6,}"placeholder="6 caractères minimum" name="pass" id="registerPass" required>
+			<input type="password" class="form-control" pattern=".{6,}" placeholder="6 caractères minimum" name="pass" id="registerPass" required>
 		</div>
 		<div class="form-group">
 			<label>Confirmation du mot de passe</label>

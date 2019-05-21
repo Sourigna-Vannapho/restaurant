@@ -12,7 +12,7 @@ class MenuManager extends Manager{
 		}
 		$bdd = $this->databaseConnect();
 		$offset = ($currentPage - 1) * $dishPerPage;
-		$req = $bdd->prepare("SELECT d.name, d.description, d.price, d.img_link, GROUP_CONCAT(c.libelle) AS libelleGrp
+		$req = $bdd->prepare("SELECT d.id, d.name, d.description, d.price, d.img_link, GROUP_CONCAT(c.libelle) AS libelleGrp
 			FROM dishes d
 			LEFT JOIN dish_criteria dc ON d.id=dc.dish_id
 			LEFT JOIN criteria c ON dc.criteria_id=c.id 
@@ -50,30 +50,30 @@ class MenuManager extends Manager{
 		return $req;
 	}
 
-	function singleMenu(){
+	function singleMenu($id){
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('SELECT id,name,description,price,category,available,img_link
 			FROM dishes WHERE id=:id');
-		$req->execute(array('id'=>$_GET['id']));
+		$req->execute(array('id'=>$id));
 		$menuEntry = $req->fetch();
 		return $menuEntry;
 	}
-	function singleCriteria(){
+	function singleCriteria($id){
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('SELECT c.libelle, c.id
 			FROM dish_criteria dc
 			INNER JOIN criteria c ON dc.criteria_id=c.id
 			WHERE dc.dish_id = :dish_id');
-		$req->execute(array('dish_id'=>$_GET['id']));
+		$req->execute(array('dish_id'=>$id));
 		return $req;
 	}
 
-	function nonPresentCriteria(){
+	function nonPresentCriteria($id){
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('SELECT libelle, id
 			FROM criteria 
 			WHERE id NOT IN(SELECT criteria_id FROM dish_criteria WHERE dish_id=:dish_id)');
-		$req->execute(array('dish_id'=>$_GET['id']));
+		$req->execute(array('dish_id'=>$id));
 		return $req;
 	}
 

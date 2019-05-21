@@ -68,7 +68,7 @@ class BookingManager extends Manager{
 			u.phone AS phone
 			FROM reservation r
 			LEFT JOIN users u ON u.id=r.users_id
-			WHERE r.reservation_day  BETWEEN CURDATE() AND CURDATE() + 2
+			WHERE r.reservation_day BETWEEN CURDATE() AND DATE_ADD(CURDATE(),INTERVAL 2 DAY)
 			ORDER BY r.reservation_day ASC,r.reservation_time ASC');
 		return $req;
 	}

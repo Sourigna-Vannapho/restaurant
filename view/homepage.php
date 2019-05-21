@@ -9,7 +9,7 @@
 
 <div class="container-fluid background" id="homepageBackground">
 	<div class="image">
-		<img src="public/img/bg_home.jpg" class="img-fluid">
+		<img src="public/img/bg_home.jpg" class="img-fluid" alt="Homepage Background">
 		<div class="blackOverlay"></div>
 	</div>
 	<div id="title">
@@ -111,7 +111,7 @@
 			<div id="mapid">
 				<div class="mapOverlay"></div>			
 				<address>
-				<h3>VAN' A PHO</h3>
+				VAN' A PHO<br/>
 				280 Rue Benjamin Delessert<br/>
 				77127 Lieusaint<br/>
 				01 23 45 67 89<br/>

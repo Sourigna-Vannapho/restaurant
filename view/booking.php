@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <div class="container-fluid background">
 	<div class="image">
-		<img src="public/img/bg_booking.jpg" class="img-fluid">
+		<img src="public/img/bg_booking.jpg" class="img-fluid" alt="Booking Background">
 		<div class="blackOverlay"></div>
 	</div>
 </div>

@@ -8,7 +8,7 @@ function callBlog(){
 	$bdd = $this->databaseConnect();
 	$req = $bdd->query('SELECT id,title,content,DATE_FORMAT(date,\'%d/%m/%Y\') AS date_creation
 		FROM blog 
-		ORDER BY date_creation DESC
+		ORDER BY date DESC
 		LIMIT 5');
 	return $req;
 }

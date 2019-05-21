@@ -2,7 +2,7 @@
 <?php ob_start(); ?>
 <div class="container-fluid background menuAdjust">
 	<div class="image">
-		<img src="public/img/bg_menu.jpg" class="img-fluid">
+		<img src="public/img/bg_menu.jpg" class="img-fluid" alt="Menu Background">
 		<div class="blackOverlay"></div>
 	</div>
 </div>
@@ -20,7 +20,7 @@
 			<a href="index.php?action=menu&category=1&page=1">
 				<h2>Entrées</h2>
 				<div class="gradientMenu">
-					<img src="public/img/entreeMenu.jpg">
+					<img src="public/img/entreeMenu.jpg" alt="Menu Entrée Bannière">
 					<div class="menuOverlay"></div>	
 				</div>
 			</a>
@@ -37,7 +37,7 @@
 			<a href="index.php?action=menu&category=2&page=1">
 				<h2>Plats</h2>
 				<div class="gradientMenu">
-					<img src="public/img/platMenu.jpg">
+					<img src="public/img/platMenu.jpg" alt="Menu Plat Bannière">
 					<div class="menuOverlay"></div>
 				</div>
 					
@@ -54,7 +54,7 @@
 			<a href="index.php?action=menu&category=3&page=1">
 				<h2>Desserts</h2>
 				<div class="gradientMenu">
-					<img src="public/img/dessertMenu.jpg">
+					<img src="public/img/dessertMenu.jpg" alt="Menu Dessert Bannière">
 					<div class="menuOverlay"></div>
 				</div>
 			</a>
@@ -71,7 +71,7 @@
 			<a href="index.php?action=menu&category=4&page=1">
 				<h2>Boissons</h2>
 				<div class="gradientMenu">
-					<img src="public/img/boissonMenu.jpg">
+					<img src="public/img/boissonMenu.jpg" alt="Menu Boisson Bannière">
 					<div class="menuOverlay"></div>
 				</div>
 			</a>
@@ -85,7 +85,7 @@
 					while($data = $menuStatus->fetch()){?>
 					<div class="row container-fluid menuEntry">
 						<div class="col-sm-auto">
-							<img src="<?= $data['img_link'];?>">
+							<img src="<?= $data['img_link'];?>" alt="Plat <?= $data['id'];?>">
 						</div>
 						<div class="col">
 							<div class="row namePrice">

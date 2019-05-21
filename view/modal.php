@@ -59,7 +59,7 @@
 							</div>
 							<div class="form-group">
 								<label>Mot de passe</label>
-								<input type="password" name="password" class="form-control" pattern=".{6,}"placeholder="6 caractères minimum">
+								<input type="password" name="password" class="form-control" pattern=".{6,}" placeholder="6 caractères minimum">
 							</div>
         			        <button type="submit" class="btn btn-primary">Connexion</button>
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
