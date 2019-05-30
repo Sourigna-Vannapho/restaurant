@@ -1,4 +1,4 @@
-<?php $title = 'Van\' à pho'; ?>
+<?php $title = 'Van\' à pho - Inscription'; ?>
 <?php ob_start(); ?>
 <div class="container-fluid background">
 	<div class="image">
@@ -8,6 +8,7 @@
 </div>
 <div class="container" id="registerForm">
 	<h1>Inscription</h1>
+	<!-- Form to let users create their own account -->
 	<form method="POST" action="index.php?action=register_confirm" onsubmit="return passwordValidation()">
 		<div class="form-group">
 			<label>Adresse mail</label>
@@ -47,6 +48,6 @@
 </div>
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
-<script src="public/scripts/register.js"></script>
+<script src="public/scripts/passwordCheck.js"></script>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

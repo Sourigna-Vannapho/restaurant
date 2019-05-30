@@ -1,7 +1,7 @@
 <?php 
 if ($loginStatus){
-	header('Location:index.php?login_fail=true');
+	header('Location:index.php?login=fail');
 }
 else{
-	header('Location:index.php');
+	header('Location:index.php?login=success');
 }

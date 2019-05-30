@@ -1,2 +1,2 @@
 <?php 
-header('Location:index.php?action=home');
+header('Location:index.php?action=home&login=promote');

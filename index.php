@@ -3,142 +3,156 @@ if(!isset($_SESSION))
 	{ 
         session_start(); 
     }
+
 require ("controller/controller.php");
+$controller = new Controller();
 
 try{
 	if (isset($_GET['action'])) {
+		// Actions for non identified users
 		if ($_GET['action'] == "home"){
-			homepage();
+			$controller->homepage();
 		}
 		else if ($_GET['action'] == "menu"){
-			menu();
-		}
-		else if ($_GET['action'] == "register"){
-			register();
+			$controller->menu();
 		}
 		else if ($_GET['action'] == "guestbook"){
-			guestbook();
+			$controller->guestbook();
 		}
 		else if ($_GET['action'] == "entry_guestbook"){
-			entryGuestbook();
+			$controller->entryGuestbook();
+		}
+		else if ($_GET['action'] == "register"){
+			$controller->register();
 		}
 		else if ($_GET['action'] == "register_confirm"){
-			registerConfirm();
+			$controller->registerConfirm();
 		}
 		else if ($_GET['action'] == "login_confirm"){
-			loginConfirm();
+			$controller->loginConfirm();
 		}
 		else if ($_GET['action'] == "logout"){
-			logoutConfirm();
+			$controller->logoutConfirm();
 		}
+		// Action accessed through mail sent when registering using generated authentication string 
 		else if ($_GET['action'] == "register_promote"){
-			userPromote();
+			$controller->userPromote();
 		}
 		else if (isset($_SESSION['authority'])){
 			if ($_SESSION['authority'] >= 0){
+				// Actions for non-verified users
 				if ($_GET['action'] == "user_profile"){
-					userProfile();
+					$controller->userProfile();
 				}
 				else if ($_GET['action'] == "phone_modify"){
-					userPhone();
+					$controller->userPhone();
+				}
+				else if ($_GET['action'] == "pass_modify"){
+					$controller->userPass();
 				}
 				else if ($_SESSION['authority'] >= 1){
+					// Actions for verified users
 					if ($_GET['action'] == "booking"){
-						booking();
+						$controller->booking();
 					}
 					else if ($_GET['action'] == "booking_confirm"){
-						bookingConfirm();
+						$controller->bookingConfirm();
 					}
 					else if ($_GET['action'] == "user_delete_booking"){
-						userBookingDelete();
+						$controller->userBookingDelete();
 					}
 					else if ($_SESSION['authority'] >= 2){
+						// Actions for employees
 						if ($_GET['action'] == "admin_booking"){
-							adminBooking();
+							$controller->adminBooking();
 						}
 						else if ($_GET['action'] == "admin_register"){
-							adminRegister();
+							$controller->adminRegister();
 						}
 						else if ($_GET['action'] == "manual_booking"){
-							bookingManual();	
+							$controller->bookingManual();	
 						}
 						else if ($_GET['action'] == "delete_booking"){
-							bookingDelete();
+							$controller->bookingDelete();
 						}
 						else if ($_GET['action'] == "admin_blog"){
-							adminBlog();
+							$controller->adminBlog();
 						}
 						else if ($_GET['action'] == "entry_blog"){
-							entryBlog();
+							$controller->entryBlog();
 						}
 						else if ($_GET['action'] == "delete_blog"){
-							deleteBlog();
+							$controller->deleteBlog();
 						}
 						else if ($_GET['action'] == "admin_guestbook"){
-							adminGuestbook();
+							$controller->adminGuestbook();
 						}
 						else if ($_GET['action'] == "delete_guestbook"){
-							guestbookDelete();
+							$controller->guestbookDelete();
 						}
 						else if ($_SESSION['authority'] == 3){
+							// Actions for admins
 							if ($_GET['action'] == "admin_users"){
-								adminUsers();
+								$controller->adminUsers();
 							}
 							else if ($_GET['action'] == "authority_modify"){
-								authorityChange();
+								$controller->authorityChange();
 							}
 							else if ($_GET['action'] == "admin_menu"){
 								if (isset($_GET['id'])){
-								adminMenu($_GET['id']);}
-								else adminMenu('');
+								$controller->adminMenu($_GET['id']);}
+								else {$controller->adminMenu('');}
 							}
 							else if ($_GET['action'] == "entry_menu"){
+								// Check if a file has been uploaded when editing/creating dish
 								if (isset($_FILES['menuUpload']) && $_FILES['menuUpload']['size'] > 0){
-								pictureUpload();
+								$controller->pictureUpload();
 								}
+								// Decide if UPDATE or INSERT into database depending on the presence of $_GET['id']
 								if (isset($_GET['id'])){
-								editMenu();
+								$controller->editMenu();
 								}else{
-								newMenu();
+								$controller->newMenu();
 								}
 							}
 							else if ($_GET['action'] == "new_criteria"){
-								newCriteria();
+								$controller->newCriteria();
 							}
 							else if ($_GET['action'] == "edit_criteria"){
-								editCriteria();
+								$controller->editCriteria();
 							}
 							else if ($_GET['action'] == "delete_menu_criteria"){
-								removeMenuCriteria();
+								$controller->removeMenuCriteria();
 							}
 							else if ($_GET['action'] == "delete_criteria"){
-								removeCriteria();
+								$controller->removeCriteria();
 							}
 							else if ($_GET['action'] == "delete_menu"){
-								deleteMenu();
+								$controller->deleteMenu();
 							}
 							else{
-								homepage();
+								$controller->homepage();
 							}
 						}else{
-								homepage();
+								$controller->homepage();
 						}
 					}else{
-						homepage();
+						$controller->homepage();
 					}
 				}else{
-					homepage();
+					$controller->homepage();
 				}	
 			}else{
-			homepage();
+			$controller->homepage();
 			}
 		}else{
-			homepage();
+			$controller->homepage();
 		}
 	}else{
-		homepage();
+		$controller->homepage();
 	}
 }
 catch(Exception $e){
 	$errorMsg = $e->getMessage();
+	$controller->homepage();
 }

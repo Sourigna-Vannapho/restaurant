@@ -5,10 +5,11 @@ namespace model\Sourigna;
 class BookingManager extends Manager{
 
 	function callBooking(){
+		// Calculates the amount of tables taken by the amount of people requested on the basis of 2 people = 1 table
 		$tableAmount = round($_POST['nbPpl']/2,0,PHP_ROUND_HALF_UP);
 		$maxTableAmount = 20;
 		$bdd = $this->databaseConnect();
-
+		// Adds up the amount of tables for a given timeslot and day and fetch the result
 		$tableReq = $bdd->prepare('SELECT SUM(table_amount) FROM reservation 
 			WHERE reservation_day = :reservation_day AND reservation_timeslot = :reservation_timeslot');
 		$tableReq->execute(array(
@@ -55,6 +56,7 @@ class BookingManager extends Manager{
 
 	function adminBooking(){
 		$bdd = $this->databaseConnect();
+		// Retrieves bookings for the following 2 days
 		$req = $bdd->query('SELECT 
 			r.client_amount AS clientNb, 
 			r.table_amount AS tableNb, 
@@ -74,6 +76,7 @@ class BookingManager extends Manager{
 	}
 
 	function emptyBooking(){
+		// Deletes bookings prior to today
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('DELETE FROM reservation 
 			WHERE reservation_day < CURDATE()');
@@ -81,6 +84,7 @@ class BookingManager extends Manager{
 	}
 
 	function manualBooking(){
+		// Difference with regular booking is the users_id which is now manually inputted by the employee
 		$bdd = $this->databaseConnect();
 		$tableAmount = round($_POST['nbPpl']/2,0,PHP_ROUND_HALF_UP);
 		$maxTableAmount = 20;

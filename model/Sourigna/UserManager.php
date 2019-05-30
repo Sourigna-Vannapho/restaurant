@@ -11,11 +11,13 @@ class UserManager extends Manager{
 		$trimmedPass = trim($_POST['pass']);
 		if ($trimmedMail !== '' && $trimmedPass !== ''){
 			$bdd = $this->databaseConnect();
+			// Checks the database to find a match with given username
 			$mailReq = $bdd->prepare('SELECT username FROM users WHERE username = :mail');
 			$mailReq->execute(array('mail'=>$trimmedMail));
 			$mailAvailable = $mailReq->fetch();
 			if (!$mailAvailable){
 				$passHash = password_hash($trimmedPass,PASSWORD_DEFAULT);
+				// Generate random string for user 
 				$authenticationGenerate = bin2hex(random_bytes(16));
 				$req = $bdd->prepare('INSERT INTO users(username,first_name,last_name,password,authority,phone,authentication_string)
 					VALUES(:username,:first_name,:last_name,:password,0,:phone,:authentication)');
@@ -27,42 +29,40 @@ class UserManager extends Manager{
 					'phone' => $_POST['phone'],
 					'authentication' => $authenticationGenerate
 				));
+				// Sends mail with associated authentication link and appropriate action to allow user to increase authority to 1
 				try{
-					$mail->setFrom('restaurant.vanapho@gmail.com','Restaurant Van a Pho');
+					// Use SMTP.
+					$mail->isSMTP();
+					$mail->Host = 'smtp.ionos.fr';
+					// SMTP port
+					$mail->Port = 25;
+					// Set authentication
+					$mail->SMTPSecure = 'tls';
+					$mail->SMTPAuth = true;
+					// Username (email address)
+					$mail->Username = 'restaurant@sourigna-vannapho.com';
+					// Google account password
+					$mail->Password = 'Isajab77!';
+					$mail->setFrom('restaurant@sourigna-vannapho.com','Restaurant Van a Pho');
 					$mail->addAddress($trimmedMail,trim($_POST['firstName']) . trim($_POST['lastName']));
 					$mail->isHTML(TRUE);
 					$mail->Subject = 'Van a pho : Confirmation de votre inscription';
-				  	$mail->Body = "<html>Bonjour,<br/> <br/>
+				  	$mail->Body = "<html>
+				  	Bonjour,<br/> <br/>
 				  	Ce mail est envoyé suite à votre inscription sur le site de notre restaurant Van a Pho, <br/>
 				  	Veuillez cliquer sur le lien ci-dessous afin de finaliser votre inscription : <br/>
-				  	<a href='http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication=</html>' . $authenticationGenerate . '&mail='. $trimmedMail '<html>' > http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication= </html>'. $authenticationGenerate . '<html></a><br/>
+				  	http://restaurant.sourigna-vannapho.com/index.php?action=register_promote&authentication=$authenticationGenerate&mail=$trimmedMail <br/>
 				  	Suite à cette vérification vous serez capable de faire des réservations.<br/>
 
-				  	A bientot chez nous !</html>"
+				  	A bientot chez nous !
+				  	</html>"
 				  	;
-					/* Use SMTP. */
-					$mail->isSMTP();
-					/* Google (Gmail) SMTP server. */
-					$mail->Host = 'smtp.gmail.com';
-					/* SMTP port. */
-					$mail->Port = 587;
-					/* Set authentication. */
-					$mail->SMTPAuth = true;
-					$mail->SMTPSecure = 'tls';
-					/* Username (email address). */
-					$mail->Username = 'restaurant.vanapho@gmail.com';
-					/* Google account password. */
-					$mail->Password = 'Isajab77';
-					/* Enable SMTP debug output. */
+					
 				  	$mail->send();
 				}
 				catch (Exception $e)
 				{
 					echo $e->errorMessage();
-				}
-				catch (\Exception $e)
-				{
-					echo $e->getMessage();
 				}
 			}
 			else{
@@ -83,8 +83,8 @@ class UserManager extends Manager{
 		return $stringRetrieved;
 	}
 
-	//A retester
 	function callPromote($user_string){
+		// Changes authority of user to 1
 		if ($user_string == $_GET['authentication']){
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('UPDATE users 
@@ -100,6 +100,7 @@ class UserManager extends Manager{
 	}
 
 	function callLogin(){
+		//Check if password matches, if yes, creates $_SESSION
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('SELECT id,username,first_name,last_name,password,authority,phone FROM users WHERE username = :username');
 		$req->execute(array(
@@ -141,8 +142,43 @@ class UserManager extends Manager{
 			'id'=>$_SESSION['id']));
 		return true;
 	}
+	function passCheck(){
+		//Retrieves current password and compares it to submitted password
+		$trimmedPass = trim($_POST['oldPass']);
+		if ($trimmedPass !== ''){
+		$bdd = $this->databaseConnect();
+		$passReq = $bdd->prepare('SELECT password FROM users WHERE id = :id');
+		$passReq->execute(array('id'=>$_SESSION['id']));
+		$passExisting = $passReq->fetch();
+		$passwordCheck = password_verify($_POST['oldPass'],$passExisting['password']);
+			if ($passwordCheck){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+	function passEdit($passCheck){
+
+		if ($passCheck == true){
+			$trimmedPass = trim($_POST['newPass']);
+			$passHash = password_hash($trimmedPass,PASSWORD_DEFAULT);
+			$bdd = $this->databaseConnect();
+			$req = $bdd->prepare('UPDATE users SET password=:password WHERE id=:id');
+			$req->execute(array(
+				'password'=>$passHash,
+				'id'=>$_SESSION['id']));
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 	function manualUser(){
+		// Creates account with an authority of 1
 		$trimmedMail = trim($_POST['mail']);
 		$trimmedPass = trim($_POST['pass']);
 		if ($trimmedMail !== '' && $trimmedPass !== ''){

@@ -83,8 +83,10 @@ h1{
 	width:50%;
 	text-align:center;
 	left:25%;
+	top:5%;
 	animation:fadein 500ms;
 	animation-timing-function:ease-in;
+	z-index:6;
 }
 
 @keyframes fadein{
@@ -421,8 +423,8 @@ address{
 		z-index:10000;
 		color:white;
 		background:none;
-		padding:none;
-		border-radius:none;
+		padding:0;
+		border-radius:0;
 		right:0%;
 		top:0%;
 	}

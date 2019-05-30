@@ -1,0 +1,1 @@
+var modalShow = $("#connexionWindow").modal('show');

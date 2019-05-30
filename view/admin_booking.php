@@ -1,15 +1,15 @@
-<?php $title = 'Van\' à pho'; ?>
+<?php $title = 'Van\' à pho - Admin - Réservation'; ?>
 <?php ob_start(); ?>
 <?php 
-if(isset($_GET['info'])){ 
-  if ($_GET['info']=='success'){
+if(isset($_GET['info'])):
+  if ($_GET['info']=='success'):
 ?>
-<div id="adminAlert" class="alert alert-success notification" role="alert">
+<div id="notification" class="alert alert-success notification" role="alert">
     Opération effectuée avec succès !
 </div>
 <?php
-  }
-}
+  endif;
+endif;
 ?>
 <h1>Réservations</h1>
 <div class="container">
@@ -21,6 +21,7 @@ if(isset($_GET['info'])){
   </a>
   <div class="collapse" id="collapseRegister">
     <div class="card card-body">
+      <!-- Form to create a new user with authority of 1 -->
       <form method="POST" action="index.php?action=admin_register" onsubmit="return passwordValidation()">
         <div class="form-group">
           <label>Adresse Mail</label>
@@ -56,6 +57,7 @@ if(isset($_GET['info'])){
   
   <div class="collapse" id="collapseBooking">
       <div class="card card-body">
+        <!-- Form to create a booking with the desired user -->
         <form method="POST" action="index.php?action=manual_booking">
           <div class="form-group">
             <label>Utilisateur</label>
@@ -91,6 +93,7 @@ if(isset($_GET['info'])){
         </form>
     </div>
   </div>
+  <!-- Displays all the bookings for the following 2 days -->
   <table class="table table-striped">
     <thead>
       <tr>
@@ -105,7 +108,9 @@ if(isset($_GET['info'])){
     </thead>
     <tbody>
     	<?php 
+      //Sets a timezone to avoid any discrepancies
     	date_default_timezone_set('Europe/Paris');
+      //Sets days values for class and calculate the amount of tables
     	$today = date('d/m/Y');
     	$tomorrow = date('d/m/Y',strtotime("+1 day"));
     	$afterTomorrow = date('d/m/Y',strtotime("+2 day"));
@@ -133,7 +138,7 @@ if(isset($_GET['info'])){
     		?>"><?php if ($reservationEntry['reservationTime']==1):echo('Midi'); else: echo('Soir'); endif; ?>
         </td>
     		<td><?= $reservationEntry['arrivalTime']?></td>
-    		<td><?= $reservationEntry['lastName'] . ' ' .$reservationEntry['firstName'] ?></td>
+    		<td><?= htmlspecialchars($reservationEntry['lastName'] . ' ' .$reservationEntry['firstName']) ?></td>
     		<td><?= $reservationEntry['clientNb'] ?></td>
     		<td><?= $reservationEntry['phone'] ?></td>
         <td><a id='<?= $reservationEntry['reservationId']?>' href ='#' onclick='deleteBookingConfirm(<?= $reservationEntry['reservationId']?>)'>Annuler</a></td>
@@ -166,6 +171,7 @@ if(isset($_GET['info'])){
     	?>
     </tbody>
   </table>
+  <!-- Displays the amount of available table for a given timeslot and day -->
   <table class="table">
     <thead>
       <tr>
@@ -199,7 +205,16 @@ if(isset($_GET['info'])){
 <?php ob_start(); ?>
 <script src="public/scripts/deletePrompt.js"></script>
 <script src="public/scripts/validDate.js"></script>
+<script src="public/scripts/passwordCheck.js"></script>
+<?php 
+if(isset($_GET['info'])):
+  if ($_GET['info']=='success'):
+?>
 <script src="public/scripts/notification.js"></script>
-<script src="public/scripts/register.js"></script>
+<?php
+  endif;
+endif;
+?>
+
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

@@ -26,6 +26,7 @@ class GuestbookManager extends Manager{
 	}
 
 	function callPaginationTotal($commentPerPage){
+		// Calculates maximum amount of pages of comment
 		$bdd = $this->databaseConnect();
 		$commentNbReq = $bdd->query('SELECT COUNT(*) AS commentNb FROM guestbook');
 		$commentNbFetch = $commentNbReq->fetch();

@@ -9,6 +9,25 @@
       <link href="public/css/style.css" rel="stylesheet" />
   </head>
   <body>
+    <?php 
+    if(isset($_GET['login'])):
+    ?>
+    <div id="notification" class="alert alert-success notification" role="alert">
+      <?php
+      if ($_GET['login']=='success'):
+      ?>
+        Vous êtes maintenant connecté !
+      <?php
+      elseif ($_GET['login']=='promote'):
+      ?>
+        Votre compte est maintenant vérifié !
+      <?php 
+      endif;
+      ?>
+    </div>
+    <?php 
+    endif;
+    ?>
       <nav class="navbar navbar-expand-sm">
     		<a class="navbar-brand" href="index.php?action=home"><i class="fas fa-home"></i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +41,7 @@
     		 		<li>
               <a class="nav-link
               <?php 
+              // Only displays when user has verified its account
               if (isset($_SESSION['authority'])): 
                   if($_SESSION['authority']>=1): 
                     echo ('active'); 
@@ -45,6 +65,7 @@
             </li>
               <?php 
               if (isset($_SESSION['authority'])):
+                // Only displays when user is an employee
                 if($_SESSION['authority']>=2):
               ?>
             <li>
@@ -54,7 +75,9 @@
                   <a class="dropdown-item" href="index.php?action=admin_blog">Blog</a>
                   <a class="dropdown-item" href="index.php?action=admin_guestbook">Livre d'or</a>
                   <a class="dropdown-item" href="index.php?action=admin_booking">Réservations</a>
-                  <?php if($_SESSION['authority']>=3): 
+                  <?php 
+                  // Only displays when user is an admin
+                  if($_SESSION['authority']>=3): 
                   ?>
                   <a class="dropdown-item" href="index.php?action=admin_users">Gérer les accès</a>
                   <a class="dropdown-item" href="index.php?action=admin_menu">Modifier la carte</a>
@@ -70,10 +93,11 @@
               ?>
     		  </ul>
     		  <ul class="navbar-nav justify-content-end">
-            <li><a class="nav-link" href="index.php?action=user_profile">
     		  	<?php 
-    		  	if (isset($_SESSION['authority'])):
-    		  		echo ('Bonjour' . ' ' . $_SESSION['first_name'] . ' ' . $_SESSION['last_name']);
+    		  	if (isset($_SESSION['authority'])): ?>
+            <li><a class="nav-link" href="index.php?action=user_profile">
+            <?php
+    		  		echo htmlspecialchars('Bonjour' . ' ' . $_SESSION['first_name'] . ' ' . $_SESSION['last_name']);
     		  	?></a></li>
     		   	<li><a class="nav-link" href="index.php?action=logout"><i class="fas fa-sign-out-alt"></i>Déconnexion</a></li>
     		   	<?php
@@ -97,6 +121,19 @@
 	
 	<script src="public/scripts/ajax.js"></script>
 	<script src="public/scripts/script.js"></script>
+  <?php 
+  if(isset($_GET['login'])):
+    if ($_GET['login']=='success' || $_GET['login']=='promote'):
+  ?>
+  <script src="public/scripts/notification.js"></script>
+  <?php
+    elseif ($_GET['login']=='fail'):
+  ?>
+  <script src="public/scripts/modal_login_fail.js"></script>
+  <?php
+    endif;
+  endif;
+  ?>
   <?= $calledScript ?>
 	
 	<script></script>

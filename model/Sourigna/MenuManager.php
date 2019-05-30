@@ -25,6 +25,7 @@ class MenuManager extends Manager{
 	}
 
 	function callPaginationTotalMenu($dishPerPage){
+		// Calculates maximum amount of pages of dishes 
 		$bdd = $this->databaseConnect();
 		$dishNbReq = $bdd->prepare('SELECT COUNT(*) AS dishNb FROM dishes WHERE category=:category AND available=1');
 		$dishNbReq->execute(array('category'=>$_GET['category']));
@@ -69,6 +70,7 @@ class MenuManager extends Manager{
 	}
 
 	function nonPresentCriteria($id){
+		// Retrieves every critieria that IS NOT used for a given dish
 		$bdd = $this->databaseConnect();
 		$req = $bdd->prepare('SELECT libelle, id
 			FROM criteria 
@@ -122,6 +124,7 @@ class MenuManager extends Manager{
 	}
 
 	function getNewId(){
+		// Retrieves and returns the id of the newest dish
 		$bdd = $this->databaseConnect();
 		$idReq = $bdd->query('SELECT MAX(id) FROM dishes');
 		$fetchId = $idReq->fetch();
@@ -130,6 +133,7 @@ class MenuManager extends Manager{
 	}
 
 	function updateLinkDish($newestId){
+		// Updates the link of a given dish with its according id
 		$bdd = $this->databaseConnect();
 		$imgLink = "public/img/" . $newestId . "." .strtolower(pathinfo("public/uploads/" . basename($_FILES["menuUpload"]["name"]),PATHINFO_EXTENSION));
 		$secondMenu = $bdd->prepare('UPDATE dishes SET img_link = :img_link WHERE id = :id');
@@ -160,6 +164,7 @@ class MenuManager extends Manager{
 	}
 
 	function deletePicture(){
+		// Retrieves img_link of a given dish and unlink its picture
 		$bdd = $this->databaseConnect();
 		$imgReq = $bdd->prepare('SELECT img_link FROM dishes WHERE id = :id');
 		$imgExec = $imgReq->execute(array('id'=>$_GET['id']));

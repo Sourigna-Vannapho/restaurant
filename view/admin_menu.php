@@ -1,15 +1,15 @@
-<?php $title = 'Van\' à pho'; ?>
+<?php $title = 'Van\' à pho - Admin - Menu'; ?>
 <?php ob_start(); ?>
 <?php 
-if(isset($_GET['info'])){ 
-	if ($_GET['info']=='success'){
+if(isset($_GET['info'])):
+  if ($_GET['info']=='success'):
 ?>
-<div id="adminAlert" class="alert alert-success notification" role="alert">
-  	Opération effectuée avec succès !
+<div id="notification" class="alert alert-success notification" role="alert">
+    Opération effectuée avec succès !
 </div>
 <?php
-	}
-}
+  endif;
+endif;
 ?>
 <h1>Menu</h1>
 <div class="container">
@@ -44,6 +44,7 @@ if(isset($_GET['info'])){
 		<?php 
 		endif;
 		?>
+			<!-- Form to create a new dish -->
 			<form method="POST" action="index.php?action=entry_menu<?php if (isset($_GET['id'])): echo '&id=' . $singleMenuEntry['id']; endif; ?>" enctype="multipart/form-data">
 				<label>Nom</label>
 				<input type="text" class="form-control col" name="menuName" value="<?php if (isset($_GET['id'])): echo $singleMenuEntry['name']; endif;?>" required></input>
@@ -97,6 +98,7 @@ if(isset($_GET['info'])){
 		  	<div class="alert alert-warning" role="alert">
 		  		Vous êtes actuellement en train de modifier les critères de l'entrée intitulée <?= $singleMenuEntry['name'] ?>
 			</div>
+		<!-- Displays the criteria of a given dish -->
   		<table class="table table-striped">
   			<thead>
   				<tr>
@@ -114,6 +116,7 @@ if(isset($_GET['info'])){
   					<?= $singleCriteria['libelle'] ?>
   				</td>
   				<td>
+  					<!-- Form to delete a certain criteria of a given dish -->
   					<form method="POST" action="index.php?action=delete_menu_criteria&id=<?= $_GET['id']?>&criteria_id=<?= $singleCriteria['id'] ?>">
   					<button class="btn btn-primary" type="submit">Supprimer</button>
   					</form>
@@ -136,6 +139,7 @@ if(isset($_GET['info'])){
 			  		</select>
   				</td>
   				<td>
+  					<!-- Form to add criterias of a given dish -->
   					<form method="POST" id="addCriteriaForm" action="index.php?action=edit_criteria&id=<?= $_GET['id']?>">
   						<button class="btn btn-primary" type="submit" > Ajouter </button>
   					</form>
@@ -149,6 +153,7 @@ if(isset($_GET['info'])){
   	</div>
   	<div class="collapse" id="newCriteria">
   		Critères existants : 
+  		<!-- Form to delete a criteria -->
   		<form method="POST" action="index.php?action=delete_criteria">
 	  		<select name="criteriaList">
 		  		<?php
@@ -169,6 +174,7 @@ if(isset($_GET['info'])){
   			<button class="btn btn-primary" type="submit">Confirmer</button>
   		</form>
   	</div>
+  	<!-- Displays all the dishes -->
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -182,11 +188,11 @@ if(isset($_GET['info'])){
 			</tr>
 		</thead>
 		<tbody>
-	<?php 
-	while ($data = $menuDisplay->fetch()){
-		$dishCategory = $data['category'];
-		$dishAvailable = $data['available'];
-	?>
+		<?php 
+		while ($data = $menuDisplay->fetch()){
+			$dishCategory = $data['category'];
+			$dishAvailable = $data['available'];
+		?>
 			<tr>
 				<td scope="row">
 					<?php 
@@ -227,18 +233,24 @@ if(isset($_GET['info'])){
 					<a href="index.php?action=admin_menu&id=<?=$data['id']?>&edit=criteria"><button class="btn btn-primary"> Modifier</button></a>
 				</td>
 			</tr>
-
-	<?php	
-	}
-	$menuDisplay->closeCursor();
-	?>
-
+		<?php	
+		}
+		$menuDisplay->closeCursor();
+		?>
 		</tbody>
 	</table>
 </div>
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
 <script src="public/scripts/deletePrompt.js"></script>
+<?php 
+if(isset($_GET['info'])):
+    if ($_GET['info']=='success'):
+?>
 <script src="public/scripts/notification.js"></script>
+<?php
+    endif;
+endif;
+?>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

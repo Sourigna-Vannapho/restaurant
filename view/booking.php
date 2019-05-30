@@ -1,4 +1,4 @@
-<?php $title = 'Van\' à pho'; ?>
+<?php $title = 'Van\' à pho - Réservation'; ?>
 <?php ob_start(); ?>
 <div class="container-fluid background">
 	<div class="image">
@@ -20,7 +20,7 @@
 	<?php
 	endif;
 	?>
-
+	<!-- Form to book a reservation -->
 	<form method="POST" action="index.php?action=booking_confirm">
 		<div class="form-group">
 			<label>Jour de la réservation</label>
@@ -47,9 +47,11 @@
 	</form>
 	<?php 
 	if (isset($_GET['booking_status'])): 
+		if ($_GET['booking_status']=='false'):
 	?>
-			<small class="form-text warning">Nous n'avons malheureusement plus de table disponibles pour ce créneau horaire</small>
+		<small class="form-text warning">Nous n'avons malheureusement plus de table disponibles pour ce créneau horaire</small>
 	<?php
+		endif;
 	endif;
 	?>
 </div>

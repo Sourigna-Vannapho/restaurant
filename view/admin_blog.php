@@ -1,22 +1,21 @@
-<?php $title = 'Van\' à pho'; ?>
+<?php $title = 'Van\' à pho - Admin - Blog'; ?>
 <?php ob_start(); ?>
 <?php 
-if(isset($_GET['info'])){ 
-  if ($_GET['info']=='success'){
+if(isset($_GET['info'])):
+  if ($_GET['info']=='success'):
 ?>
-<div id="adminAlert" class="alert alert-success notification" role="alert">
+<div id="notification" class="alert alert-success notification" role="alert">
     Opération effectuée avec succès !
 </div>
 <?php
-  }
-}
+  endif;
+endif;
 ?>
 <div id="blogAdmin" class="container">
 	<h1>Blog</h1>
 	<br/>
 	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBlog" role="button" aria-expanded="false" aria-controls="collapseBlog">
-    Afficher éditeur
-  	</a>
+    Afficher éditeur</a>
   	<br/>
   	<br/>
   	<div class="collapse <?php if(isset($_GET['id'])): echo('show'); endif; ?>" id="collapseBlog">
@@ -30,12 +29,13 @@ if(isset($_GET['info'])){
 		<?php 
 		endif;
 		?>
+			<!-- Form to edit or create a blog entry -->
 			<form method="POST" action="index.php?action=entry_blog<?php if (isset($_GET['id'])){ echo '&id=' . $singleBlogEntry['id'];}?>">
 				<label>Titre</label>
 				<input type="text" class="form-control col" name="blogTitle" value="<?php if (isset($_GET['id'])): echo htmlspecialchars($singleBlogEntry['title']); endif;?>" required></input>
 				<br/>
 				<label>Contenu</label>
-				<textarea class="form-control col" name="blogContent" rows="3" required><?php if (isset($_GET['id'])): echo htmlspecialchars($singleBlogEntry['content']); endif;?> </textarea>
+				<textarea class="form-control col" name="blogContent" rows="3" required><?php if (isset($_GET['id'])): echo htmlspecialchars($singleBlogEntry['content']); endif;?></textarea>
 				<br/>
 				<button type="submit" class="btn btn-primary"><?php if (isset($_GET['id'])): echo ('Modifier'); else: echo ('Ajouter'); endif; ?></button>
 				<?php
@@ -51,6 +51,7 @@ if(isset($_GET['info'])){
 	<br/>
 	<br/>
 	<div>
+		<!-- Displays the 5 latest entries -->
 		<h2>Les 5 dernières entrées :</h2>
 		<?php
 		while ($data = $blogRead->fetch()){ ?>
@@ -75,6 +76,14 @@ if(isset($_GET['info'])){
 <?php $content = ob_get_clean(); ?>
 <?php ob_start(); ?>
 <script src="public/scripts/deletePrompt.js"></script>
+<?php 
+if(isset($_GET['info'])):
+    if ($_GET['info']=='success'):
+?>
 <script src="public/scripts/notification.js"></script>
+<?php
+    endif;
+endif;
+?>
 <?php $calledScript = ob_get_clean(); ?>
 <?php require('template.php'); ?>

@@ -1,4 +1,4 @@
-<?php $title = 'Van\' à pho'; ?>
+<?php $title = 'Van\' à pho - Accueil'; ?>
 <?php ob_start(); ?>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -6,7 +6,6 @@
 <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
   crossorigin=""></script>
-
 <div class="container-fluid background" id="homepageBackground">
 	<div class="image">
 		<img src="public/img/bg_home.jpg" class="img-fluid" alt="Homepage Background">
@@ -25,6 +24,7 @@
 	<div id= "blog" class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
+				<!--Displays the 5 latest entries -->
 				<h2>Dernières Nouvelles</h2>
 				<div id="blogSlider" class="row carousel slide" data-ride="carousel">
 					<div class="col-sm-10 carousel-inner">
@@ -108,6 +108,7 @@
 		</div>
 		<div class="col-lg-6">
 			<h2>Contact</h2>
+			<!--Displays map location of restaurant -->
 			<div id="mapid">
 				<div class="mapOverlay"></div>			
 				<address>

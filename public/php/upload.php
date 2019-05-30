@@ -20,7 +20,7 @@ function uploadPicture(){
 		}
 
 		if ($validUpload == 0) {
-			throw new Exception('boo');
+			throw new Exception('image invalide');
 		}else{
 			if(move_uploaded_file($_FILES["menuUpload"]["tmp_name"], $target_file)){
 				if (isset($_GET['id'])){
@@ -28,7 +28,7 @@ function uploadPicture(){
 				}
 			;}
 			else{
-				throw new Exception('test');
+				throw new Exception('image invalide');
 			}
 		}
 	}
